@@ -61,8 +61,16 @@ public class StationController {
     }
     @GetMapping("delstation")
     public  Result delStation(Integer sid){
-        System.out.println(sid);
         int s=ss.deleteByPrimaryKey(sid);
+        return new Result(s!=0 ? 0 : 1, s);
+    }
+    @GetMapping("delsstation")
+    public  Result delsStation(Integer[] sid){
+        System.out.println(sid);
+        int s=1;
+        for (int i=0;i<sid.length;i++){
+            s=s==0?0:ss.deleteByPrimaryKey(sid[i]);
+        }
         return new Result(s!=0 ? 0 : 1, s);
     }
 }

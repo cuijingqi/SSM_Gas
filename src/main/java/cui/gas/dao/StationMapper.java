@@ -32,7 +32,7 @@ public interface StationMapper {
      * @param record the record
      * @return insert count
      */
-    int insert( @Param("sid") Integer sid,@Param("sname") String sname, @Param("employeeId") Integer employeeId, @Param("sparentid") Integer sparentid, @Param("saddress") String saddress, @Param("stprice") BigDecimal stprice, @Param("sdescribe") String sdescribe, @Param("stime") Date stime, @Param("sadvice") String sadvice, @Param("scomment") String scomment, @Param("savailable") Integer savailable);
+    int insert( @Param("sname") String sname, @Param("employeeId") Integer employeeId, @Param("sparentid") Integer sparentid, @Param("saddress") String saddress, @Param("stprice") BigDecimal stprice, @Param("sdescribe") String sdescribe, @Param("stime") Date stime, @Param("sadvice") String sadvice, @Param("scomment") String scomment, @Param("savailable") Integer savailable);
 
     /**
      * insert record to table selective
@@ -91,4 +91,6 @@ public interface StationMapper {
      */
 
     List<Station> selectByNameAndAddress(@Param("sname") String sname, @Param("saddress") String saddress);
+
+    List<Station> selectAllOrderByTime();
 }

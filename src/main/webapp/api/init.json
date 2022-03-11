@@ -37,19 +37,19 @@
         },
         {
           "title": "员工管理",
-          "href": "page/menu.html",
+          "href": "page/employee/table.html",
           "icon": "fa fa-group",
           "target": "_self"
         },
         {
           "title": "会员管理",
-          "href": "page/setting.html",
+          "href": "page/member/table.html",
           "icon": "fa fa-user",
           "target": "_self"
         },
         {
           "title": "积分管理",
-          "href": "page/setting.html",
+          "href": "page/point/table.html",
           "icon": "fa fa-ticket",
           "target": "_self"
         }

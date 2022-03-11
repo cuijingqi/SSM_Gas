@@ -40,7 +40,7 @@
     delete from station
     where sid = #{sid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="sid" keyProperty="sid" parameterType="map" useGeneratedKeys="true">
+  <insert id="insert" parameterType="map" useGeneratedKeys="false">
     <!--@mbg.generated-->
     insert into station (sname, employee_id, sparentid,
     saddress, stprice, sdescribe,
@@ -191,5 +191,9 @@
       </if>
     </where>
 
+  </select>
+  <select id="selectAllOrderByTime" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select * from station s left join employee e on s.employee_id=e.eid order by s.stime desc
   </select>
 </mapper>

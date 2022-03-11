@@ -1,5 +1,6 @@
 package cui.gas.service.impl;
 
+import com.alibaba.druid.sql.visitor.functions.Now;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.lang.annotation.ElementType;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cui.gas.dao.StationMapper;
@@ -31,7 +33,6 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
-        System.out.println(id);
         System.out.println(stationMapper.selectByPrimaryKey(id));
         List<Employee> employeeId = stationMapper.selectByPrimaryKey(id).getEmployeeId();
         for (int i=0;i<employeeId.size();i++){
@@ -42,12 +43,11 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public int insert(Station record) {
-        Integer sid = 0;
-        //todo map自增主键返回
-        Integer count = stationMapper.insert(sid, record.getSname(), record.getEmployeeId().get(0).getEid(), record.getSparentid(), record.getSaddress(), record.getStprice(), record.getSdescribe(), record.getStime(), record.getSadvice(), record.getScomment(), record.getSavailable());
+        Integer count = stationMapper.insert( record.getSname(), record.getEmployeeId().get(0).getEid(), record.getSparentid(), record.getSaddress(), record.getStprice(), record.getSdescribe(), new Date(), record.getSadvice(), record.getScomment(), record.getSavailable());
+        Integer sid = stationMapper.selectAllOrderByTime().get(0).getSid();
         Integer eid = record.getEmployeeId().get(0).getEid();
         record.setSid(sid);
-        employeeMapper.updateByPrimaryKeySelective(eid, 2, record.getSid(), null, null, null, null, null, null, null, null, null);
+        employeeMapper.updateByPrimaryKeySelective(eid, 2, sid, null, null, null, null, null, null, null, null, null);
         return count;
     }
     @Override

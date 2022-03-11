@@ -208,7 +208,7 @@
     select * from employee e,role r,station s where e.station_id=#{sid,jdbcType=INTEGER} and e.role_id=r.rid and r.rid=2 and s.sid=e.station_id
   </select>
   <select id="selectByStationAndName" resultMap="BaseResultMap">
-    select * from (employee e left join station s on e.station_id=#{sid,jdbcType=INTEGER}),role r
+    select * from (select * from  employee e LEFT JOIN station s on e.station_id=s.sid WHERE e.station_id=#{sid,jdbcType=INTEGER})e,role r
     <where>
       e.role_id=r.rid
       <if test="ename != null">
@@ -217,6 +217,6 @@
   </where>
   </select>
   <select id="selectByStation" resultMap="BaseResultMap">
-    select * from (employee e left join station s on e.station_id=#{sid,jdbcType=INTEGER}),role r
+    select * from (select * from  employee e LEFT JOIN station s on e.station_id=s.sid WHERE e.station_id=#{sid,jdbcType=INTEGER})e,role r where e.role_id=r.rid
   </select>
 </mapper>
