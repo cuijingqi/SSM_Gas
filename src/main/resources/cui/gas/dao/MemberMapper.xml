@@ -16,11 +16,12 @@
     <result column="mpassword" jdbcType="VARCHAR" property="mpassword" />
     <result column="mcomment" jdbcType="VARCHAR" property="mcomment" />
     <result column="mavailable" jdbcType="INTEGER" property="mavailable" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    mid, role_id, station_id, mname, msex,mage, mtelephone, memail, musername, mpassword,
-    mcomment, mavailable
+    mid, role_id, station_id, mname, msex, mage, mtelephone, memail, musername, mpassword, 
+    mcomment, mavailable, mtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -36,14 +37,16 @@
   </delete>
   <insert id="insert" keyColumn="mid" keyProperty="mid" parameterType="cui.gas.domain.Member" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into `member` (role_id, station_id, mname, msex,
-      mage, mtelephone, memail, 
-      musername, mpassword, mcomment, 
-      mavailable)
-    values (#{roleId,jdbcType=INTEGER}, #{stationId,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR},#{msex,jdbcType=INTEGER},
-      #{mage,jdbcType=INTEGER}, #{mtelephone,jdbcType=VARCHAR}, #{memail,jdbcType=VARCHAR}, 
-      #{musername,jdbcType=VARCHAR}, #{mpassword,jdbcType=VARCHAR}, #{mcomment,jdbcType=VARCHAR}, 
-      #{mavailable,jdbcType=INTEGER})
+    insert into `member` (role_id, station_id, mname, 
+      msex, mage, mtelephone, 
+      memail, musername, mpassword, 
+      mcomment, mavailable, mtime
+      )
+    values (#{roleId,jdbcType=INTEGER}, #{stationId,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, 
+      #{msex,jdbcType=INTEGER}, #{mage,jdbcType=INTEGER}, #{mtelephone,jdbcType=VARCHAR}, 
+      #{memail,jdbcType=VARCHAR}, #{musername,jdbcType=VARCHAR}, #{mpassword,jdbcType=VARCHAR}, 
+      #{mcomment,jdbcType=VARCHAR}, #{mavailable,jdbcType=INTEGER}, #{mtime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="mid" keyProperty="mid" parameterType="cui.gas.domain.Member" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -82,6 +85,9 @@
       <if test="mavailable != null">
         mavailable,
       </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
@@ -116,6 +122,9 @@
       </if>
       <if test="mavailable != null">
         #{mavailable,jdbcType=INTEGER},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -156,6 +165,9 @@
       <if test="mavailable != null">
         mavailable = #{mavailable,jdbcType=INTEGER},
       </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where mid = #{mid,jdbcType=INTEGER}
   </update>
@@ -172,7 +184,8 @@
       musername = #{musername,jdbcType=VARCHAR},
       mpassword = #{mpassword,jdbcType=VARCHAR},
       mcomment = #{mcomment,jdbcType=VARCHAR},
-      mavailable = #{mavailable,jdbcType=INTEGER}
+      mavailable = #{mavailable,jdbcType=INTEGER},
+      mtime = #{mtime,jdbcType=TIMESTAMP}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
   <select id="selectAll" resultMap="BaseResultMap">

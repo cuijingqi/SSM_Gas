@@ -1,11 +1,15 @@
 package cui.gas.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author 崔靖奇 CUIJINGQICHN@163.com
- * @date 12:58 2022-03-08
+ * @date 17:50 2022-03-11
  */
 public class Goods implements Serializable {
     private Integer gid;
@@ -25,6 +29,9 @@ public class Goods implements Serializable {
     private String gcomment;
 
     private Integer gavailable;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")//页面写入数据库时格式化
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//数据库导出页面时json格式化
+    private Date gtime;
 
     private static final long serialVersionUID = 1L;
 
@@ -100,6 +107,14 @@ public class Goods implements Serializable {
         this.gavailable = gavailable;
     }
 
+    public Date getGtime() {
+        return gtime;
+    }
+
+    public void setGtime(Date gtime) {
+        this.gtime = gtime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -115,6 +130,7 @@ public class Goods implements Serializable {
         sb.append(", gprice=").append(gprice);
         sb.append(", gcomment=").append(gcomment);
         sb.append(", gavailable=").append(gavailable);
+        sb.append(", gtime=").append(gtime);
         sb.append("]");
         return sb.toString();
     }
@@ -139,7 +155,8 @@ public class Goods implements Serializable {
                 && (this.getGdescribe() == null ? other.getGdescribe() == null : this.getGdescribe().equals(other.getGdescribe()))
                 && (this.getGprice() == null ? other.getGprice() == null : this.getGprice().equals(other.getGprice()))
                 && (this.getGcomment() == null ? other.getGcomment() == null : this.getGcomment().equals(other.getGcomment()))
-                && (this.getGavailable() == null ? other.getGavailable() == null : this.getGavailable().equals(other.getGavailable()));
+                && (this.getGavailable() == null ? other.getGavailable() == null : this.getGavailable().equals(other.getGavailable()))
+                && (this.getGtime() == null ? other.getGtime() == null : this.getGtime().equals(other.getGtime()));
     }
 
     @Override
@@ -155,6 +172,7 @@ public class Goods implements Serializable {
         result = prime * result + ((getGprice() == null) ? 0 : getGprice().hashCode());
         result = prime * result + ((getGcomment() == null) ? 0 : getGcomment().hashCode());
         result = prime * result + ((getGavailable() == null) ? 0 : getGavailable().hashCode());
+        result = prime * result + ((getGtime() == null) ? 0 : getGtime().hashCode());
         return result;
     }
 }

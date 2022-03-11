@@ -15,10 +15,12 @@
     <result column="apassword" jdbcType="VARCHAR" property="apassword" />
     <result column="acomment" jdbcType="VARCHAR" property="acomment" />
     <result column="aavailable" jdbcType="INTEGER" property="aavailable" />
+    <result column="atime" jdbcType="TIMESTAMP" property="atime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    aid, role_id, asex, aage, aname, atelephone, aemail, ausername, apassword, acomment, aavailable
+    aid, role_id, asex, aage, aname, atelephone, aemail, ausername, apassword, acomment, 
+    aavailable, atime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -34,14 +36,14 @@
   </delete>
   <insert id="insert" keyColumn="aid" keyProperty="aid" parameterType="cui.gas.domain.Admin" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into `admin` (role_id, asex, aage, aname,
-      atelephone, aemail, ausername, 
-      apassword, acomment, aavailable
-      )
-    values (#{roleId,jdbcType=INTEGER}, #{asex,jdbcType=INTEGER}, #{aage,jdbcType=INTEGER}, #{aname,jdbcType=VARCHAR},
-      #{atelephone,jdbcType=VARCHAR}, #{aemail,jdbcType=VARCHAR}, #{ausername,jdbcType=VARCHAR}, 
-      #{apassword,jdbcType=VARCHAR}, #{acomment,jdbcType=VARCHAR}, #{aavailable,jdbcType=INTEGER}
-      )
+    insert into `admin` (role_id, asex, aage, 
+      aname, atelephone, aemail, 
+      ausername, apassword, acomment, 
+      aavailable, atime)
+    values (#{roleId,jdbcType=INTEGER}, #{asex,jdbcType=INTEGER}, #{aage,jdbcType=INTEGER}, 
+      #{aname,jdbcType=VARCHAR}, #{atelephone,jdbcType=VARCHAR}, #{aemail,jdbcType=VARCHAR}, 
+      #{ausername,jdbcType=VARCHAR}, #{apassword,jdbcType=VARCHAR}, #{acomment,jdbcType=VARCHAR}, 
+      #{aavailable,jdbcType=INTEGER}, #{atime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="aid" keyProperty="aid" parameterType="cui.gas.domain.Admin" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -77,6 +79,9 @@
       <if test="aavailable != null">
         aavailable,
       </if>
+      <if test="atime != null">
+        atime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
@@ -108,6 +113,9 @@
       </if>
       <if test="aavailable != null">
         #{aavailable,jdbcType=INTEGER},
+      </if>
+      <if test="atime != null">
+        #{atime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -145,6 +153,9 @@
       <if test="aavailable != null">
         aavailable = #{aavailable,jdbcType=INTEGER},
       </if>
+      <if test="atime != null">
+        atime = #{atime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where aid = #{aid,jdbcType=INTEGER}
   </update>
@@ -160,7 +171,8 @@
       ausername = #{ausername,jdbcType=VARCHAR},
       apassword = #{apassword,jdbcType=VARCHAR},
       acomment = #{acomment,jdbcType=VARCHAR},
-      aavailable = #{aavailable,jdbcType=INTEGER}
+      aavailable = #{aavailable,jdbcType=INTEGER},
+      atime = #{atime,jdbcType=TIMESTAMP}
     where aid = #{aid,jdbcType=INTEGER}
   </update>
   <select id="selectAll" resultMap="BaseResultMap">

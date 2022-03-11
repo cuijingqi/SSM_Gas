@@ -13,10 +13,12 @@
     <result column="gprice" jdbcType="DECIMAL" property="gprice" />
     <result column="gcomment" jdbcType="VARCHAR" property="gcomment" />
     <result column="gavailable" jdbcType="INTEGER" property="gavailable" />
+    <result column="gtime" jdbcType="TIMESTAMP" property="gtime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    gid, station_id, gname, gimage, gquantity, gdescribe, gprice, gcomment, gavailable
+    gid, station_id, gname, gimage, gquantity, gdescribe, gprice, gcomment, gavailable, 
+    gtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -34,10 +36,12 @@
     <!--@mbg.generated-->
     insert into goods (station_id, gname, gimage, 
       gquantity, gdescribe, gprice, 
-      gcomment, gavailable)
+      gcomment, gavailable, gtime
+      )
     values (#{stationId,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}, #{gimage,jdbcType=VARCHAR}, 
       #{gquantity,jdbcType=VARCHAR}, #{gdescribe,jdbcType=VARCHAR}, #{gprice,jdbcType=DECIMAL}, 
-      #{gcomment,jdbcType=VARCHAR}, #{gavailable,jdbcType=INTEGER})
+      #{gcomment,jdbcType=VARCHAR}, #{gavailable,jdbcType=INTEGER}, #{gtime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="gid" keyProperty="gid" parameterType="cui.gas.domain.Goods" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -67,6 +71,9 @@
       <if test="gavailable != null">
         gavailable,
       </if>
+      <if test="gtime != null">
+        gtime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="stationId != null">
@@ -92,6 +99,9 @@
       </if>
       <if test="gavailable != null">
         #{gavailable,jdbcType=INTEGER},
+      </if>
+      <if test="gtime != null">
+        #{gtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -123,6 +133,9 @@
       <if test="gavailable != null">
         gavailable = #{gavailable,jdbcType=INTEGER},
       </if>
+      <if test="gtime != null">
+        gtime = #{gtime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where gid = #{gid,jdbcType=INTEGER}
   </update>
@@ -136,7 +149,8 @@
       gdescribe = #{gdescribe,jdbcType=VARCHAR},
       gprice = #{gprice,jdbcType=DECIMAL},
       gcomment = #{gcomment,jdbcType=VARCHAR},
-      gavailable = #{gavailable,jdbcType=INTEGER}
+      gavailable = #{gavailable,jdbcType=INTEGER},
+      gtime = #{gtime,jdbcType=TIMESTAMP}
     where gid = #{gid,jdbcType=INTEGER}
   </update>
   <select id="selectAll" resultMap="BaseResultMap">

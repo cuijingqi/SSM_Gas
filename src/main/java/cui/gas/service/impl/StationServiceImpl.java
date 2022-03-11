@@ -36,7 +36,7 @@ public class StationServiceImpl implements StationService {
         System.out.println(stationMapper.selectByPrimaryKey(id));
         List<Employee> employeeId = stationMapper.selectByPrimaryKey(id).getEmployeeId();
         for (int i=0;i<employeeId.size();i++){
-            employeeMapper.updateByPrimaryKeySelective(employeeId.get(i).getEid(),null,0,null,null,null,null,null,null,null,null,null);
+            employeeMapper.updateByPrimaryKeySelective(employeeId.get(i).getEid(),null,0,null,null,null,null,null,null,null,null,null,null);
         }
         return stationMapper.deleteByPrimaryKey(id);
     }
@@ -47,7 +47,7 @@ public class StationServiceImpl implements StationService {
         Integer sid = stationMapper.selectAllOrderByTime().get(0).getSid();
         Integer eid = record.getEmployeeId().get(0).getEid();
         record.setSid(sid);
-        employeeMapper.updateByPrimaryKeySelective(eid, 2, sid, null, null, null, null, null, null, null, null, null);
+        employeeMapper.updateByPrimaryKeySelective(eid, 2, sid, null, null, null, null, null, null, null, null, null,null);
         return count;
     }
     @Override
@@ -69,8 +69,8 @@ public class StationServiceImpl implements StationService {
         Station station = stationMapper.selectByPrimaryKey(record.getSid());
         Integer oldeid = station.getEmployeeId().get(0).getEid();
         Integer neweid = record.getEmployeeId().get(0).getEid();
-        employeeMapper.updateByPrimaryKeySelective(oldeid,3,null,null,null,null,null,null,null,null,null,null);
-        employeeMapper.updateByPrimaryKeySelective(neweid,2,null,null,null,null,null,null,null,null,null,null);
+        employeeMapper.updateByPrimaryKeySelective(oldeid,3,null,null,null,null,null,null,null,null,null,null,null);
+        employeeMapper.updateByPrimaryKeySelective(neweid,2,null,null,null,null,null,null,null,null,null,null,null);
         return stationMapper.updateByPrimaryKey(record.getSid(),record.getSname(),record.getEmployeeId().get(0).getEid(),record.getSparentid(),record.getSaddress(),record.getStprice(),record.getSdescribe(),record.getStime(),record.getSadvice(),record.getScomment(),record.getSavailable());
     }
     @Override

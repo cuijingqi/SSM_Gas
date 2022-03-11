@@ -2,6 +2,7 @@ package cui.gas.dao;
 
 import cui.gas.domain.Employee;
 
+import java.util.Date;
 import java.util.List;
 
 import cui.gas.domain.Role;
@@ -29,7 +30,7 @@ public interface EmployeeMapper {
      * @param record the record
      * @return insert count
      */
-    int insert(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId,@Param("esex") Integer esex, @Param("eage") Integer eage, @Param("ename") String ename, @Param("etelephone") String etelephone, @Param("eaddress") String eaddress, @Param("eusername") String eusername, @Param("epassword") String epassword, @Param("ecomment") String ecomment, @Param("eavailable") Integer eavailable);
+    int insert(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId,@Param("esex") Integer esex, @Param("eage") Integer eage, @Param("ename") String ename, @Param("etelephone") String etelephone, @Param("eaddress") String eaddress, @Param("eusername") String eusername, @Param("epassword") String epassword, @Param("ecomment") String ecomment, @Param("eavailable") Integer eavailable,@Param("etime") Date etime);
 
     /**
      * insert record to table selective
@@ -37,7 +38,7 @@ public interface EmployeeMapper {
      * @param record the record
      * @return insert count
      */
-    int insertSelective(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId,@Param("esex") Integer esex, @Param("eage") Integer eage, @Param("ename") String ename, @Param("etelephone") String etelephone, @Param("eaddress") String eaddress, @Param("eusername") String eusername, @Param("epassword") String epassword, @Param("ecomment") String ecomment, @Param("eavailable") Integer eavailable);
+    int insertSelective(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId,@Param("esex") Integer esex, @Param("eage") Integer eage, @Param("ename") String ename, @Param("etelephone") String etelephone, @Param("eaddress") String eaddress, @Param("eusername") String eusername, @Param("epassword") String epassword, @Param("ecomment") String ecomment, @Param("eavailable") Integer eavailable,@Param("etime") Date etime);
 
     /**
      * select by primary key
@@ -53,7 +54,7 @@ public interface EmployeeMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(@Param("eid") Integer eid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("esex") Integer esex, @Param("eage") Integer eage, @Param("ename") String ename, @Param("etelephone") String etelephone, @Param("eaddress") String eaddress, @Param("eusername") String eusername, @Param("epassword") String epassword, @Param("ecomment") String ecomment, @Param("eavailable") Integer eavailable);
+    int updateByPrimaryKeySelective(@Param("eid") Integer eid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("esex") Integer esex, @Param("eage") Integer eage, @Param("ename") String ename, @Param("etelephone") String etelephone, @Param("eaddress") String eaddress, @Param("eusername") String eusername, @Param("epassword") String epassword, @Param("ecomment") String ecomment, @Param("eavailable") Integer eavailable,@Param("etime") Date etime);
 
     /**
      * update record
@@ -61,7 +62,7 @@ public interface EmployeeMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(@Param("eid") Integer eid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("esex") Integer esex, @Param("eage") Integer eage, @Param("ename") String ename, @Param("etelephone") String etelephone, @Param("eaddress") String eaddress, @Param("eusername") String eusername, @Param("epassword") String epassword, @Param("ecomment") String ecomment, @Param("eavailable") Integer eavailable);
+    int updateByPrimaryKey(@Param("eid") Integer eid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("esex") Integer esex, @Param("eage") Integer eage, @Param("ename") String ename, @Param("etelephone") String etelephone, @Param("eaddress") String eaddress, @Param("eusername") String eusername, @Param("epassword") String epassword, @Param("ecomment") String ecomment, @Param("eavailable") Integer eavailable,@Param("etime") Date etime);
 
     List<Employee> selectAll();
 

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import cui.gas.domain.Station;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import cui.gas.domain.Employee;
 import cui.gas.dao.EmployeeMapper;
@@ -27,12 +28,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public int insert(Employee record) {
-        return employeeMapper.insert(record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable());
+        return employeeMapper.insert(record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),new Date());
     }
 
     @Override
     public int insertSelective(Employee record) {
-        return employeeMapper.insertSelective(record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable());
+        return employeeMapper.insertSelective(record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),new Date());
     }
     @Override
     public Employee selectByPrimaryKey(Integer id) {
@@ -41,12 +42,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public int updateByPrimaryKeySelective(Employee record) {
-        return employeeMapper.updateByPrimaryKeySelective(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable());
+        return employeeMapper.updateByPrimaryKeySelective(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
     }
 
     @Override
     public int updateByPrimaryKey(Employee record) {
-        return employeeMapper.updateByPrimaryKey(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable());
+        return employeeMapper.updateByPrimaryKey(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
     }
     @Override
     public List<Employee> selectAll() {

@@ -63,10 +63,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin login(Admin admin) {
-        return adminMapper.selectByUsernameAndPassword(admin.getAusername(),admin.getApassword());
+        return adminMapper.selectByUsernameAndPassword(admin.getAusername(), admin.getApassword());
     }
 
 
 }
+
 
 

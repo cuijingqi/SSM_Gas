@@ -1,23 +1,19 @@
 package cui.gas.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author 崔靖奇 CUIJINGQICHN@163.com
- * @date 12:58 2022-03-08
+ * @date 17:50 2022-03-11
  */
 public class Admin implements Serializable {
     private Integer aid;
 
     private Integer roleId;
-
-    public Integer getAsex() {
-        return asex;
-    }
-
-    public void setAsex(Integer asex) {
-        this.asex = asex;
-    }
 
     private Integer asex;
 
@@ -36,6 +32,9 @@ public class Admin implements Serializable {
     private String acomment;
 
     private Integer aavailable;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")//页面写入数据库时格式化
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//数据库导出页面时json格式化
+    private Date atime;
 
     private static final long serialVersionUID = 1L;
 
@@ -53,6 +52,14 @@ public class Admin implements Serializable {
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    public Integer getAsex() {
+        return asex;
+    }
+
+    public void setAsex(Integer asex) {
+        this.asex = asex;
     }
 
     public Integer getAage() {
@@ -119,6 +126,14 @@ public class Admin implements Serializable {
         this.aavailable = aavailable;
     }
 
+    public Date getAtime() {
+        return atime;
+    }
+
+    public void setAtime(Date atime) {
+        this.atime = atime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -136,6 +151,7 @@ public class Admin implements Serializable {
         sb.append(", apassword=").append(apassword);
         sb.append(", acomment=").append(acomment);
         sb.append(", aavailable=").append(aavailable);
+        sb.append(", atime=").append(atime);
         sb.append("]");
         return sb.toString();
     }
@@ -154,6 +170,7 @@ public class Admin implements Serializable {
         Admin other = (Admin) that;
         return (this.getAid() == null ? other.getAid() == null : this.getAid().equals(other.getAid()))
                 && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
+                && (this.getAsex() == null ? other.getAsex() == null : this.getAsex().equals(other.getAsex()))
                 && (this.getAage() == null ? other.getAage() == null : this.getAage().equals(other.getAage()))
                 && (this.getAname() == null ? other.getAname() == null : this.getAname().equals(other.getAname()))
                 && (this.getAtelephone() == null ? other.getAtelephone() == null : this.getAtelephone().equals(other.getAtelephone()))
@@ -161,7 +178,8 @@ public class Admin implements Serializable {
                 && (this.getAusername() == null ? other.getAusername() == null : this.getAusername().equals(other.getAusername()))
                 && (this.getApassword() == null ? other.getApassword() == null : this.getApassword().equals(other.getApassword()))
                 && (this.getAcomment() == null ? other.getAcomment() == null : this.getAcomment().equals(other.getAcomment()))
-                && (this.getAavailable() == null ? other.getAavailable() == null : this.getAavailable().equals(other.getAavailable()));
+                && (this.getAavailable() == null ? other.getAavailable() == null : this.getAavailable().equals(other.getAavailable()))
+                && (this.getAtime() == null ? other.getAtime() == null : this.getAtime().equals(other.getAtime()));
     }
 
     @Override
@@ -170,6 +188,7 @@ public class Admin implements Serializable {
         int result = 1;
         result = prime * result + ((getAid() == null) ? 0 : getAid().hashCode());
         result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
+        result = prime * result + ((getAsex() == null) ? 0 : getAsex().hashCode());
         result = prime * result + ((getAage() == null) ? 0 : getAage().hashCode());
         result = prime * result + ((getAname() == null) ? 0 : getAname().hashCode());
         result = prime * result + ((getAtelephone() == null) ? 0 : getAtelephone().hashCode());
@@ -178,6 +197,7 @@ public class Admin implements Serializable {
         result = prime * result + ((getApassword() == null) ? 0 : getApassword().hashCode());
         result = prime * result + ((getAcomment() == null) ? 0 : getAcomment().hashCode());
         result = prime * result + ((getAavailable() == null) ? 0 : getAavailable().hashCode());
+        result = prime * result + ((getAtime() == null) ? 0 : getAtime().hashCode());
         return result;
     }
 }

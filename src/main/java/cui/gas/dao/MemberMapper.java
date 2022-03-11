@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author 崔靖奇 CUIJINGQICHN@163.com
- * @date 12:58 2022-03-08
+ * @date 17:50 2022-03-11
  */
 @Mapper
 public interface MemberMapper {

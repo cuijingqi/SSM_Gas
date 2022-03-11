@@ -1,6 +1,10 @@
 package cui.gas.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +43,17 @@ public class Employee implements Serializable {
     private String ecomment;
 
     private Integer eavailable;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")//页面写入数据库时格式化
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//数据库导出页面时json格式化
+    private Date etime;
+
+    public Date getEtime() {
+        return etime;
+    }
+
+    public void setEtime(Date etime) {
+        this.etime = etime;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -148,6 +163,7 @@ public class Employee implements Serializable {
         sb.append(", epassword=").append(epassword);
         sb.append(", ecomment=").append(ecomment);
         sb.append(", eavailable=").append(eavailable);
+        sb.append(", etime=").append(etime);
         sb.append("]");
         return sb.toString();
     }
