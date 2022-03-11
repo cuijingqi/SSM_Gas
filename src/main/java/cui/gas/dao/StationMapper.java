@@ -42,6 +42,7 @@ public interface StationMapper {
      */
     int insertSelective( @Param("sname") String sname, @Param("employeeId") Integer employeeId, @Param("sparentid") Integer sparentid, @Param("saddress") String saddress, @Param("stprice") BigDecimal stprice, @Param("sdescribe") String sdescribe, @Param("stime") Date stime, @Param("sadvice") String sadvice, @Param("scomment") String scomment, @Param("savailable") Integer savailable);
 
+    Station selectsByPrimaryKey(Integer sid);
     /**
      * select by primary key
      *

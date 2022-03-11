@@ -31,9 +31,13 @@
     sid, sname, employee_id, sparentid, saddress, stprice, sdescribe, stime, sadvice, 
     scomment, savailable
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectsByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select * from station s,employee e where  s.sid=#{sid,jdbcType=INTEGER} and s.sid=e.station_id
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select * from station s,employee e where  s.sid=#{sid,jdbcType=INTEGER} and s.employee_id=e.eid
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
