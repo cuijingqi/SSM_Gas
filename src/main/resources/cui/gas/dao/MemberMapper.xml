@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cui.gas.dao.MemberMapper">
+  <resultMap id="BaseResultMap" type="cui.gas.domain.Member">
+    <!--@mbg.generated-->
+    <!--@Table `member`-->
+    <id column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="station_id" jdbcType="INTEGER" property="stationId" />
+    <result column="mname" jdbcType="VARCHAR" property="mname" />
+    <result column="msex" jdbcType="INTEGER" property="msex" />
+    <result column="mage" jdbcType="INTEGER" property="mage" />
+    <result column="mtelephone" jdbcType="VARCHAR" property="mtelephone" />
+    <result column="memail" jdbcType="VARCHAR" property="memail" />
+    <result column="musername" jdbcType="VARCHAR" property="musername" />
+    <result column="mpassword" jdbcType="VARCHAR" property="mpassword" />
+    <result column="mcomment" jdbcType="VARCHAR" property="mcomment" />
+    <result column="mavailable" jdbcType="INTEGER" property="mavailable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    mid, role_id, station_id, mname, msex,mage, mtelephone, memail, musername, mpassword,
+    mcomment, mavailable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from `member`
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from `member`
+    where mid = #{mid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="mid" keyProperty="mid" parameterType="cui.gas.domain.Member" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `member` (role_id, station_id, mname, msex,
+      mage, mtelephone, memail, 
+      musername, mpassword, mcomment, 
+      mavailable)
+    values (#{roleId,jdbcType=INTEGER}, #{stationId,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR},#{msex,jdbcType=INTEGER},
+      #{mage,jdbcType=INTEGER}, #{mtelephone,jdbcType=VARCHAR}, #{memail,jdbcType=VARCHAR}, 
+      #{musername,jdbcType=VARCHAR}, #{mpassword,jdbcType=VARCHAR}, #{mcomment,jdbcType=VARCHAR}, 
+      #{mavailable,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="mid" keyProperty="mid" parameterType="cui.gas.domain.Member" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `member`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="stationId != null">
+        station_id,
+      </if>
+      <if test="mname != null">
+        mname,
+      </if>
+      <if test="msex != null">
+        msex,
+      </if>
+      <if test="mage != null">
+        mage,
+      </if>
+      <if test="mtelephone != null">
+        mtelephone,
+      </if>
+      <if test="memail != null">
+        memail,
+      </if>
+      <if test="musername != null">
+        musername,
+      </if>
+      <if test="mpassword != null">
+        mpassword,
+      </if>
+      <if test="mcomment != null">
+        mcomment,
+      </if>
+      <if test="mavailable != null">
+        mavailable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="stationId != null">
+        #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="mname != null">
+        #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="msex != null">
+        #{msex,jdbcType=INTEGER},
+      </if>
+      <if test="mage != null">
+        #{mage,jdbcType=INTEGER},
+      </if>
+      <if test="mtelephone != null">
+        #{mtelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="memail != null">
+        #{memail,jdbcType=VARCHAR},
+      </if>
+      <if test="musername != null">
+        #{musername,jdbcType=VARCHAR},
+      </if>
+      <if test="mpassword != null">
+        #{mpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="mcomment != null">
+        #{mcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="mavailable != null">
+        #{mavailable,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Member">
+    <!--@mbg.generated-->
+    update `member`
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="stationId != null">
+        station_id = #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="mname != null">
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="msex != null">
+        msex = #{msex,jdbcType=INTEGER},
+      </if>
+      <if test="mage != null">
+        mage = #{mage,jdbcType=INTEGER},
+      </if>
+      <if test="mtelephone != null">
+        mtelephone = #{mtelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="memail != null">
+        memail = #{memail,jdbcType=VARCHAR},
+      </if>
+      <if test="musername != null">
+        musername = #{musername,jdbcType=VARCHAR},
+      </if>
+      <if test="mpassword != null">
+        mpassword = #{mpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="mcomment != null">
+        mcomment = #{mcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="mavailable != null">
+        mavailable = #{mavailable,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Member">
+    <!--@mbg.generated-->
+    update `member`
+    set role_id = #{roleId,jdbcType=INTEGER},
+      station_id = #{stationId,jdbcType=INTEGER},
+      mname = #{mname,jdbcType=VARCHAR},
+      msex = #{msex,jdbcType=INTEGER},
+      mage = #{mage,jdbcType=INTEGER},
+      mtelephone = #{mtelephone,jdbcType=VARCHAR},
+      memail = #{memail,jdbcType=VARCHAR},
+      musername = #{musername,jdbcType=VARCHAR},
+      mpassword = #{mpassword,jdbcType=VARCHAR},
+      mcomment = #{mcomment,jdbcType=VARCHAR},
+      mavailable = #{mavailable,jdbcType=INTEGER}
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List" />
+        from `member`
+    </select>
+</mapper>

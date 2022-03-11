@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cui.gas.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="cui.gas.domain.Role">
+    <!--@mbg.generated-->
+    <!--@Table `role`-->
+    <id column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="rpostion" jdbcType="VARCHAR" property="rpostion" />
+    <result column="rparentid" jdbcType="INTEGER" property="rparentid" />
+    <result column="ravailable" jdbcType="INTEGER" property="ravailable" />
+    <result column="rcomment" jdbcType="VARCHAR" property="rcomment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    rid, rpostion, rparentid, ravailable, rcomment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from `role`
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from `role`
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="rid" keyProperty="rid" parameterType="cui.gas.domain.Role" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `role` (rpostion, rparentid, ravailable, 
+      rcomment)
+    values (#{rpostion,jdbcType=VARCHAR}, #{rparentid,jdbcType=INTEGER}, #{ravailable,jdbcType=INTEGER}, 
+      #{rcomment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="rid" keyProperty="rid" parameterType="cui.gas.domain.Role" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `role`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rpostion != null">
+        rpostion,
+      </if>
+      <if test="rparentid != null">
+        rparentid,
+      </if>
+      <if test="ravailable != null">
+        ravailable,
+      </if>
+      <if test="rcomment != null">
+        rcomment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rpostion != null">
+        #{rpostion,jdbcType=VARCHAR},
+      </if>
+      <if test="rparentid != null">
+        #{rparentid,jdbcType=INTEGER},
+      </if>
+      <if test="ravailable != null">
+        #{ravailable,jdbcType=INTEGER},
+      </if>
+      <if test="rcomment != null">
+        #{rcomment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Role">
+    <!--@mbg.generated-->
+    update `role`
+    <set>
+      <if test="rpostion != null">
+        rpostion = #{rpostion,jdbcType=VARCHAR},
+      </if>
+      <if test="rparentid != null">
+        rparentid = #{rparentid,jdbcType=INTEGER},
+      </if>
+      <if test="ravailable != null">
+        ravailable = #{ravailable,jdbcType=INTEGER},
+      </if>
+      <if test="rcomment != null">
+        rcomment = #{rcomment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Role">
+    <!--@mbg.generated-->
+    update `role`
+    set rpostion = #{rpostion,jdbcType=VARCHAR},
+      rparentid = #{rparentid,jdbcType=INTEGER},
+      ravailable = #{ravailable,jdbcType=INTEGER},
+      rcomment = #{rcomment,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List" />
+        from `role`
+    </select>
+</mapper>

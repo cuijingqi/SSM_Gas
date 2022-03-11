@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cui.gas.dao.FunctionMapper">
+  <resultMap id="BaseResultMap" type="cui.gas.domain.Function">
+    <!--@mbg.generated-->
+    <!--@Table `function`-->
+    <id column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="fname" jdbcType="VARCHAR" property="fname" />
+    <result column="ftype" jdbcType="VARCHAR" property="ftype" />
+    <result column="furl" jdbcType="VARCHAR" property="furl" />
+    <result column="fpercode" jdbcType="VARCHAR" property="fpercode" />
+    <result column="fparentid" jdbcType="BIGINT" property="fparentid" />
+    <result column="fparentids" jdbcType="VARCHAR" property="fparentids" />
+    <result column="fsortstring" jdbcType="VARCHAR" property="fsortstring" />
+    <result column="fcomment" jdbcType="VARCHAR" property="fcomment" />
+    <result column="favailable" jdbcType="INTEGER" property="favailable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    fid, fname, ftype, furl, fpercode, fparentid, fparentids, fsortstring, fcomment, 
+    favailable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from `function`
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from `function`
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="fid" keyProperty="fid" parameterType="cui.gas.domain.Function" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `function` (fname, ftype, furl, 
+      fpercode, fparentid, fparentids, 
+      fsortstring, fcomment, favailable
+      )
+    values (#{fname,jdbcType=VARCHAR}, #{ftype,jdbcType=VARCHAR}, #{furl,jdbcType=VARCHAR}, 
+      #{fpercode,jdbcType=VARCHAR}, #{fparentid,jdbcType=BIGINT}, #{fparentids,jdbcType=VARCHAR}, 
+      #{fsortstring,jdbcType=VARCHAR}, #{fcomment,jdbcType=VARCHAR}, #{favailable,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="fid" keyProperty="fid" parameterType="cui.gas.domain.Function" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `function`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fname != null">
+        fname,
+      </if>
+      <if test="ftype != null">
+        ftype,
+      </if>
+      <if test="furl != null">
+        furl,
+      </if>
+      <if test="fpercode != null">
+        fpercode,
+      </if>
+      <if test="fparentid != null">
+        fparentid,
+      </if>
+      <if test="fparentids != null">
+        fparentids,
+      </if>
+      <if test="fsortstring != null">
+        fsortstring,
+      </if>
+      <if test="fcomment != null">
+        fcomment,
+      </if>
+      <if test="favailable != null">
+        favailable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fname != null">
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftype != null">
+        #{ftype,jdbcType=VARCHAR},
+      </if>
+      <if test="furl != null">
+        #{furl,jdbcType=VARCHAR},
+      </if>
+      <if test="fpercode != null">
+        #{fpercode,jdbcType=VARCHAR},
+      </if>
+      <if test="fparentid != null">
+        #{fparentid,jdbcType=BIGINT},
+      </if>
+      <if test="fparentids != null">
+        #{fparentids,jdbcType=VARCHAR},
+      </if>
+      <if test="fsortstring != null">
+        #{fsortstring,jdbcType=VARCHAR},
+      </if>
+      <if test="fcomment != null">
+        #{fcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="favailable != null">
+        #{favailable,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Function">
+    <!--@mbg.generated-->
+    update `function`
+    <set>
+      <if test="fname != null">
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftype != null">
+        ftype = #{ftype,jdbcType=VARCHAR},
+      </if>
+      <if test="furl != null">
+        furl = #{furl,jdbcType=VARCHAR},
+      </if>
+      <if test="fpercode != null">
+        fpercode = #{fpercode,jdbcType=VARCHAR},
+      </if>
+      <if test="fparentid != null">
+        fparentid = #{fparentid,jdbcType=BIGINT},
+      </if>
+      <if test="fparentids != null">
+        fparentids = #{fparentids,jdbcType=VARCHAR},
+      </if>
+      <if test="fsortstring != null">
+        fsortstring = #{fsortstring,jdbcType=VARCHAR},
+      </if>
+      <if test="fcomment != null">
+        fcomment = #{fcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="favailable != null">
+        favailable = #{favailable,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Function">
+    <!--@mbg.generated-->
+    update `function`
+    set fname = #{fname,jdbcType=VARCHAR},
+      ftype = #{ftype,jdbcType=VARCHAR},
+      furl = #{furl,jdbcType=VARCHAR},
+      fpercode = #{fpercode,jdbcType=VARCHAR},
+      fparentid = #{fparentid,jdbcType=BIGINT},
+      fparentids = #{fparentids,jdbcType=VARCHAR},
+      fsortstring = #{fsortstring,jdbcType=VARCHAR},
+      fcomment = #{fcomment,jdbcType=VARCHAR},
+      favailable = #{favailable,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List" />
+        from `function`
+    </select>
+</mapper>

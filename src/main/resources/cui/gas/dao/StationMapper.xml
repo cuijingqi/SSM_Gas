@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cui.gas.dao.StationMapper">
+  <resultMap id="BaseResultMap" type="cui.gas.domain.Station">
+    <!--@mbg.generated-->
+    <!--@Table station-->
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="sparentid" jdbcType="INTEGER" property="sparentid" />
+    <result column="saddress" jdbcType="VARCHAR" property="saddress" />
+    <result column="stprice" jdbcType="DECIMAL" property="stprice" />
+    <result column="sdescribe" jdbcType="VARCHAR" property="sdescribe" />
+    <result column="stime" jdbcType="TIMESTAMP" property="stime" />
+    <result column="sadvice" jdbcType="VARCHAR" property="sadvice" />
+    <result column="scomment" jdbcType="VARCHAR" property="scomment" />
+    <result column="savailable" jdbcType="INTEGER" property="savailable" />
+    <collection property="employeeId" ofType="cui.gas.domain.Employee">
+      <id column="eid" jdbcType="INTEGER" property="eid" />
+      <result column="eage" jdbcType="INTEGER" property="eage" />
+      <result column="ename" jdbcType="VARCHAR" property="ename" />
+      <result column="etelephone" jdbcType="VARCHAR" property="etelephone" />
+      <result column="eaddress" jdbcType="VARCHAR" property="eaddress" />
+      <result column="eusername" jdbcType="VARCHAR" property="eusername" />
+      <result column="epassword" jdbcType="VARCHAR" property="epassword" />
+      <result column="ecomment" jdbcType="VARCHAR" property="ecomment" />
+      <result column="eavailable" jdbcType="CHAR" property="eavailable" />
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sid, sname, employee_id, sparentid, saddress, stprice, sdescribe, stime, sadvice, 
+    scomment, savailable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select * from station s,employee e where  s.sid=#{sid,jdbcType=INTEGER} and s.sid=e.station_id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from station
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="sid" keyProperty="sid" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into station (sname, employee_id, sparentid,
+    saddress, stprice, sdescribe,
+    stime, sadvice, scomment,
+    savailable)
+    values (#{sname,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{sparentid,jdbcType=INTEGER},
+    #{saddress,jdbcType=VARCHAR}, #{stprice,jdbcType=DECIMAL}, #{sdescribe,jdbcType=VARCHAR},
+    #{stime,jdbcType=TIMESTAMP}, #{sadvice,jdbcType=VARCHAR}, #{scomment,jdbcType=VARCHAR},
+    #{savailable,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="sid" keyProperty="sid" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into station
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="employeeId != null">
+        employee_id,
+      </if>
+      <if test="sparentid != null">
+        sparentid,
+      </if>
+      <if test="saddress != null">
+        saddress,
+      </if>
+      <if test="stprice != null">
+        stprice,
+      </if>
+      <if test="sdescribe != null">
+        sdescribe,
+      </if>
+      <if test="stime != null">
+        stime,
+      </if>
+      <if test="sadvice != null">
+        sadvice,
+      </if>
+      <if test="scomment != null">
+        scomment,
+      </if>
+      <if test="savailable != null">
+        savailable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="sparentid != null">
+        #{sparentid,jdbcType=INTEGER},
+      </if>
+      <if test="saddress != null">
+        #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stprice != null">
+        #{stprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sdescribe != null">
+        #{sdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null">
+        #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sadvice != null">
+        #{sadvice,jdbcType=VARCHAR},
+      </if>
+      <if test="scomment != null">
+        #{scomment,jdbcType=VARCHAR},
+      </if>
+      <if test="savailable != null">
+        #{savailable,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    <!--@mbg.generated-->
+    update station
+    <set>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null">
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="sparentid != null">
+        sparentid = #{sparentid,jdbcType=INTEGER},
+      </if>
+      <if test="saddress != null">
+        saddress = #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stprice != null">
+        stprice = #{stprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sdescribe != null">
+        sdescribe = #{sdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="stime != null">
+        stime = #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sadvice != null">
+        sadvice = #{sadvice,jdbcType=VARCHAR},
+      </if>
+      <if test="scomment != null">
+        scomment = #{scomment,jdbcType=VARCHAR},
+      </if>
+      <if test="savailable != null">
+        savailable = #{savailable,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    update station
+    set sname = #{sname,jdbcType=VARCHAR},
+    employee_id = #{employeeId,jdbcType=INTEGER},
+    sparentid = #{sparentid,jdbcType=INTEGER},
+    saddress = #{saddress,jdbcType=VARCHAR},
+    stprice = #{stprice,jdbcType=DECIMAL},
+    sdescribe = #{sdescribe,jdbcType=VARCHAR},
+    stime = #{stime,jdbcType=TIMESTAMP},
+    sadvice = #{sadvice,jdbcType=VARCHAR},
+    scomment = #{scomment,jdbcType=VARCHAR},
+    savailable = #{savailable,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select * from station s left join employee e on s.employee_id=e.eid
+  </select>
+  <select id="selectAllS" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select * from station s left join employee e on e.station_id=s.sid
+  </select>
+  <select id="selectByNameAndAddress" resultMap="BaseResultMap">
+    SELECT * FROM station s,employee e
+    <where>
+      s.employee_id=e.eid
+      <if test="sname != null">
+        and sname like concat('%',#{sname,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="saddress != null">
+        and saddress like concat('%',#{saddress,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+
+  </select>
+</mapper>

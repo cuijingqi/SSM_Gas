@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cui.gas.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="cui.gas.domain.Goods">
+    <!--@mbg.generated-->
+    <!--@Table goods-->
+    <id column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="station_id" jdbcType="INTEGER" property="stationId" />
+    <result column="gname" jdbcType="VARCHAR" property="gname" />
+    <result column="gimage" jdbcType="VARCHAR" property="gimage" />
+    <result column="gquantity" jdbcType="VARCHAR" property="gquantity" />
+    <result column="gdescribe" jdbcType="VARCHAR" property="gdescribe" />
+    <result column="gprice" jdbcType="DECIMAL" property="gprice" />
+    <result column="gcomment" jdbcType="VARCHAR" property="gcomment" />
+    <result column="gavailable" jdbcType="INTEGER" property="gavailable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    gid, station_id, gname, gimage, gquantity, gdescribe, gprice, gcomment, gavailable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from goods
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="gid" keyProperty="gid" parameterType="cui.gas.domain.Goods" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into goods (station_id, gname, gimage, 
+      gquantity, gdescribe, gprice, 
+      gcomment, gavailable)
+    values (#{stationId,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}, #{gimage,jdbcType=VARCHAR}, 
+      #{gquantity,jdbcType=VARCHAR}, #{gdescribe,jdbcType=VARCHAR}, #{gprice,jdbcType=DECIMAL}, 
+      #{gcomment,jdbcType=VARCHAR}, #{gavailable,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="gid" keyProperty="gid" parameterType="cui.gas.domain.Goods" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stationId != null">
+        station_id,
+      </if>
+      <if test="gname != null">
+        gname,
+      </if>
+      <if test="gimage != null">
+        gimage,
+      </if>
+      <if test="gquantity != null">
+        gquantity,
+      </if>
+      <if test="gdescribe != null">
+        gdescribe,
+      </if>
+      <if test="gprice != null">
+        gprice,
+      </if>
+      <if test="gcomment != null">
+        gcomment,
+      </if>
+      <if test="gavailable != null">
+        gavailable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stationId != null">
+        #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null">
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gimage != null">
+        #{gimage,jdbcType=VARCHAR},
+      </if>
+      <if test="gquantity != null">
+        #{gquantity,jdbcType=VARCHAR},
+      </if>
+      <if test="gdescribe != null">
+        #{gdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="gprice != null">
+        #{gprice,jdbcType=DECIMAL},
+      </if>
+      <if test="gcomment != null">
+        #{gcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="gavailable != null">
+        #{gavailable,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Goods">
+    <!--@mbg.generated-->
+    update goods
+    <set>
+      <if test="stationId != null">
+        station_id = #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null">
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gimage != null">
+        gimage = #{gimage,jdbcType=VARCHAR},
+      </if>
+      <if test="gquantity != null">
+        gquantity = #{gquantity,jdbcType=VARCHAR},
+      </if>
+      <if test="gdescribe != null">
+        gdescribe = #{gdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="gprice != null">
+        gprice = #{gprice,jdbcType=DECIMAL},
+      </if>
+      <if test="gcomment != null">
+        gcomment = #{gcomment,jdbcType=VARCHAR},
+      </if>
+      <if test="gavailable != null">
+        gavailable = #{gavailable,jdbcType=INTEGER},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Goods">
+    <!--@mbg.generated-->
+    update goods
+    set station_id = #{stationId,jdbcType=INTEGER},
+      gname = #{gname,jdbcType=VARCHAR},
+      gimage = #{gimage,jdbcType=VARCHAR},
+      gquantity = #{gquantity,jdbcType=VARCHAR},
+      gdescribe = #{gdescribe,jdbcType=VARCHAR},
+      gprice = #{gprice,jdbcType=DECIMAL},
+      gcomment = #{gcomment,jdbcType=VARCHAR},
+      gavailable = #{gavailable,jdbcType=INTEGER}
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List" />
+        from goods
+    </select>
+</mapper>

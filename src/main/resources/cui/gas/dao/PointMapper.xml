@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cui.gas.dao.PointMapper">
+  <resultMap id="BaseResultMap" type="cui.gas.domain.Point">
+    <!--@mbg.generated-->
+    <!--@Table point-->
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="option_id" jdbcType="INTEGER" property="optionId" />
+    <result column="pfigure" jdbcType="INTEGER" property="pfigure" />
+    <result column="psum" jdbcType="INTEGER" property="psum" />
+    <result column="ptime" jdbcType="TIMESTAMP" property="ptime" />
+    <result column="pcomment" jdbcType="VARCHAR" property="pcomment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    pid, member_id, option_id, pfigure, psum, ptime, pcomment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from point
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from point
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="cui.gas.domain.Point" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into point (member_id, option_id, pfigure, 
+      psum, ptime, pcomment
+      )
+    values (#{memberId,jdbcType=INTEGER}, #{optionId,jdbcType=INTEGER}, #{pfigure,jdbcType=INTEGER}, 
+      #{psum,jdbcType=INTEGER}, #{ptime,jdbcType=TIMESTAMP}, #{pcomment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="cui.gas.domain.Point" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="optionId != null">
+        option_id,
+      </if>
+      <if test="pfigure != null">
+        pfigure,
+      </if>
+      <if test="psum != null">
+        psum,
+      </if>
+      <if test="ptime != null">
+        ptime,
+      </if>
+      <if test="pcomment != null">
+        pcomment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="optionId != null">
+        #{optionId,jdbcType=INTEGER},
+      </if>
+      <if test="pfigure != null">
+        #{pfigure,jdbcType=INTEGER},
+      </if>
+      <if test="psum != null">
+        #{psum,jdbcType=INTEGER},
+      </if>
+      <if test="ptime != null">
+        #{ptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pcomment != null">
+        #{pcomment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Point">
+    <!--@mbg.generated-->
+    update point
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="optionId != null">
+        option_id = #{optionId,jdbcType=INTEGER},
+      </if>
+      <if test="pfigure != null">
+        pfigure = #{pfigure,jdbcType=INTEGER},
+      </if>
+      <if test="psum != null">
+        psum = #{psum,jdbcType=INTEGER},
+      </if>
+      <if test="ptime != null">
+        ptime = #{ptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pcomment != null">
+        pcomment = #{pcomment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Point">
+    <!--@mbg.generated-->
+    update point
+    set member_id = #{memberId,jdbcType=INTEGER},
+      option_id = #{optionId,jdbcType=INTEGER},
+      pfigure = #{pfigure,jdbcType=INTEGER},
+      psum = #{psum,jdbcType=INTEGER},
+      ptime = #{ptime,jdbcType=TIMESTAMP},
+      pcomment = #{pcomment,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List" />
+        from point
+    </select>
+</mapper>

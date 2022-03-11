@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cui.gas.dao.OptionMapper">
+  <resultMap id="BaseResultMap" type="cui.gas.domain.Option">
+    <!--@mbg.generated-->
+    <!--@Table `option`-->
+    <id column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="oname" jdbcType="VARCHAR" property="oname" />
+    <result column="ocomment" jdbcType="VARCHAR" property="ocomment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    oid, oname, ocomment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from `option`
+    where oid = #{oid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from `option`
+    where oid = #{oid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="oid" keyProperty="oid" parameterType="cui.gas.domain.Option" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `option` (oname, ocomment)
+    values (#{oname,jdbcType=VARCHAR}, #{ocomment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="oid" keyProperty="oid" parameterType="cui.gas.domain.Option" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into `option`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oname != null">
+        oname,
+      </if>
+      <if test="ocomment != null">
+        ocomment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oname != null">
+        #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="ocomment != null">
+        #{ocomment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Option">
+    <!--@mbg.generated-->
+    update `option`
+    <set>
+      <if test="oname != null">
+        oname = #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="ocomment != null">
+        ocomment = #{ocomment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Option">
+    <!--@mbg.generated-->
+    update `option`
+    set oname = #{oname,jdbcType=VARCHAR},
+      ocomment = #{ocomment,jdbcType=VARCHAR}
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List" />
+        from `option`
+    </select>
+</mapper>
