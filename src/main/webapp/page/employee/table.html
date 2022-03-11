@@ -19,17 +19,23 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">油站名称</label>
+                            <label class="layui-form-label">员工姓名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="sname" autocomplete="off" class="layui-input">
+                                <input type="text" name="ename" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">油站地址</label>
+                            <label class="layui-form-label">员工电话</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="saddress" autocomplete="off" class="layui-input">
+                                <input type="text" name="etelephone" autocomplete="off" class="layui-input">
                             </div>
                         </div>
+<!--                        <div class="layui-inline">-->
+<!--                            <label class="layui-form-label">任职部门</label>-->
+<!--                            <div class="layui-input-inline">-->
+<!--                                <input type="text" name="" autocomplete="off" class="layui-input">-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="layui-inline">
                             <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
                         </div>
@@ -89,7 +95,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/station/allwithpage',
+            url: '/employee/allwithpage',
             // parseData:function (result){
             //     return{
             //       "code":0,
@@ -106,14 +112,16 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'sid', width: 80, title: 'ID', sort: true},
-                {field: 'sname', width: 160, title: '站名'},
-                {field: 'employeeId',templet: function(data){ return (data.employeeId[0].eid!=null)?data.employeeId[0].ename:"暂无"}, width: 80, title: '站长'},
-                {field: 'stprice', width: 100, title: '当日油价', sort: true},
-                {field: 'saddress', title: '地址', minWidth: 100},
-                {field: 'sdescribe', title: '简述', minWidth: 100},
-                {field: 'stime', width: 160, title: '创建时间', sort: true},
-                {field: 'savailable',templet: function(data){ return (data.savailable!=1)?"停用":"启用"}, width: 80, title: '启用', sort: true},
+                {field: 'eid', width: 80, title: 'ID', sort: true},
+                {field: 'ename', width: 80, title: '姓名'},
+                {field: 'esex',templet: function(data){ return (data.esex!=1)?"女":"男"}, width: 80, title: '性别', sort: true},
+                {field: 'eage', width: 80, title: '年龄', sort: true},
+                {field: 'roleId',templet: function(data){ return (data.roleId.rid!=null)?data.roleId.rpostion:"暂无"}, width: 80, title: '职位'},
+                {field: 'stationId',templet: function(data){ return (data.stationId!=null)?data.stationId.sname:"暂无"}, width: 160, title: '任职部门'},
+                {field: 'etelephone', width: 160, title: '电话'},
+                {field: 'eaddress', title: '地址', minWidth: 160},
+                {field: 'etime', width: 100, title: '入职时间', sort: true, sort: true},
+                {field: 'eavailable',templet: function(data){ return (data.eavailable!=1)?"离职":"就职"}, width: 80, title: '启用', sort: true},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -148,13 +156,13 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
-                    title: '添加站点',
+                    title: '添加员工',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../station/table/add.html',
+                    content: '../employee/table/add.html',
                 end: function () {
                     // $(window.document).find("iframe")[0].contentWindow.location.reload(true);
                     // window.location.reload();//关闭后刷新数据
@@ -174,14 +182,14 @@
             } else if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
                     , data = checkStatus.data;
-                var sid=data.map((item,index) =>{
+                var eid=data.map((item,index) =>{
 
-                    return item.sid
+                    return item.eid
 
                 });
                 // layer.alert(JSON.stringify(data));
                 // layer.alert(JSON.stringify(checkStatus));
-                layer.confirm('真的删除选中站点吗？站点下的所有员工将会被移出该站点！'
+                layer.confirm('真的删除选中员工吗？可以将员工设置为离职状态！'
                     , function (index) {
                         $.ajax({
                             //请求方式
@@ -189,9 +197,9 @@
                             //请求的媒体类型
                             // contentType: "application/json;charset=UTF-8",
                             //请求地址
-                            url : "/station/delsstation",
+                            url : "/employee/delsemployee",
                             //数据，json字符串
-                            data : "sid="+sid,
+                            data : "eid="+eid,
                             //请求成功
                             success : function(result) {
                                 // console.log(result);
@@ -231,13 +239,13 @@
             if (obj.event === 'edit') {
                 //layer.open 通过ajax改造post方法不做 自行查询
                 var index = layer.open({
-                    title: '编辑站点',
+                    title: '编辑员工',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../station/table/edit.html'+'?sid='+data.sid,
+                    content: '../employee/table/edit.html'+'?eid='+data.eid,
                     end: function () {
                         // $(window.document).find("iframe")[0].contentWindow.location.reload(true);
                         // window.location.reload();//关闭后刷新数据
@@ -256,7 +264,7 @@
                 });
                 return false;
             } else if (obj.event === 'delete') {
-                layer.confirm('真的删除该站点吗？站点下的所有员工将会被移出该站点！'
+                layer.confirm('真的删除该员工吗？可以将员工设置为离职状态！'
                     , function (index) {
                         $.ajax({
                             //请求方式
@@ -264,9 +272,9 @@
                             //请求的媒体类型
                             // contentType: "application/json;charset=UTF-8",
                             //请求地址
-                            url : "/station/delstation",
+                            url : "/employee/delemployee",
                             //数据，json字符串
-                            data : "sid="+data.sid,
+                            data : "eid="+data.eid,
                             //请求成功
                             success : function(result) {
                                 console.log(result);

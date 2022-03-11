@@ -33,8 +33,9 @@ public class StationController {
             String saddress=null;
             if (searchParams!=null) {
                 Map<String, String> map = objectMapper.readValue(searchParams, Map.class);
-                sname = map.get("sname");
-                saddress = map.get("saddress");
+                sname = map.get("sname")==""?null:map.get("sname");
+                //这个判断可以避免空参查询  也可以在mapper  if test 判断
+                saddress = map.get("saddress")==""?null:map.get("saddress");
             }
             PageInfo pageInfo = ss.selectByNameAndAddressWithPage(page,limit,sname,saddress);
             return new Result(pageInfo.getList().size() != 0 ? 0 : 1, pageInfo.getList(), "", pageInfo.getTotal());

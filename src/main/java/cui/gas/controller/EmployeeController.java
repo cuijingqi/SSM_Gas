@@ -30,10 +30,17 @@ public class EmployeeController {
     public Result getAllwithPage(HttpServletRequest request) throws JsonProcessingException {
         Integer page = Integer.parseInt(request.getParameter("page"));
         Integer limit = Integer.parseInt(request.getParameter("limit"));
-        String ename = request.getParameter("ename");
+        String searchParams = request.getParameter("searchParams");
 //        if (ename!=null) {
-
-            PageInfo pageInfo = es.selectByNameWithPage(page,limit,ename);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String ename=null;
+            String etelephone=null;
+            if (searchParams!=null) {
+                Map<String, String> map = objectMapper.readValue(searchParams, Map.class);
+                ename = map.get("ename")==""?null:map.get("ename");
+                etelephone = map.get("etelephone")==""?null:map.get("etelephone");
+            }
+            PageInfo pageInfo = es.selectByNameAndTelephoneWithPage(page,limit,ename,etelephone);
             return new Result(pageInfo.getList().size() != 0 ? 0 : 1, pageInfo.getList(), "", pageInfo.getTotal());
 //        }else {
 //            PageInfo pageInfo = es.selectAllWithPage(page, limit);

@@ -90,6 +90,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         PageInfo pageInfo = new PageInfo(employees);
         return pageInfo;
     }
+
+    @Override
+    public PageInfo selectByNameAndTelephoneWithPage(Integer page, Integer limit, String ename, String etelephone) {
+        PageHelper.startPage(page,limit,true);
+        List<Employee> employees = employeeMapper.selectByNameAndTelephone(ename,etelephone);
+        PageInfo pageInfo = new PageInfo(employees);
+        return pageInfo;
+    }
 }
 
 

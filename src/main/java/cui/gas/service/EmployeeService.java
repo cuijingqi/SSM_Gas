@@ -81,6 +81,8 @@ public interface EmployeeService {
      */
 
     PageInfo selectByStationWithPage(Integer page, Integer limit, String sid);
+
+    PageInfo selectByNameAndTelephoneWithPage(Integer page, Integer limit, String ename, String etelephone);
 }
 
 
