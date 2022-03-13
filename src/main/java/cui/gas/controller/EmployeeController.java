@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import cui.gas.controller.results.Result;
+import cui.gas.domain.Employee;
 import cui.gas.domain.Station;
 import cui.gas.service.EmployeeService;
 import cui.gas.service.StationService;
@@ -63,14 +64,34 @@ public class EmployeeController {
 //
 //        }
     }
-//    @GetMapping("getstation")
-//    public  Result getStation(Integer sid){
-//        Station s=ss.selectBySid(sid);
-//        return new Result(s!=null ? 0 : 1, s);
-//    }
-//    @PostMapping("updatastation")
-//    public  Result updataStation(Station s){
-//        int i = ss.updateByPrimaryKey(s);
-//        return new Result(i!=0 ? 0 : 1);
-//    }
+    @GetMapping("getemployee")
+    public  Result getEmployee(Integer eid){
+        Employee e=es.selectByEid(eid);
+        return new Result(e!=null ? 0 : 1, e);
+    }
+    @PostMapping("addemployee")
+    public  Result addEmployee(Employee e){
+        int i=es.insert(e);
+        return new Result(i!=0 ? 0 : 1, e);
+    }
+    @PostMapping("updataemployee")
+    public  Result updataEmployee(Employee e){
+        int i = es.updateByPrimaryKey(e);
+        return new Result(i!=0 ? 0 : 1);
+    }
+    @GetMapping("delemployee")
+    public  Result delEmployee(Integer eid){
+        int s=es.deleteByPrimaryKey(eid);
+        return new Result(s!=0 ? 0 : 1, s);
+    }
+    @GetMapping("delsemployee")
+    public  Result delsEmployee(Integer[] eid){
+        System.out.println(eid);
+        int s=1;
+        for (int i=0;i<eid.length;i++){
+            s=s==0?0:es.deleteByPrimaryKey(eid[i]);
+        }
+        return new Result(s!=0 ? 0 : 1, s);
+    }
+
 }

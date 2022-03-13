@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import cui.gas.domain.Employee;
+import cui.gas.domain.Station;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface EmployeeService {
 
-
+@Transactional
     int deleteByPrimaryKey(Integer id);
 
     int insert(Employee record);
@@ -83,6 +84,9 @@ public interface EmployeeService {
     PageInfo selectByStationWithPage(Integer page, Integer limit, String sid);
 
     PageInfo selectByNameAndTelephoneWithPage(Integer page, Integer limit, String ename, String etelephone);
+
+
+    Employee selectByEid(Integer eid);
 }
 
 

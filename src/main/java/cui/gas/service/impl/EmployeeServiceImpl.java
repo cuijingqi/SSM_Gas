@@ -2,6 +2,7 @@ package cui.gas.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import cui.gas.dao.StationMapper;
 import cui.gas.domain.Station;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -20,14 +21,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Resource
     private EmployeeMapper employeeMapper;
-
+    @Resource
+    private StationMapper stationMapper;
     @Override
     public int deleteByPrimaryKey(Integer id) {
+        Employee employee = employeeMapper.selectByPrimaryKey(id);
+        if (employee.getRoleId().getRid()==2){
+            stationMapper.updateByPrimaryKeySelective(employee.getStationId().getSid(),null,null,null,null,null,null,null,null,null,null);
+        }
         return employeeMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public int insert(Employee record) {
+        System.out.println(record);
         return employeeMapper.insert(record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),new Date());
     }
 
@@ -47,7 +54,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public int updateByPrimaryKey(Employee record) {
-        return employeeMapper.updateByPrimaryKey(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
+        Employee employee = employeeMapper.selectByPrimaryKey(record.getEid());
+        System.out.println(employee);
+        System.out.println(record);
+        if(record.getStationId().getSid().equals(employee.getStationId().getSid())){
+            return employeeMapper.updateByPrimaryKey(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
+        }
+        if (record.getRoleId().getRid()==2){
+            stationMapper.updateByPrimaryKeySelective(record.getStationId().getSid(),null,null,null,null,null,null,null,null,null,null);
+        }
+        return employeeMapper.updateByPrimaryKey(record.getEid(),3,record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
     }
     @Override
     public List<Employee> selectAll() {
@@ -97,6 +113,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employees = employeeMapper.selectByNameAndTelephone(ename,etelephone);
         PageInfo pageInfo = new PageInfo(employees);
         return pageInfo;
+    }
+
+    @Override
+    public Employee selectByEid(Integer eid) {
+        Employee employee = employeeMapper.selectByPrimaryKey(eid);
+        return employee;
     }
 }
 

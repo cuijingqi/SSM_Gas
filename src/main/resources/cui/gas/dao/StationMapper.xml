@@ -130,9 +130,9 @@
       <if test="sname != null">
         sname = #{sname,jdbcType=VARCHAR},
       </if>
-      <if test="employeeId != null">
+<!--      <if test="employeeId != null">-->
         employee_id = #{employeeId,jdbcType=INTEGER},
-      </if>
+<!--      </if>-->
       <if test="sparentid != null">
         sparentid = #{sparentid,jdbcType=INTEGER},
       </if>
