@@ -37,7 +37,7 @@
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
-    select * from station s,employee e where  s.sid=#{sid,jdbcType=INTEGER} and s.employee_id=e.eid
+    select * from station s left join employee e on s.employee_id=e.eid where  s.sid=#{sid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
@@ -184,9 +184,8 @@
     select * from station s left join employee e on e.station_id=s.sid
   </select>
   <select id="selectByNameAndAddress" resultMap="BaseResultMap">
-    SELECT * FROM station s,employee e
+    SELECT * FROM station s left join employee e on s.employee_id=e.eid
     <where>
-      s.employee_id=e.eid
       <if test="sname != null">
         and sname like concat('%',#{sname,jdbcType=VARCHAR},'%')
       </if>

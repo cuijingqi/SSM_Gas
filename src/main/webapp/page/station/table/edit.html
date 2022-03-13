@@ -135,9 +135,9 @@
                 $("input[name='sid']").val(result.data.sid);
                 $("input[name='savailable']").prop("checked",result.data.savailable);
                 $("input[name='sname']").val(result.data.sname);
-                $("#eid").val(result.data.employeeId[0].eid);
-                $("#selectstationer").attr("ts-selected",result.data.employeeId[0].eid);
-                $("#selectstationer").attr("value",result.data.employeeId[0].ename);
+                $("#eid").val((result.data.employeeId[0]!=null)?result.data.employeeId[0].eid:null);
+                $("#selectstationer").attr("ts-selected",(result.data.employeeId[0]!=null)?result.data.employeeId[0].eid:null);
+                $("#selectstationer").attr("value",(result.data.employeeId[0]!=null)?result.data.employeeId[0].ename:null);
                 $("input[name='saddress']").val(result.data.saddress);
                 p1=result.data.saddress.match(regex)[1];
                 c2=result.data.saddress.match(regex)[2];

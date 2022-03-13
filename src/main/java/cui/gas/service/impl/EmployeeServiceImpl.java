@@ -55,13 +55,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public int updateByPrimaryKey(Employee record) {
         Employee employee = employeeMapper.selectByPrimaryKey(record.getEid());
-        System.out.println(employee);
-        System.out.println(record);
+        if(employee.getStationId()==null){
+            Station station = new Station();
+            station.setSid(-1);
+            employee.setStationId(station);
+        }
         if(record.getStationId().getSid().equals(employee.getStationId().getSid())){
             return employeeMapper.updateByPrimaryKey(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
         }
-        if (record.getRoleId().getRid()==2){
-            stationMapper.updateByPrimaryKeySelective(record.getStationId().getSid(),null,null,null,null,null,null,null,null,null,null);
+        if (employee.getRoleId().getRid()==2){
+            stationMapper.updateByPrimaryKeySelective(employee.getStationId().getSid(),null,null,null,null,null,null,null,null,null,null);
         }
         return employeeMapper.updateByPrimaryKey(record.getEid(),3,record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
     }

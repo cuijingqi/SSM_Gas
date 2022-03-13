@@ -67,7 +67,7 @@ public class StationServiceImpl implements StationService {
     @Override
     public int updateByPrimaryKey(Station record) {
         Station station = stationMapper.selectByPrimaryKey(record.getSid());
-        Integer oldeid = station.getEmployeeId().get(0).getEid();
+        Integer oldeid = station.getEmployeeId().size()!=0?station.getEmployeeId().get(0).getEid():-1;
         Integer neweid = record.getEmployeeId().get(0).getEid();
         employeeMapper.updateByPrimaryKeySelective(oldeid,3,null,null,null,null,null,null,null,null,null,null,null);
         employeeMapper.updateByPrimaryKeySelective(neweid,2,null,null,null,null,null,null,null,null,null,null,null);
