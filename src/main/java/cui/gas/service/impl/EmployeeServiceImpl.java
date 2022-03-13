@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeMapper.selectByPrimaryKey(record.getEid());
         if(employee.getStationId()==null){
             Station station = new Station();
-            station.setSid(-1);
+            station.setSid(0);
             employee.setStationId(station);
         }
         if(record.getStationId().getSid().equals(employee.getStationId().getSid())){
