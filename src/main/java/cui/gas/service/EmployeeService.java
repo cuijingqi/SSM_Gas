@@ -47,7 +47,7 @@ public interface EmployeeService {
      * @return com.github.pagehelper.PageInfo
      */
 
-
+    //更全面的替代
     PageInfo selectByNameWithPage(Integer page, Integer limit, String ename);
 
     /**
@@ -57,7 +57,7 @@ public interface EmployeeService {
      * @param limit
      * @return com.github.pagehelper.PageInfo
      */
-
+    //更全面的替代
     PageInfo selectAllWithPage(Integer page, Integer limit);
 
     /**
@@ -80,7 +80,7 @@ public interface EmployeeService {
      * @param sid
      * @return com.github.pagehelper.PageInfo
      */
-
+    //更全面的替代
     PageInfo selectByStationWithPage(Integer page, Integer limit, String sid);
 
     PageInfo selectByNameAndTelephoneWithPage(Integer page, Integer limit, String ename, String etelephone);

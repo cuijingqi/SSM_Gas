@@ -1,8 +1,16 @@
 package cui.gas.dao;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import cui.gas.domain.Member;
+
+import java.util.Date;
 import java.util.List;
+
+import cui.gas.domain.Role;
+import cui.gas.domain.Station;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author 崔靖奇 CUIJINGQICHN@163.com
@@ -24,7 +32,7 @@ public interface MemberMapper {
      * @param record the record
      * @return insert count
      */
-    int insert(Member record);
+    int insert(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
 
     /**
      * insert record to table selective
@@ -32,7 +40,7 @@ public interface MemberMapper {
      * @param record the record
      * @return insert count
      */
-    int insertSelective(Member record);
+    int insertSelective(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
 
     /**
      * select by primary key
@@ -48,7 +56,7 @@ public interface MemberMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(Member record);
+    int updateByPrimaryKeySelective(@Param("mid") Integer mid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
 
     /**
      * update record
@@ -56,7 +64,9 @@ public interface MemberMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(Member record);
+    int updateByPrimaryKey(@Param("mid") Integer mid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
 
     List<Member> selectAll();
+
+    List<Member> selectByNameAndTelephone(@Param("mname") String mname, @Param("mtelephone") String mtelephone);
 }

@@ -2,6 +2,7 @@ package cui.gas.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import cui.gas.domain.Member;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,11 @@ public interface MemberService {
 
     List<Member> selectAll();
 
+    PageInfo selectAllWithPage(Integer page, Integer limit);
+
+    PageInfo selectByNameAndTelephoneWithPage(Integer page, Integer limit, String mname, String mtelephone);
+
+    Member selectByMid(Integer mid);
 }
 
 

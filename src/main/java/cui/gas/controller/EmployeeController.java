@@ -86,7 +86,6 @@ public class EmployeeController {
     }
     @GetMapping("delsemployee")
     public  Result delsEmployee(Integer[] eid){
-        System.out.println(eid);
         int s=1;
         for (int i=0;i<eid.length;i++){
             s=s==0?0:es.deleteByPrimaryKey(eid[i]);

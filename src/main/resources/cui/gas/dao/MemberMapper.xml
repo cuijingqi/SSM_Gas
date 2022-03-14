@@ -5,8 +5,6 @@
     <!--@mbg.generated-->
     <!--@Table `member`-->
     <id column="mid" jdbcType="INTEGER" property="mid" />
-    <result column="role_id" jdbcType="INTEGER" property="roleId" />
-    <result column="station_id" jdbcType="INTEGER" property="stationId" />
     <result column="mname" jdbcType="VARCHAR" property="mname" />
     <result column="msex" jdbcType="INTEGER" property="msex" />
     <result column="mage" jdbcType="INTEGER" property="mage" />
@@ -17,6 +15,25 @@
     <result column="mcomment" jdbcType="VARCHAR" property="mcomment" />
     <result column="mavailable" jdbcType="INTEGER" property="mavailable" />
     <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    <association property="roleId" javaType="cui.gas.domain.Role">
+      <id column="rid" jdbcType="INTEGER" property="rid" />
+      <result column="rpostion" jdbcType="VARCHAR" property="rpostion" />
+      <result column="rparentid" jdbcType="INTEGER" property="rparentid" />
+      <result column="ravailable" jdbcType="INTEGER" property="ravailable" />
+      <result column="rcomment" jdbcType="VARCHAR" property="rcomment" />
+    </association>
+    <association property="stationId" javaType="cui.gas.domain.Station">
+      <id column="sid" jdbcType="INTEGER" property="sid" />
+      <result column="sname" jdbcType="VARCHAR" property="sname" />
+      <result column="sparentid" jdbcType="INTEGER" property="sparentid" />
+      <result column="saddress" jdbcType="VARCHAR" property="saddress" />
+      <result column="stprice" jdbcType="DECIMAL" property="stprice" />
+      <result column="sdescribe" jdbcType="VARCHAR" property="sdescribe" />
+      <result column="stime" jdbcType="TIMESTAMP" property="stime" />
+      <result column="sadvice" jdbcType="VARCHAR" property="sadvice" />
+      <result column="scomment" jdbcType="VARCHAR" property="scomment" />
+      <result column="savailable" jdbcType="INTEGER" property="savailable" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
@@ -26,16 +43,16 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
-    <include refid="Base_Column_List" />
-    from `member`
-    where mid = #{mid,jdbcType=INTEGER}
+    *
+    from `member` m,station s,role r
+    where mid = #{mid,jdbcType=INTEGER} and m.station_id=s.sid and m.role_id=r.rid
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from `member`
     where mid = #{mid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="mid" keyProperty="mid" parameterType="cui.gas.domain.Member" useGeneratedKeys="true">
+  <insert id="insert" parameterType="map">
     <!--@mbg.generated-->
     insert into `member` (role_id, station_id, mname, 
       msex, mage, mtelephone, 
@@ -128,7 +145,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Member">
+  <update id="updateByPrimaryKeySelective" parameterType="map">
     <!--@mbg.generated-->
     update `member`
     <set>
@@ -171,7 +188,7 @@
     </set>
     where mid = #{mid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Member">
+  <update id="updateByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
     update `member`
     set role_id = #{roleId,jdbcType=INTEGER},
@@ -190,8 +207,22 @@
   </update>
   <select id="selectAll" resultMap="BaseResultMap">
         <!--@mbg.generated-->
-        select
-        <include refid="Base_Column_List" />
-        from `member`
+    select
+    *
+    from `member` m,station s,role r
+    where m.station_id=s.sid and m.role_id=r.rid
     </select>
+
+  <select id="selectByNameAndTelephone" resultMap="BaseResultMap">
+    select * from `member` m,station s,role r
+    <where>
+      m.station_id=s.sid and m.role_id=r.rid
+      <if test="mname != null">
+        and mname like concat('%',#{mname,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="mtelephone != null">
+        and mtelephone like concat('%',#{mtelephone,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

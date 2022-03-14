@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../css/public.css" media="all">
+    <link rel="stylesheet" href="../../../js/lay-module/step-lay/step.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+<!--    <input type="hidden" name="sid">-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">启用</label>
+        <div class="layui-input-block">
+            <input type="checkbox" checked name="savailable" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">站名</label>
+        <div class="layui-input-block">
+            <input type="text" name="sname" lay-verify="required" lay-reqtext="站名不能为空" placeholder="请输入站名" value="" class="layui-input">
+            <!--            <tip>填写油站的名称。</tip>-->
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">站长</label>
+        <div class="layui-input-inline">
+            <input type="hidden" id="eid" name="employeeId[0].eid" value="0">
+            <input type="text" name="" readonly placeholder="请选择" autocomplete="off" class="layui-input" id="selectstation" value="" ts-selected="">
+        </div>
+    </div>
+    <input type="hidden" name="saddress" value="">
+    <div class="layui-form-item" id="area-picker">
+        <div class="layui-form-label required">站点地址</div>
+        <div class="layui-input-inline" style="width: 200px;">
+            <select lay-verify="required" lay-reqtext="站点所在省！"  class="province-selector" data-value="" lay-filter="province-1">
+                <option value="">请选择省</option>
+            </select>
+        </div>
+        <div class="layui-input-inline" style="width: 200px;">
+            <select lay-verify="required" lay-reqtext="站点所在市！" class="city-selector" data-value="" lay-filter="city-1">
+                <option value="">请选择市</option>
+            </select>
+        </div>
+        <div class="layui-input-inline" style="width: 200px;">
+            <select lay-verify="required" lay-reqtext="站点所在区县！" class="county-selector" data-value="" lay-filter="county-1">
+                <option value="">请选择区</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">今日油价</label>
+        <div class="layui-input-block">
+            <input type="text" name="stprice" lay-verify="required" lay-reqtext="油价不能为空" placeholder="请输入油价" value="" class="layui-input">
+            <!--            <tip>填写今日油价。</tip>-->
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">站点描述</label>
+        <div class="layui-input-block">
+            <textarea name="sdescribe" class="layui-textarea" placeholder="请输入站点描述"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">站点公告</label>
+        <div class="layui-input-block">
+            <textarea name="sadvice" class="layui-textarea" placeholder="请输入站点公告"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注信息</label>
+        <div class="layui-input-block">
+            <textarea name="scomment" class="layui-textarea" placeholder="请输入备注信息"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+<script src="../../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script src="../../../js/jquery-3.6.0.min.js"></script>
+<script>
+    layui.use(['layer', 'form', 'layarea', 'tableSelect'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            layarea = layui.layarea,
+            tableSelect = layui.tableSelect,
+            $ = layui.$;
+        layarea.render({
+            elem: '#area-picker',
+            // data: {
+            //     province: "",
+            //     city: "",
+            //     county: "",
+            // },
+            change: function (res) {
+                //选择结果
+                console.log(res);
+                $("input[name='saddress']").val(res.province+res.city+res.county);
+            }
+        });
+        //雇员表单
+        var tableSelect = layui.tableSelect;
+        tableSelect.render({
+            elem: '#selectstation',	//定义输入框input对象 必填
+            checkedKey: 'eid', //表格的唯一建值，非常重要，影响到选中状态 必填
+            searchKey: 'ename',	//搜索输入框的name值 默认keyword
+            searchPlaceholder: '姓名搜索',	//搜索输入框的提示文字 默认关键词搜索
+            height:'400',  //自定义高度
+            width:'900',  //自定义宽度
+            table: {	//定义表格参数，与LAYUI的TABLE模块一致，只是无需再定义表格elem
+                url:'/employee/allwithpagebystation?sid='+0,
+                cols: [[
+                    { type: 'radio' },//checkbox多选
+                    { field: 'eid', title: 'ID' },
+                    { field: 'ename', title: '姓名' },
+                    { field: 'esex', title: '性别' ,templet: function(data){ return data.esex==1?'男':'女';}},
+                    { field: 'eage', title: '年龄' }
+                ]]
+            },
+            // parseData: function(res) {
+            //     res.data.data.esex=res.data.data.esex==1?'男':'女';
+            //     alert(res.data.data.esex);
+            //     return {
+            //         code: res.code,
+            //         msg: res.msg,
+            //         count: res.data.count,
+            //         data: res.data.data
+            //     }
+            // },
+            done: function (elem, data) {
+                //选择完后的回调，包含2个返回值 elem:返回之前input对象；data:表格返回的选中的数据 []
+                //拿到data[]后 就按照业务需求做想做的事情啦~比如加个隐藏域放ID...
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    console.log(item);
+                    NEWJSON.push(item.ename);
+
+                    $("#eid").val(item.eid);
+                })
+                elem.val(NEWJSON.join(","))
+
+            }
+        })
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            data.field.savailable=data.field.savailable=='on'?1:0;
+            var index = layer.open({
+                content: '确认添加？',
+                title: '信息'
+                ,btn: ['确认', '取消']
+                ,yes: function(index, layero){
+                    // 关闭弹出层
+                    layer.close(index);
+                    $.ajax({
+                        //请求方式
+                        type : "post",
+                        //请求的媒体类型
+                        //json字符串JSON.stringify(list)请求需要写  只有post方法
+                        // contentType: "application/json;charset=UTF-8",
+                        //请求地址
+                        url : "/station/addstation",
+                        //数据，json字符串
+                        data : data.field,
+                        //请求成功
+                        dataType:"json",
+                        success : function(result) {
+                            // console.log(result);  1成功0失败
+                            layer.msg('成功', {
+                                icon: 1,
+                                time: 1200 //2秒关闭（如果不配置，默认是3秒）
+                            }, function(){
+
+                                // $(window.parent.parent.document).find("iframe")[0].contentWindow.location.reload(true);//刷新父页面 不管用
+                                var iframeIndex = parent.layer.getFrameIndex(window.name);//先得到当前iframe层的索引
+                                parent.layer.close(iframeIndex);//再执行关闭
+                            });
+
+                        },
+                        //请求失败，包含具体的错误信息
+                        error : function(e){
+                            console.log(e.status);
+                            console.log(e.responseText);
+                        }
+                    });
+                    // parent.layui.table.reload('currentTableId',{
+                    //     where: {
+                    //         param: value,
+                    //         page:current,
+                    //         limit:limit
+                    //     }
+                    // });
+
+                }
+                ,btn2: function(index, layero){
+                    // 关闭弹出层
+                    layer.close(index);
+                    // return false //开启该代码可禁止点击该按钮关闭
+                }
+            })
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>

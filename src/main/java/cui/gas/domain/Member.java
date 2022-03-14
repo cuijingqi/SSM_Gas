@@ -13,9 +13,9 @@ import java.util.Date;
 public class Member implements Serializable {
     private Integer mid;
 
-    private Integer roleId;
+    private Role roleId;
 
-    private Integer stationId;
+    private Station stationId;
 
     private String mname;
 
@@ -48,19 +48,19 @@ public class Member implements Serializable {
         this.mid = mid;
     }
 
-    public Integer getRoleId() {
+    public Role getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Role roleId) {
         this.roleId = roleId;
     }
 
-    public Integer getStationId() {
+    public Station getStationId() {
         return stationId;
     }
 
-    public void setStationId(Integer stationId) {
+    public void setStationId(Station stationId) {
         this.stationId = stationId;
     }
 

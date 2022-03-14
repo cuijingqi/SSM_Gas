@@ -34,7 +34,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public int insert(Employee record) {
-        System.out.println(record);
         return employeeMapper.insert(record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),new Date());
     }
 

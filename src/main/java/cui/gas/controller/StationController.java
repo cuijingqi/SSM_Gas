@@ -38,7 +38,6 @@ public class StationController {
                 saddress = map.get("saddress")==""?null:map.get("saddress");
             }
             sname = request.getParameter("sname")==""?sname:request.getParameter("sname");
-        System.out.println(sname+""+saddress);
             PageInfo pageInfo = ss.selectByNameAndAddressWithPage(page,limit,sname,saddress);
             return new Result(pageInfo.getList().size() != 0 ? 0 : 1, pageInfo.getList(), "", pageInfo.getTotal());
 //        }else {
@@ -69,7 +68,6 @@ public class StationController {
     }
     @GetMapping("delsstation")
     public  Result delsStation(Integer[] sid){
-        System.out.println(sid);
         int s=1;
         for (int i=0;i<sid.length;i++){
             s=s==0?0:ss.deleteByPrimaryKey(sid[i]);
