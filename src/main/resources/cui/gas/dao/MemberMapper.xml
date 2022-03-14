@@ -10,6 +10,7 @@
     <result column="mage" jdbcType="INTEGER" property="mage" />
     <result column="mtelephone" jdbcType="VARCHAR" property="mtelephone" />
     <result column="memail" jdbcType="VARCHAR" property="memail" />
+    <result column="maddress" jdbcType="VARCHAR" property="maddress" />
     <result column="musername" jdbcType="VARCHAR" property="musername" />
     <result column="mpassword" jdbcType="VARCHAR" property="mpassword" />
     <result column="mcomment" jdbcType="VARCHAR" property="mcomment" />
@@ -61,8 +62,8 @@
       )
     values (#{roleId,jdbcType=INTEGER}, #{stationId,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, 
       #{msex,jdbcType=INTEGER}, #{mage,jdbcType=INTEGER}, #{mtelephone,jdbcType=VARCHAR}, 
-      #{memail,jdbcType=VARCHAR}, #{musername,jdbcType=VARCHAR}, #{mpassword,jdbcType=VARCHAR}, 
-      #{mcomment,jdbcType=VARCHAR}, #{mavailable,jdbcType=INTEGER}, #{mtime,jdbcType=TIMESTAMP}
+      #{memail,jdbcType=VARCHAR}, #{musername,jdbcType=VARCHAR}, #{mpassword,jdbcType=VARCHAR},
+    #{maddress,jdbcType=VARCHAR},#{mcomment,jdbcType=VARCHAR}, #{mavailable,jdbcType=INTEGER}, #{mtime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" keyColumn="mid" keyProperty="mid" parameterType="cui.gas.domain.Member" useGeneratedKeys="true">
@@ -176,6 +177,9 @@
       <if test="mpassword != null">
         mpassword = #{mpassword,jdbcType=VARCHAR},
       </if>
+      <if test="maddress != null">
+        mpassword = #{maddress,jdbcType=VARCHAR},
+      </if>
       <if test="mcomment != null">
         mcomment = #{mcomment,jdbcType=VARCHAR},
       </if>
@@ -200,6 +204,7 @@
       memail = #{memail,jdbcType=VARCHAR},
       musername = #{musername,jdbcType=VARCHAR},
       mpassword = #{mpassword,jdbcType=VARCHAR},
+      maddress=#{maddress,jdbcType=VARCHAR},
       mcomment = #{mcomment,jdbcType=VARCHAR},
       mavailable = #{mavailable,jdbcType=INTEGER},
       mtime = #{mtime,jdbcType=TIMESTAMP}

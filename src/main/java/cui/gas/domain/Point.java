@@ -1,5 +1,8 @@
 package cui.gas.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,14 +13,15 @@ import java.util.Date;
 public class Point implements Serializable {
     private Integer pid;
 
-    private Integer memberId;
+    private Member memberId;
 
-    private Integer optionId;
+    private Option optionId;
 
     private Integer pfigure;
 
     private Integer psum;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")//页面写入数据库时格式化
+    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//数据库导出页面时json格式化
     private Date ptime;
 
     private String pcomment;
@@ -32,19 +36,19 @@ public class Point implements Serializable {
         this.pid = pid;
     }
 
-    public Integer getMemberId() {
+    public Member getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Integer memberId) {
+    public void setMemberId(Member memberId) {
         this.memberId = memberId;
     }
 
-    public Integer getOptionId() {
+    public Option getOptionId() {
         return optionId;
     }
 
-    public void setOptionId(Integer optionId) {
+    public void setOptionId(Option optionId) {
         this.optionId = optionId;
     }
 

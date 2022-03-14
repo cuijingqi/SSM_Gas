@@ -5,12 +5,29 @@
     <!--@mbg.generated-->
     <!--@Table point-->
     <id column="pid" jdbcType="INTEGER" property="pid" />
-    <result column="member_id" jdbcType="INTEGER" property="memberId" />
-    <result column="option_id" jdbcType="INTEGER" property="optionId" />
     <result column="pfigure" jdbcType="INTEGER" property="pfigure" />
     <result column="psum" jdbcType="INTEGER" property="psum" />
     <result column="ptime" jdbcType="TIMESTAMP" property="ptime" />
     <result column="pcomment" jdbcType="VARCHAR" property="pcomment" />
+    <association property="memberId" javaType="cui.gas.domain.Member">
+      <id column="mid" jdbcType="INTEGER" property="mid" />
+      <result column="mname" jdbcType="VARCHAR" property="mname" />
+      <result column="msex" jdbcType="INTEGER" property="msex" />
+      <result column="mage" jdbcType="INTEGER" property="mage" />
+      <result column="mtelephone" jdbcType="VARCHAR" property="mtelephone" />
+      <result column="memail" jdbcType="VARCHAR" property="memail" />
+      <result column="maddress" jdbcType="VARCHAR" property="maddress" />
+      <result column="musername" jdbcType="VARCHAR" property="musername" />
+      <result column="mpassword" jdbcType="VARCHAR" property="mpassword" />
+      <result column="mcomment" jdbcType="VARCHAR" property="mcomment" />
+      <result column="mavailable" jdbcType="INTEGER" property="mavailable" />
+      <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+    </association>
+    <association property="optionId" javaType="cui.gas.domain.Option">
+      <id column="oid" jdbcType="INTEGER" property="oid" />
+      <result column="oname" jdbcType="VARCHAR" property="oname" />
+      <result column="ocomment" jdbcType="VARCHAR" property="ocomment" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
@@ -18,17 +35,14 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from point
-    where pid = #{pid,jdbcType=INTEGER}
+    select * from point p,member m,`option` o where p.member_id=m.mid and p.option_id=o.oid and pid = #{pid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from point
     where pid = #{pid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="cui.gas.domain.Point" useGeneratedKeys="true">
+  <insert id="insert" parameterType="map">
     <!--@mbg.generated-->
     insert into point (member_id, option_id, pfigure, 
       psum, ptime, pcomment
@@ -37,7 +51,7 @@
       #{psum,jdbcType=INTEGER}, #{ptime,jdbcType=TIMESTAMP}, #{pcomment,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="cui.gas.domain.Point" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="map">
     <!--@mbg.generated-->
     insert into point
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -81,7 +95,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Point">
+  <update id="updateByPrimaryKeySelective" parameterType="map">
     <!--@mbg.generated-->
     update point
     <set>
@@ -106,7 +120,7 @@
     </set>
     where pid = #{pid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Point">
+  <update id="updateByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
     update point
     set member_id = #{memberId,jdbcType=INTEGER},
@@ -119,8 +133,10 @@
   </update>
   <select id="selectAll" resultMap="BaseResultMap">
         <!--@mbg.generated-->
-        select
-        <include refid="Base_Column_List" />
-        from point
-    </select>
+    select * from point p,member m,`option` o where p.member_id=m.mid and p.option_id=o.oid order by p.ptime desc
+  </select>
+
+  <select id="selectByMemberOrderByTime" resultMap="BaseResultMap">
+    select * from point p,member m,`option` o where p.member_id=m.mid and p.option_id=o.oid and p.member_id= #{memberId,jdbcType=INTEGER} order by p.ptime desc
+  </select>
 </mapper>

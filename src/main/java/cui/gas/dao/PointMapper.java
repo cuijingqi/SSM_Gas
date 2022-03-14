@@ -1,8 +1,14 @@
 package cui.gas.dao;
 
+import cui.gas.domain.Member;
+import cui.gas.domain.Option;
 import cui.gas.domain.Point;
+
+import java.util.Date;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author 崔靖奇 CUIJINGQICHN@163.com
@@ -24,7 +30,7 @@ public interface PointMapper {
      * @param record the record
      * @return insert count
      */
-    int insert(Point record);
+    int insert(@Param("memberId") Member memberId, @Param("optionId") Option optionId, @Param("pfigure") Integer pfigure, @Param("psum") Integer psum, @Param("ptime") Date ptime, @Param("pcomment") String pcomment);
 
     /**
      * insert record to table selective
@@ -32,7 +38,7 @@ public interface PointMapper {
      * @param record the record
      * @return insert count
      */
-    int insertSelective(Point record);
+    int insertSelective(@Param("memberId") Member memberId, @Param("optionId") Option optionId, @Param("pfigure") Integer pfigure, @Param("psum") Integer psum, @Param("ptime") Date ptime, @Param("pcomment") String pcomment);
 
     /**
      * select by primary key
@@ -48,7 +54,7 @@ public interface PointMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(Point record);
+    int updateByPrimaryKeySelective(@Param("pid") Integer pid, @Param("memberId") Member memberId, @Param("optionId") Option optionId, @Param("pfigure") Integer pfigure, @Param("psum") Integer psum, @Param("ptime") Date ptime, @Param("pcomment") String pcomment);
 
     /**
      * update record
@@ -56,7 +62,9 @@ public interface PointMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(Point record);
+    int updateByPrimaryKey(@Param("pid") Integer pid, @Param("memberId") Member memberId, @Param("optionId") Option optionId, @Param("pfigure") Integer pfigure, @Param("psum") Integer psum, @Param("ptime") Date ptime, @Param("pcomment") String pcomment);
 
     List<Point> selectAll();
+
+    List<Point> selectByMemberOrderByTime(@Param("memberId") Integer memberId);
 }

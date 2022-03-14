@@ -2,8 +2,10 @@ package cui.gas.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import cui.gas.dao.PointMapper;
 import cui.gas.domain.Employee;
 import cui.gas.domain.Member;
+import cui.gas.domain.Point;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
@@ -21,6 +23,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Resource
     private MemberMapper memberMapper;
+    @Resource
+    private PointMapper pointMapper;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -29,12 +33,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int insert(Member record) {
-        return memberMapper.insert(record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMcomment(),record.getMavailable(),new Date());
+        return memberMapper.insert(record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMaddress(),record.getMcomment(),record.getMavailable(),new Date());
     }
 
     @Override
     public int insertSelective(Member record) {
-        return memberMapper.insertSelective(record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMcomment(),record.getMavailable(),new Date());
+        return memberMapper.insertSelective(record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMaddress(),record.getMcomment(),record.getMavailable(),new Date());
     }
 
     @Override
@@ -44,12 +48,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int updateByPrimaryKeySelective(Member record) {
-        return memberMapper.updateByPrimaryKeySelective(record.getMid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMcomment(),record.getMavailable(),record.getMtime());
+        return memberMapper.updateByPrimaryKeySelective(record.getMid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMaddress(),record.getMcomment(),record.getMavailable(),record.getMtime());
     }
 
     @Override
     public int updateByPrimaryKey(Member record) {
-        return memberMapper.updateByPrimaryKey(record.getMid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMcomment(),record.getMavailable(),record.getMtime());
+        return memberMapper.updateByPrimaryKey(record.getMid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMaddress(),record.getMcomment(),record.getMavailable(),record.getMtime());
     }
 
     @Override
@@ -61,6 +65,10 @@ public class MemberServiceImpl implements MemberService {
     public PageInfo selectAllWithPage(Integer page, Integer limit) {
         PageHelper.startPage(page,limit,true);
         List<Member> members = memberMapper.selectAll();
+        for (int i = 0; i < members.size(); i++) {
+            List<Point> points=pointMapper.selectByMemberOrderByTime(members.get(i).getMid());
+            members.get(i).setPsum(points.size()!=0?points.get(0).getPsum():0);
+        }
         PageInfo pageInfo = new PageInfo(members);
         return pageInfo;
     }
@@ -69,6 +77,10 @@ public class MemberServiceImpl implements MemberService {
     public PageInfo selectByNameAndTelephoneWithPage(Integer page, Integer limit, String mname, String mtelephone) {
         PageHelper.startPage(page,limit,true);
         List<Member> members = memberMapper.selectByNameAndTelephone(mname,mtelephone);
+        for (int i = 0; i < members.size(); i++) {
+            List<Point> points=pointMapper.selectByMemberOrderByTime(members.get(i).getMid());
+            members.get(i).setPsum(points.size()!=0?points.get(0).getPsum():0);
+        }
         PageInfo pageInfo = new PageInfo(members);
         return pageInfo;
     }
@@ -76,6 +88,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member selectByMid(Integer mid) {
         Member member = memberMapper.selectByPrimaryKey(mid);
+        List<Point> points=pointMapper.selectByMemberOrderByTime(member.getMid());
+        member.setPsum(points.size()!=0?points.get(0).getPsum():0);
         return member;
     }
 }

@@ -3,6 +3,7 @@ package cui.gas.service.impl;
 import cui.gas.domain.Point;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 import cui.gas.dao.PointMapper;
@@ -25,14 +26,13 @@ public class PointServiceImpl implements PointService {
 
     @Override
     public int insert(Point record) {
-        return pointMapper.insert(record);
+        return pointMapper.insert(record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),new Date(),record.getPcomment());
     }
 
     @Override
     public int insertSelective(Point record) {
-        return pointMapper.insertSelective(record);
+        return pointMapper.insertSelective(record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),new Date(),record.getPcomment());
     }
-
     @Override
     public Point selectByPrimaryKey(Integer id) {
         return pointMapper.selectByPrimaryKey(id);
@@ -40,14 +40,12 @@ public class PointServiceImpl implements PointService {
 
     @Override
     public int updateByPrimaryKeySelective(Point record) {
-        return pointMapper.updateByPrimaryKeySelective(record);
+        return pointMapper.updateByPrimaryKeySelective(record.getPid(),record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),record.getPtime(),record.getPcomment());
     }
-
     @Override
     public int updateByPrimaryKey(Point record) {
-        return pointMapper.updateByPrimaryKey(record);
+        return pointMapper.updateByPrimaryKey(record.getPid(),record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),record.getPtime(),record.getPcomment());
     }
-
     @Override
     public List<Point> selectAll() {
         return pointMapper.selectAll();

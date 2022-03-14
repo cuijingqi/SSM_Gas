@@ -30,13 +30,22 @@ public class Member implements Serializable {
     private String musername;
 
     private String mpassword;
-
+    private String maddress;
     private String mcomment;
 
     private Integer mavailable;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")//页面写入数据库时格式化
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//数据库导出页面时json格式化
     private Date mtime;
+    private Integer psum;
+
+    public Integer getPsum() {
+        return psum;
+    }
+
+    public void setPsum(Integer psum) {
+        this.psum = psum;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -54,6 +63,14 @@ public class Member implements Serializable {
 
     public void setRoleId(Role roleId) {
         this.roleId = roleId;
+    }
+
+    public String getMaddress() {
+        return maddress;
+    }
+
+    public void setMaddress(String maddress) {
+        this.maddress = maddress;
     }
 
     public Station getStationId() {
@@ -158,6 +175,7 @@ public class Member implements Serializable {
         sb.append(", mage=").append(mage);
         sb.append(", mtelephone=").append(mtelephone);
         sb.append(", memail=").append(memail);
+        sb.append(", maddress=").append(maddress);
         sb.append(", musername=").append(musername);
         sb.append(", mpassword=").append(mpassword);
         sb.append(", mcomment=").append(mcomment);

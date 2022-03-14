@@ -19,15 +19,15 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">油站名称</label>
+                            <label class="layui-form-label">会员姓名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="sname" autocomplete="off" class="layui-input">
+                                <input type="text" name="mname" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">油站地址</label>
+                            <label class="layui-form-label">会员电话</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="saddress" autocomplete="off" class="layui-input">
+                                <input type="text" name="mtelephone" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -89,7 +89,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/station/allwithpage',
+            url: '/member/allwithpage',
             // parseData:function (result){
             //     return{
             //       "code":0,
@@ -106,14 +106,16 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'sid', width: 80, title: 'ID', sort: true},
-                {field: 'sname', width: 160, title: '站名'},
-                {field: 'employeeId',templet: function(data){ return (data.employeeId[0]!=null)?data.employeeId[0].ename:"暂无"}, width: 80, title: '站长'},
-                {field: 'stprice', width: 100, title: '当日油价', sort: true},
-                {field: 'saddress', title: '地址', minWidth: 100},
-                {field: 'sdescribe', title: '简述', minWidth: 100},
-                {field: 'stime', width: 160, title: '创建时间', sort: true},
-                {field: 'savailable',templet: function(data){ return (data.savailable!=1)?"停用":"启用"}, width: 80, title: '启用', sort: true},
+                {field: 'mid', width: 60, title: 'ID', sort: true},
+                {field: 'mname', width: 100, title: '姓名'},
+                {field: 'msex',templet: function(data){ return (data.esex!=1)?"女":"男"}, width: 75, title: '性别', sort: true},
+                {field: 'mage', width: 75, title: '年龄', sort: true},
+                {field: 'stationId',templet: function(data){ return (data.stationId!=null)?data.stationId.sname:"暂无"}, width: 160, title: '注册地'},
+                {field: 'psum', width: 75, title: '积分', sort: true},
+                {field: 'mtelephone', width: 160, title: '电话'},
+                {field: 'maddress', title: '地址', minWidth: 160},
+                {field: 'mtime', width: 160, title: '注册时间', sort: true, sort: true},
+                {field: 'mavailable',templet: function(data){ return (data.mavailable!=1)?"注销":"在册"}, width: 80, title: '状态', sort: true},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -148,13 +150,13 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
-                    title: '添加站点',
+                    title: '添加会员',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../station/table/add.html',
+                    content: '../member/table/add.html',
                 end: function () {
                     // $(window.document).find("iframe")[0].contentWindow.location.reload(true);
                     // window.location.reload();//关闭后刷新数据
@@ -176,7 +178,7 @@
                     , data = checkStatus.data;
                 var sid=data.map((item,index) =>{
 
-                    return item.sid
+                    return item.mid
 
                 });
                 // layer.alert(JSON.stringify(data));
@@ -189,9 +191,9 @@
                             //请求的媒体类型
                             // contentType: "application/json;charset=UTF-8",
                             //请求地址
-                            url : "/station/delsstation",
+                            url : "/member/delsstation",
                             //数据，json字符串
-                            data : "sid="+sid,
+                            data : "mid="+mid,
                             //请求成功
                             success : function(result) {
                                 // console.log(result);
@@ -237,7 +239,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../station/table/edit.html'+'?sid='+data.sid,
+                    content: '../member/table/edit.html'+'?mid='+data.mid,
                     end: function () {
                         // $(window.document).find("iframe")[0].contentWindow.location.reload(true);
                         // window.location.reload();//关闭后刷新数据
@@ -264,9 +266,9 @@
                             //请求的媒体类型
                             // contentType: "application/json;charset=UTF-8",
                             //请求地址
-                            url : "/station/delstation",
+                            url : "/member/delstation",
                             //数据，json字符串
-                            data : "sid="+data.sid,
+                            data : "mid="+data.mid,
                             //请求成功
                             success : function(result) {
                                 console.log(result);

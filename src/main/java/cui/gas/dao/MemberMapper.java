@@ -32,7 +32,7 @@ public interface MemberMapper {
      * @param record the record
      * @return insert count
      */
-    int insert(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
+    int insert(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword,@Param("maddress") String maddress, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
 
     /**
      * insert record to table selective
@@ -40,7 +40,7 @@ public interface MemberMapper {
      * @param record the record
      * @return insert count
      */
-    int insertSelective(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
+    int insertSelective(@Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword,@Param("maddress") String maddress, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
 
     /**
      * select by primary key
@@ -56,7 +56,7 @@ public interface MemberMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(@Param("mid") Integer mid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
+    int updateByPrimaryKeySelective(@Param("mid") Integer mid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword,@Param("maddress") String maddress, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
 
     /**
      * update record
@@ -64,7 +64,7 @@ public interface MemberMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(@Param("mid") Integer mid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
+    int updateByPrimaryKey(@Param("mid") Integer mid, @Param("roleId") Integer roleId, @Param("stationId") Integer stationId, @Param("mname") String mname, @Param("msex") Integer msex, @Param("mage") Integer mage, @Param("mtelephone") String mtelephone, @Param("memail") String memail, @Param("musername") String musername, @Param("mpassword") String mpassword,@Param("maddress") String maddress, @Param("mcomment") String mcomment, @Param("mavailable") Integer mavailable, @Param("mtime") Date mtime);
 
     List<Member> selectAll();
 
