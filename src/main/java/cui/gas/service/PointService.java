@@ -2,6 +2,7 @@ package cui.gas.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import cui.gas.domain.Point;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,9 @@ public interface PointService {
 
     List<Point> selectAll();
 
+    PageInfo selectAllWithPage(Integer page, Integer limit);
+
+    Point selectByPid(Integer pid);
 }
 
 

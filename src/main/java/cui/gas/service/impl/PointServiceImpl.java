@@ -1,6 +1,9 @@
 package cui.gas.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import cui.gas.domain.Point;
+import cui.gas.domain.Station;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
@@ -44,13 +47,24 @@ public class PointServiceImpl implements PointService {
     }
     @Override
     public int updateByPrimaryKey(Point record) {
-        return pointMapper.updateByPrimaryKey(record.getPid(),record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),record.getPtime(),record.getPcomment());
+        return pointMapper.updateByPrimaryKeySelective(record.getPid(),record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),record.getPtime(),record.getPcomment());
     }
     @Override
     public List<Point> selectAll() {
         return pointMapper.selectAll();
     }
 
+    @Override
+    public PageInfo selectAllWithPage(Integer page, Integer limit) {
+        PageHelper.startPage(page,limit,true);
+        List<Point> points = pointMapper.selectAll();
+        return new PageInfo(points);
+    }
+
+    @Override
+    public Point selectByPid(Integer pid) {
+        return pointMapper.selectByPrimaryKey(pid);
+    }
 }
 
 

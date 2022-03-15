@@ -1,6 +1,9 @@
 package cui.gas.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import cui.gas.domain.Option;
+import cui.gas.domain.Point;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -53,6 +56,12 @@ public class OptionServiceImpl implements OptionService {
         return optionMapper.selectAll();
     }
 
+    @Override
+    public PageInfo selectAllWithPage(Integer page, Integer limit) {
+        PageHelper.startPage(page,limit,true);
+        List<Option> options = optionMapper.selectAll();
+        return new PageInfo(options);
+    }
 }
 
 

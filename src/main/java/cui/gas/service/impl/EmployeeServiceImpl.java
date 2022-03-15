@@ -59,7 +59,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             station.setSid(0);
             employee.setStationId(station);
         }
-        System.out.println(record);
         if(record.getStationId().getSid().equals(employee.getStationId().getSid())){
             return employeeMapper.updateByPrimaryKeySelective(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
         }

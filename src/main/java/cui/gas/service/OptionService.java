@@ -2,6 +2,7 @@ package cui.gas.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import cui.gas.domain.Option;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,7 @@ public interface OptionService {
 
     List<Option> selectAll();
 
+    PageInfo selectAllWithPage(Integer page, Integer limit);
 }
 
 
