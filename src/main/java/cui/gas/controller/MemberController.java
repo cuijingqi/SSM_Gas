@@ -41,6 +41,8 @@ public class MemberController {
             mname = map.get("mname")==""?null:map.get("mname");
             mtelephone = map.get("mtelephone")==""?null:map.get("mtelephone");
         }
+        mname = request.getParameter("mname")==""?mname:request.getParameter("mname");
+        mtelephone = request.getParameter("mtelephone")==""?mtelephone:request.getParameter("mtelephone");
         PageInfo pageInfo = ms.selectByNameAndTelephoneWithPage(page,limit,mname,mtelephone);
         return new Result(pageInfo.getList().size() != 0 ? 0 : 1, pageInfo.getList(), "", pageInfo.getTotal());
 //        }else {

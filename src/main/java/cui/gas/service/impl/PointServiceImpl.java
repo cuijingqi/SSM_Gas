@@ -29,12 +29,19 @@ public class PointServiceImpl implements PointService {
 
     @Override
     public int insert(Point record) {
-        return pointMapper.insert(record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),new Date(),record.getPcomment());
+        switch (record.getOptionId().getOid()){
+            case 1:
+                Integer oldsum=pointMapper.selectByMemberOrderByTime(record.getMemberId().getMid()).size()!=0?pointMapper.selectByMemberOrderByTime(record.getMemberId().getMid()).get(0).getPsum():0;
+                record.setPsum(oldsum+record.getPfigure());
+                break;
+            default:record.setPsum(0);
+        }
+        return pointMapper.insert(record.getMemberId().getMid(),record.getOptionId().getOid(),record.getPfigure(),record.getPsum(),new Date(),record.getPcomment());
     }
 
     @Override
     public int insertSelective(Point record) {
-        return pointMapper.insertSelective(record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),new Date(),record.getPcomment());
+        return pointMapper.insertSelective(record.getMemberId().getMid(),record.getOptionId().getOid(),record.getPfigure(),record.getPsum(),new Date(),record.getPcomment());
     }
     @Override
     public Point selectByPrimaryKey(Integer id) {
@@ -43,11 +50,11 @@ public class PointServiceImpl implements PointService {
 
     @Override
     public int updateByPrimaryKeySelective(Point record) {
-        return pointMapper.updateByPrimaryKeySelective(record.getPid(),record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),record.getPtime(),record.getPcomment());
+        return pointMapper.updateByPrimaryKeySelective(record.getPid(),record.getMemberId().getMid(),record.getOptionId().getOid(),record.getPfigure(),record.getPsum(),record.getPtime(),record.getPcomment());
     }
     @Override
     public int updateByPrimaryKey(Point record) {
-        return pointMapper.updateByPrimaryKeySelective(record.getPid(),record.getMemberId(),record.getOptionId(),record.getPfigure(),record.getPsum(),record.getPtime(),record.getPcomment());
+        return pointMapper.updateByPrimaryKeySelective(record.getPid(),record.getMemberId().getMid(),record.getOptionId().getOid(),record.getPfigure(),record.getPsum(),record.getPtime(),record.getPcomment());
     }
     @Override
     public List<Point> selectAll() {
