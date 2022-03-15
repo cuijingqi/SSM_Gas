@@ -108,7 +108,7 @@
                 {type: "checkbox", width: 50},
                 {field: 'mid', width: 60, title: 'ID', sort: true},
                 {field: 'mname', width: 100, title: '姓名'},
-                {field: 'msex',templet: function(data){ return (data.esex!=1)?"女":"男"}, width: 75, title: '性别', sort: true},
+                {field: 'msex',templet: function(data){ return (data.msex!=1)?"女":"男"}, width: 75, title: '性别', sort: true},
                 {field: 'mage', width: 75, title: '年龄', sort: true},
                 {field: 'stationId',templet: function(data){ return (data.stationId!=null)?data.stationId.sname:"暂无"}, width: 160, title: '注册地'},
                 {field: 'psum', width: 75, title: '积分', sort: true},
@@ -176,7 +176,7 @@
             } else if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
                     , data = checkStatus.data;
-                var sid=data.map((item,index) =>{
+                var mid=data.map((item,index) =>{
 
                     return item.mid
 
@@ -191,7 +191,7 @@
                             //请求的媒体类型
                             // contentType: "application/json;charset=UTF-8",
                             //请求地址
-                            url : "/member/delsstation",
+                            url : "/member/delsmember",
                             //数据，json字符串
                             data : "mid="+mid,
                             //请求成功
@@ -233,7 +233,7 @@
             if (obj.event === 'edit') {
                 //layer.open 通过ajax改造post方法不做 自行查询
                 var index = layer.open({
-                    title: '编辑站点',
+                    title: '编辑会员',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
@@ -266,7 +266,7 @@
                             //请求的媒体类型
                             // contentType: "application/json;charset=UTF-8",
                             //请求地址
-                            url : "/member/delstation",
+                            url : "/member/delmember",
                             //数据，json字符串
                             data : "mid="+data.mid,
                             //请求成功

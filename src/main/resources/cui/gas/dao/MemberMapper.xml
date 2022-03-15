@@ -10,9 +10,9 @@
     <result column="mage" jdbcType="INTEGER" property="mage" />
     <result column="mtelephone" jdbcType="VARCHAR" property="mtelephone" />
     <result column="memail" jdbcType="VARCHAR" property="memail" />
-    <result column="maddress" jdbcType="VARCHAR" property="maddress" />
     <result column="musername" jdbcType="VARCHAR" property="musername" />
     <result column="mpassword" jdbcType="VARCHAR" property="mpassword" />
+    <result column="maddress" jdbcType="VARCHAR" property="maddress" />
     <result column="mcomment" jdbcType="VARCHAR" property="mcomment" />
     <result column="mavailable" jdbcType="INTEGER" property="mavailable" />
     <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
@@ -57,7 +57,7 @@
     <!--@mbg.generated-->
     insert into `member` (role_id, station_id, mname, 
       msex, mage, mtelephone, 
-      memail, musername, mpassword, 
+      memail, musername, mpassword, maddress,
       mcomment, mavailable, mtime
       )
     values (#{roleId,jdbcType=INTEGER}, #{stationId,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, 
@@ -97,6 +97,9 @@
       <if test="mpassword != null">
         mpassword,
       </if>
+      <if test="maddress != null">
+        maddress,
+      </if>
       <if test="mcomment != null">
         mcomment,
       </if>
@@ -134,6 +137,9 @@
       </if>
       <if test="mpassword != null">
         #{mpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="maddress != null">
+        #{maddress,jdbcType=VARCHAR},
       </if>
       <if test="mcomment != null">
         #{mcomment,jdbcType=VARCHAR},

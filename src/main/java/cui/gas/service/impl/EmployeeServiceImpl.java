@@ -59,13 +59,14 @@ public class EmployeeServiceImpl implements EmployeeService {
             station.setSid(0);
             employee.setStationId(station);
         }
+        System.out.println(record);
         if(record.getStationId().getSid().equals(employee.getStationId().getSid())){
-            return employeeMapper.updateByPrimaryKey(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
+            return employeeMapper.updateByPrimaryKeySelective(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
         }
         if (employee.getRoleId().getRid()==2){
             stationMapper.updateByPrimaryKeySelective(employee.getStationId().getSid(),null,null,null,null,null,null,null,null,null,null);
         }
-        return employeeMapper.updateByPrimaryKey(record.getEid(),3,record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
+        return employeeMapper.updateByPrimaryKeySelective(record.getEid(),3,record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
     }
     @Override
     public List<Employee> selectAll() {

@@ -17,32 +17,53 @@
 </head>
 <body>
 <div class="layui-form layuimini-form">
-    <input type="hidden" name="sid">
+    <input type="hidden" name="roleId.rid">
+    <input type="hidden" name="mid">
     <div class="layui-form-item">
-        <label class="layui-form-label">启用</label>
+        <label class="layui-form-label">状态</label>
         <div class="layui-input-block">
-            <input type="checkbox" checked name="savailable" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+            <input type="checkbox" checked name="mavailable" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">站名</label>
+        <label class="layui-form-label required">姓名</label>
         <div class="layui-input-block">
-            <input type="text" name="sname" lay-verify="required" lay-reqtext="站名不能为空" placeholder="请输入站名" value="" class="layui-input">
+            <input type="text" name="mname" lay-verify="required" lay-reqtext="姓名不能为空" placeholder="请输入姓名" value="" class="layui-input">
 <!--            <tip>填写油站的名称。</tip>-->
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">站长</label>
-        <div class="layui-input-inline">
-            <input type="hidden" id="eid" name="employeeId[0].eid" value="0">
-            <input type="text" lay-verify="required" lay-reqtext="站点需要有管理者！" name="" readonly placeholder="请选择" autocomplete="off" class="layui-input" id="selectstationer" value="" ts-selected="">
+        <label class="layui-form-label required">年龄</label>
+        <div class="layui-input-block">
+            <input type="number" name="mage" lay-verify="required" lay-reqtext="年龄不能为空" placeholder="请输入年龄" value="" class="layui-input" lay-verify="number">
+            <!--            <tip>填写油站的名称。</tip>-->
         </div>
     </div>
-    <input type="hidden" name="saddress">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">性别</label>
+        <div class="layui-input-block">
+            <input type="radio" id="man" name="msex" value="1" title="男" checked="">
+            <input type="radio" id="woman" name="msex" value="0" title="女">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">手机</label>
+        <div class="layui-input-block">
+            <input type="number" name="mtelephone" lay-verify="required" lay-reqtext="联系方式不能为空" placeholder="请输入联系方式" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">注册地</label>
+        <div class="layui-input-inline">
+            <input type="hidden" id="sid" name="stationId.sid" value="0">
+            <input type="text" name=""  readonly placeholder="请选择" autocomplete="off" class="layui-input" id="selectstation" value="" ts-selected="">
+        </div>
+    </div>
+    <input type="hidden" name="maddress">
     <div class="layui-form-item" id="area-picker">
-        <div class="layui-form-label required">站点地址</div>
+        <div class="layui-form-label required">现居住地</div>
         <div class="layui-input-inline" style="width: 200px;">
-            <select lay-verify="required" lay-reqtext="站点所在省！"  class="province-selector" data-value="" lay-filter="province-1">
+            <select lay-verify="required" lay-reqtext="居住地所在省！"  class="province-selector" data-value="" lay-filter="province-1">
                 <option value="">请选择省</option>
             </select>
         </div>
@@ -57,30 +78,10 @@
             </select>
         </div>
     </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">今日油价</label>
-        <div class="layui-input-block">
-            <input type="number" name="stprice" lay-verify="required" lay-reqtext="油价不能为空" placeholder="请输入油价" value="" class="layui-input" lay-verify="number">
-<!--            <tip>填写今日油价。</tip>-->
-        </div>
-    </div>
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">站点描述</label>
-        <div class="layui-input-block">
-            <textarea name="sdescribe" class="layui-textarea" placeholder="请输入站点描述"></textarea>
-        </div>
-    </div>
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">站点公告</label>
-        <div class="layui-input-block">
-            <textarea name="sadvice" class="layui-textarea" placeholder="请输入站点公告"></textarea>
-        </div>
-    </div>
-
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">备注信息</label>
         <div class="layui-input-block">
-            <textarea name="scomment" class="layui-textarea" placeholder="请输入备注信息"></textarea>
+            <textarea name="mcomment" class="layui-textarea" placeholder="请输入备注信息"></textarea>
         </div>
     </div>
 
@@ -89,7 +90,6 @@
             <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
         </div>
     </div>
-</div>
 </div>
 <script src="../../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
@@ -125,29 +125,31 @@
             //json字符串JSON.stringify(list)请求需要写  只有post方法
             // contentType: "application/json;charset=UTF-8",
             //请求地址
-            url : "/station/getstation",
+            url : "/member/getmember",
             //数据，json字符串
             data : list,
             //请求成功
             dataType:"json",
             success : function(result) {
-                // console.log(result);
-                $("input[name='sid']").val(result.data.sid);
-                $("input[name='savailable']").prop("checked",result.data.savailable);
-                $("input[name='sname']").val(result.data.sname);
-                //可以废弃判断 表中由0代替空
-                //(result.data.employeeId[0]!=null)?result.data.employeeId[0].eid:null
-                $("#eid").val((result.data.employeeId[0]!=null)?result.data.employeeId[0].eid:null);
-                $("#selectstationer").attr("ts-selected",(result.data.employeeId[0]!=null)?result.data.employeeId[0].eid:null);
-                $("#selectstationer").attr("value",(result.data.employeeId[0]!=null)?result.data.employeeId[0].ename:null);
-                $("input[name='saddress']").val(result.data.saddress);
-                p1=result.data.saddress.match(regex)[1];
-                c2=result.data.saddress.match(regex)[2];
-                c3=result.data.saddress.match(regex)[3];
-                $("input[name='stprice']").val(result.data.stprice);
-                $("textarea[name='sdescribe']").val(result.data.sdescribe);
-                $("textarea[name='sadvice']").val(result.data.sadvice);
-                $("textarea[name='scomment']").val(result.data.scomment);
+                 console.log(result);
+                $("input[name='roleId.rid']").val(result.data.roleId.rid);
+                $("input[name='mid']").val(result.data.mid);
+                $("input[name='mavailable']").prop("checked",result.data.mavailable);
+                $("input[name='mname']").val(result.data.mname);
+                $("input[name='mage']").val(result.data.mage);
+                if(result.data.msex==0){
+                    $("#man").removeProp("checked");
+                    $("#woman").prop("checked",true);
+                }
+                $("input[name='mtelephone']").val(result.data.mtelephone);
+                $("#sid").val((result.data.stationId.sid!=null)?result.data.stationId.sid:null);
+                $("#selectstation").attr("ts-selected",(result.data.stationId!=null)?result.data.stationId.sid:null);
+                $("#selectstation").attr("value",(result.data.stationId!=null)?result.data.stationId.sname:null);
+                $("input[name='maddress']").val(result.data.maddress);
+                p1=result.data.maddress.match(regex)[1];
+                c2=result.data.maddress.match(regex)[2];
+                c3=result.data.maddress.match(regex)[3];
+                $("textarea[name='mcomment']").val(result.data.mcomment);
                 layui.form.render(); //重新渲染显示效果  !!!!
 
             },
@@ -174,27 +176,28 @@
             change: function (res) {
                 //选择结果
                 console.log(res);
-                $("input[name='saddress']").val(res.province+res.city+res.county);
+                $("input[name='maddress']").val(res.province+res.city+res.county);
             }
         });
 
 //雇员表单
     var tableSelect = layui.tableSelect;
     tableSelect.render({
-        elem: '#selectstationer',	//定义输入框input对象 必填
-        checkedKey: 'eid', //表格的唯一建值，非常重要，影响到选中状态 必填
-        searchKey: 'ename',	//搜索输入框的name值 默认keyword
-        searchPlaceholder: '姓名搜索',	//搜索输入框的提示文字 默认关键词搜索
+        elem: '#selectstation',	//定义输入框input对象 必填
+        checkedKey: 'sid', //表格的唯一建值，非常重要，影响到选中状态 必填
+        searchKey: 'sname',	//搜索输入框的name值 默认keyword
+        searchPlaceholder: '站名搜索',	//搜索输入框的提示文字 默认关键词搜索
         height:'400',  //自定义高度
         width:'900',  //自定义宽度
         table: {	//定义表格参数，与LAYUI的TABLE模块一致，只是无需再定义表格elem
-            url:'/employee/allwithpagebystation?sid='+list["sid"],
+            url:'/station/allwithpage',
             cols: [[
                 { type: 'radio' },//checkbox多选
-                { field: 'eid', title: 'ID' },
-                { field: 'ename', title: '姓名' },
-                { field: 'esex', title: '性别' ,templet: function(data){ return data.esex==1?'男':'女';}},
-                { field: 'eage', title: '年龄' }
+                { field: 'sid', title: 'ID' },
+                { field: 'sname', title: '站名' },
+                //{ field: 'esex', title: '性别' ,templet: function(data){ return data.esex==1?'男':'女';}},
+                { field: 'saddress', title: '地址' },
+                { field: 'savailable', title: '启用',templet: function(data){ return data.savailable==1?'启用':'停用';}},
             ]]
         },
         // parseData: function(res) {
@@ -213,9 +216,9 @@
             var NEWJSON = []
             layui.each(data.data, function (index, item) {
                 console.log(item);
-                NEWJSON.push(item.ename);
+                NEWJSON.push(item.sname);
 
-                $("#eid").val(item.eid);
+                $("#sid").val(item.sid);
             })
             elem.val(NEWJSON.join(","))
 
@@ -228,7 +231,7 @@
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            data.field.savailable=data.field.savailable=='on'?1:0;
+            data.field.mavailable=data.field.mavailable=='on'?1:0;
             // alert(JSON.stringify(data.field));
             var index = layer.open({
                 content: '确认更改？',
@@ -244,7 +247,7 @@
                         //json字符串JSON.stringify(list)请求需要写  只有post方法
                         // contentType: "application/json;charset=UTF-8",
                         //请求地址
-                        url : "/station/updatastation",
+                        url : "/member/updatamember",
                         //数据，json字符串
                         data : data.field,
                         //请求成功

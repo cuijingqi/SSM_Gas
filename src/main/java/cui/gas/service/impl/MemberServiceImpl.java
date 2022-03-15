@@ -53,7 +53,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int updateByPrimaryKey(Member record) {
-        return memberMapper.updateByPrimaryKey(record.getMid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMaddress(),record.getMcomment(),record.getMavailable(),record.getMtime());
+        System.out.println(record);
+        return memberMapper.updateByPrimaryKeySelective(record.getMid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getMname(),record.getMsex(),record.getMage(),record.getMtelephone(),record.getMemail(),record.getMusername(),record.getMpassword(),record.getMaddress(),record.getMcomment(),record.getMavailable(),record.getMtime());
     }
 
     @Override

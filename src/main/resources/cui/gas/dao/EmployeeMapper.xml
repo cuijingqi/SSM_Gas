@@ -197,9 +197,7 @@
     epassword = #{epassword,jdbcType=VARCHAR},
     ecomment = #{ecomment,jdbcType=VARCHAR},
     eavailable = #{eavailable,jdbcType=INTEGER},
-    <if test="etime != null">
-      etime=#{etime,jdbcType=TIMESTAMP},
-    </if>
+    etime=#{etime,jdbcType=TIMESTAMP},
     </set>
     where eid = #{eid,jdbcType=INTEGER}
   </update>
