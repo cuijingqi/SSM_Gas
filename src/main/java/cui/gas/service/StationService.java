@@ -3,7 +3,9 @@ package cui.gas.service;
 import java.util.List;
 
 import com.github.pagehelper.PageInfo;
+import cui.gas.dao.StationMapper;
 import cui.gas.domain.Station;
+import net.sf.json.JSONArray;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -68,4 +70,6 @@ public interface StationService {
  */
 
     Station selectBySid(Integer sid);
+
+    JSONArray selectChart();
 }

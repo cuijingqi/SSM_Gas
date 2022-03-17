@@ -63,7 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return employeeMapper.updateByPrimaryKeySelective(record.getEid(),record.getRoleId().getRid(),record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
         }
         if (employee.getRoleId().getRid()==2){
-            stationMapper.updateByPrimaryKeySelective(employee.getStationId().getSid(),null,null,null,null,null,null,null,null,null,null);
+            stationMapper.updateByPrimaryKeySelective(employee.getStationId().getSid(),null,0,null,null,null,null,null,null,null,null);
         }
         return employeeMapper.updateByPrimaryKeySelective(record.getEid(),3,record.getStationId().getSid(),record.getEsex(),record.getEage(),record.getEname(),record.getEtelephone(),record.getEaddress(),record.getEusername(),record.getEpassword(),record.getEcomment(),record.getEavailable(),record.getEtime());
     }
@@ -121,6 +121,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee selectByEid(Integer eid) {
         Employee employee = employeeMapper.selectByPrimaryKey(eid);
         return employee;
+    }
+
+    @Override
+    public Integer selectAllNum() {
+        return employeeMapper.selectAll().size();
     }
 }
 

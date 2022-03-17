@@ -72,6 +72,11 @@ public class PointServiceImpl implements PointService {
     public Point selectByPid(Integer pid) {
         return pointMapper.selectByPrimaryKey(pid);
     }
+
+    @Override
+    public Integer selectAllNum() {
+        return pointMapper.selectAll().size();
+    }
 }
 
 

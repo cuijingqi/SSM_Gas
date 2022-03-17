@@ -31,6 +31,8 @@ public interface PointService {
     PageInfo selectAllWithPage(Integer page, Integer limit);
 
     Point selectByPid(Integer pid);
+
+    Integer selectAllNum();
 }
 
 

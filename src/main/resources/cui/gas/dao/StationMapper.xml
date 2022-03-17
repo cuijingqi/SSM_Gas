@@ -199,4 +199,8 @@
     <!--@mbg.generated-->
     select * from station s left join employee e on s.employee_id=e.eid order by s.stime desc
   </select>
+
+  <select id="selectChart" resultType="cui.gas.domain.StationPointChart">
+    SELECT sname,pfigure,ptime FROM (SELECT * FROM member m, station s where m.station_id=s.sid) t,point p where p.member_id=t.mid and p.option_id=1 ORDER BY sname,ptime desc
+  </select>
 </mapper>

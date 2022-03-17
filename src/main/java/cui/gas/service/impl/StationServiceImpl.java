@@ -7,11 +7,15 @@ import com.github.pagehelper.PageInfo;
 import cui.gas.dao.EmployeeMapper;
 import cui.gas.domain.Employee;
 import cui.gas.domain.Station;
+import cui.gas.domain.StationPointChart;
 import cui.gas.service.EmployeeService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.lang.annotation.ElementType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -129,6 +133,73 @@ public class StationServiceImpl implements StationService {
 //        l.add(e);
 //        s.setEmployeeId(l);
         return s;
+    }
+
+
+    @Override
+    public JSONArray selectChart() {
+        List<StationPointChart> stationPointCharts = stationMapper.selectChart();
+        JSONArray jsonArray = new JSONArray();
+        int today = new Date().getDate();
+        int t=0,d1=0,d2=0,d3=0,d4=0,d5=0,d6=0,d7=0;
+        int[][] data=new int[stationPointCharts.size()][7];
+        List<String> snames = new ArrayList();
+        int[] days=new int[7];
+        for (int i = 0; i < 7; i++) {
+            days[6-i]=today-i;
+        }
+        String name="";
+        for (int i = 0; i < stationPointCharts.size(); i++) {
+            StationPointChart stationPointChart = stationPointCharts.get(i);
+            String sname = stationPointChart.getSname();
+            if (!sname.equals(name)){
+                t++;
+                snames.add(sname);
+                name=sname;
+                d1=0;d2=0;d3=0;d4=0;d5=0;d6=0;d7=0;
+            }
+            Date ptime = stationPointChart.getPtime();
+            int date = ptime.getDate();
+            if (date==days[0]){
+                data[t-1][0]=(d1+=stationPointChart.getPfigure()*10);
+            }
+            if (date==days[1]){
+                data[t-1][1]=(d2+=stationPointChart.getPfigure()*10);
+            }
+            if (date==days[2]){
+                data[t-1][2]=(d3+=stationPointChart.getPfigure()*10);
+            }
+            if (date==days[3]){
+                data[t-1][3]=(d4+=stationPointChart.getPfigure()*10);
+            }
+            if (date==days[4]){
+                data[t-1][4]=(d5+=stationPointChart.getPfigure()*10);
+            }
+            if (date==days[5]){
+                data[t-1][5]=(d6+=stationPointChart.getPfigure()*10);
+            }
+            if (date==days[6]){
+                data[t-1][6]=(d7+=stationPointChart.getPfigure()*10);
+            }
+        }
+        jsonArray.add(days);
+        jsonArray.add(snames);
+        int[][] datas=new int[snames.size()][7];
+        for (int i = 0; i < snames.size(); i++) {
+            for (int j = 0; j < 7; j++) {
+                datas[i][j]=data[i][j];
+            }
+        }
+        JSONArray jsonArray1 = new JSONArray();
+        for (int i = 0; i < snames.size(); i++) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("name",snames.get(i));
+            jsonObject.put("type","line");
+            jsonObject.put("data",datas[i]);
+            jsonArray1.add(jsonObject);
+        }
+        jsonArray.add(jsonArray1);
+        return jsonArray;
     }
 }
 

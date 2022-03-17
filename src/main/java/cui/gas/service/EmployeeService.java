@@ -87,6 +87,8 @@ public interface EmployeeService {
 
 
     Employee selectByEid(Integer eid);
+
+    Integer selectAllNum();
 }
 
 

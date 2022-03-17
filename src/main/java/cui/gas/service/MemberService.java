@@ -33,6 +33,8 @@ public interface MemberService {
     PageInfo selectByNameAndTelephoneWithPage(Integer page, Integer limit, String mname, String mtelephone);
 
     Member selectByMid(Integer mid);
+
+    Integer selectAllNum();
 }
 
 

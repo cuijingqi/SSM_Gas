@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import cui.gas.domain.StationPointChart;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -94,4 +95,6 @@ public interface StationMapper {
     List<Station> selectByNameAndAddress(@Param("sname") String sname, @Param("saddress") String saddress);
 
     List<Station> selectAllOrderByTime();
+
+    List<StationPointChart> selectChart();
 }

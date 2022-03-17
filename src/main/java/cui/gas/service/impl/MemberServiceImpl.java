@@ -93,6 +93,11 @@ public class MemberServiceImpl implements MemberService {
         member.setPsum(points.size()!=0?points.get(0).getPsum():0);
         return member;
     }
+
+    @Override
+    public Integer selectAllNum() {
+        return memberMapper.selectAll().size();
+    }
 }
 
 

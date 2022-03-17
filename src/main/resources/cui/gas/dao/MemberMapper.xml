@@ -184,7 +184,7 @@
         mpassword = #{mpassword,jdbcType=VARCHAR},
       </if>
       <if test="maddress != null">
-        mpassword = #{maddress,jdbcType=VARCHAR},
+        maddress = #{maddress,jdbcType=VARCHAR},
       </if>
       <if test="mcomment != null">
         mcomment = #{mcomment,jdbcType=VARCHAR},
