@@ -5,9 +5,9 @@
 <configuration>
     <settings>
         <!-- 打印查询语句 -->
-        <setting name="logImpl" value="STDOUT_LOGGING" />
+<!--        <setting name="logImpl" value="STDOUT_LOGGING" />-->
         <!-- 不打印查询语句 -->
-<!--        <setting name="logImpl" value="NO_LOGGING"/>-->
+        <setting name="logImpl" value="NO_LOGGING"/>
     </settings>
 
     <!-- mapper已经在spring-mybatis.xml中的sqlSessionFactory配置，这里不再需要配置 -->

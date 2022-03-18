@@ -24,11 +24,45 @@
 <!--            class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />-->
 <!--    <bean-->
 <!--            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />-->
-
+<!--    &lt;!&ndash; 视图解析器1:html视图解析器 必须先配置freemarkerConfig,注意html是没有prefix前缀属性的 &ndash;&gt;-->
+<!--    <bean id="freemarkerConfig"-->
+<!--          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">-->
+<!--        <property name="freemarkerSettings">-->
+<!--            <bean-->
+<!--                    class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
+<!--                <property name="properties">-->
+<!--                    <props>-->
+<!--                        <prop key="default_encoding">utf-8</prop>-->
+<!--                        <prop key="output_encoding">utf-8</prop>-->
+<!--                    </props>-->
+<!--                </property>-->
+<!--            </bean>-->
+<!--        </property>-->
+<!--        <property name="templateLoaderPath">-->
+<!--            <value>/WEB-INF/views/</value>-->
+<!--        </property>-->
+<!--    </bean>-->
+<!--    <bean id="htmlviewResolver"-->
+<!--          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"-->
+<!--          p:suffix=".html" p:order="0">-->
+<!--        <property name="contentType" value="text/html;charset=UTF-8" />-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; 视图解析器2:jsp视图解析器 &ndash;&gt;-->
+<!--    <bean id="jspviewResolver"-->
+<!--          class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
+<!--          p:prefix="/WEB-INF/views/" p:suffix=".jsp" p:order="1">-->
+<!--        <property name="contentType" value="text/html;charset=UTF-8" />-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; <mvc:resources location="/" mapping="*.html"/> &ndash;&gt;-->
+<!--    <mvc:resources location="/pages/" mapping="/pages/*"/>-->
+<!--    <mvc:resources location="/img/" mapping="/img/**"/>-->
+<!--    <mvc:resources location="/css/" mapping="/css/**"/>-->
+<!--    <mvc:resources location="/js/" mapping="/js/**"/>-->
+<!--</beans>-->
     <!-- 这个类用于Spring MVC视图解析 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/" />
-        <property name="suffix" value="" />
+        <property name="suffix" value=".html" />
     </bean>
     <!--配置文件上传处理器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

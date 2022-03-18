@@ -3,6 +3,7 @@ package cui.gas.controller;
 import cui.gas.controller.results.Result;
 import cui.gas.domain.Admin;
 import cui.gas.service.AdminService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -15,7 +16,7 @@ import java.io.IOException;
  * @author 崔靖奇 CUIJINGQICHN@163.com
  * @date 16:05 2022-03-07
  */
-@RestController
+@Controller
 @RequestMapping("admin")
 public class AdminController {
     @Resource
@@ -41,9 +42,14 @@ public class AdminController {
 //        return NONE;
         return new Result(0);
     }
-    @GetMapping("{one}/{two}")
-    public Result distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one,@PathVariable("two") String two) throws ServletException, IOException {
-        request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
-        return new Result(0);
+    @RequestMapping("{one}/{two}")
+    public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one,@PathVariable("two") String two) throws ServletException, IOException {
+            //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
+        return one+"/"+two;
+    }
+    @RequestMapping("{one}/{two}/{three}")
+    public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one,@PathVariable("two") String two,@PathVariable("three") String three) throws ServletException, IOException {
+        //request.getRequestDispatcher("/page/"+one+"/"+two+"/"+three+".html").forward(request, response);
+        return one+"/"+two+"/"+three;
     }
 }
