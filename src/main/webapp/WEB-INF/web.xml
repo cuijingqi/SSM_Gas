@@ -8,12 +8,51 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath*:applicationContext.xml</param-value>
   </context-param>
+<!--  <welcome-file-list>-->
+<!--    <welcome-file>login.html</welcome-file>-->
+<!--  </welcome-file-list>-->
+<!--  <error-page>-->
+<!--    <error-code>404</error-code>-->
+<!--    <location>/WEB-INF/page/404.html</location>-->
+<!--  </error-page>-->
 
   <!--启动服务器时，通过监听器加载spring运行环境-->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <!--  <filter>-->
+  <!--    <filter-name>Power</filter-name>-->
+  <!--    <filter-class>cui.gas.system.filter.PowerFilter</filter-class>-->
+  <!--    <init-param>-->
+  <!--      <param-name>excludedPages</param-name>-->
+  <!--      <param-value>login.html,/Admin/Login</param-value>-->
+  <!--    </init-param>-->
+  <!--    <init-param>-->
+  <!--      <param-name>zero</param-name>-->
+  <!--      <param-value>/*</param-value>-->
+  <!--    </init-param>-->
+  <!--    <init-param>-->
+  <!--      <param-name>one</param-name>-->
+  <!--      <param-value>/*</param-value>-->
+  <!--    </init-param>-->
+  <!--    <init-param>-->
+  <!--      <param-name>two</param-name>-->
+  <!--      <param-value>/station/table/edit.html,/station/getstation,/station/updatastation,/employee/,/member/,/point/</param-value>-->
+  <!--    </init-param>-->
+  <!--    <init-param>-->
+  <!--      <param-name>three</param-name>-->
+  <!--      <param-value></param-value>-->
+  <!--    </init-param>-->
+  <!--    <init-param>-->
+  <!--      <param-name>four</param-name>-->
+  <!--      <param-value></param-value>-->
+  <!--    </init-param>-->
+  <!--  </filter>-->
+  <!--  <filter-mapping>-->
+  <!--    <filter-name>Power</filter-name>-->
+  <!--    <url-pattern>/*</url-pattern>-->
+  <!--  </filter-mapping>-->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -5,7 +5,6 @@
     <!--@mbg.generated-->
     <!--@Table `admin`-->
     <id column="aid" jdbcType="INTEGER" property="aid" />
-    <result column="role_id" jdbcType="INTEGER" property="roleId" />
     <result column="asex" jdbcType="INTEGER" property="asex" />
     <result column="aage" jdbcType="INTEGER" property="aage" />
     <result column="aname" jdbcType="VARCHAR" property="aname" />
@@ -16,6 +15,13 @@
     <result column="acomment" jdbcType="VARCHAR" property="acomment" />
     <result column="aavailable" jdbcType="INTEGER" property="aavailable" />
     <result column="atime" jdbcType="TIMESTAMP" property="atime" />
+    <association property="roleId" javaType="cui.gas.domain.Role">
+      <id column="rid" jdbcType="INTEGER" property="rid" />
+      <result column="rpostion" jdbcType="VARCHAR" property="rpostion" />
+      <result column="rparentid" jdbcType="INTEGER" property="rparentid" />
+      <result column="ravailable" jdbcType="INTEGER" property="ravailable" />
+      <result column="rcomment" jdbcType="VARCHAR" property="rcomment" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
@@ -25,168 +31,169 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
-    <include refid="Base_Column_List" />
-    from `admin`
-    where aid = #{aid,jdbcType=INTEGER}
+    *
+    from `admin` a,role r
+    where a.role_id=r.rid and aid = #{aid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from `admin`
     where aid = #{aid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="aid" keyProperty="aid" parameterType="cui.gas.domain.Admin" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into `admin` (role_id, asex, aage, 
-      aname, atelephone, aemail, 
-      ausername, apassword, acomment, 
-      aavailable, atime)
-    values (#{roleId,jdbcType=INTEGER}, #{asex,jdbcType=INTEGER}, #{aage,jdbcType=INTEGER}, 
-      #{aname,jdbcType=VARCHAR}, #{atelephone,jdbcType=VARCHAR}, #{aemail,jdbcType=VARCHAR}, 
-      #{ausername,jdbcType=VARCHAR}, #{apassword,jdbcType=VARCHAR}, #{acomment,jdbcType=VARCHAR}, 
-      #{aavailable,jdbcType=INTEGER}, #{atime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" keyColumn="aid" keyProperty="aid" parameterType="cui.gas.domain.Admin" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into `admin`
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="roleId != null">
-        role_id,
-      </if>
-      <if test="asex != null">
-        asex,
-      </if>
-      <if test="aage != null">
-        aage,
-      </if>
-      <if test="aname != null">
-        aname,
-      </if>
-      <if test="atelephone != null">
-        atelephone,
-      </if>
-      <if test="aemail != null">
-        aemail,
-      </if>
-      <if test="ausername != null">
-        ausername,
-      </if>
-      <if test="apassword != null">
-        apassword,
-      </if>
-      <if test="acomment != null">
-        acomment,
-      </if>
-      <if test="aavailable != null">
-        aavailable,
-      </if>
-      <if test="atime != null">
-        atime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="roleId != null">
-        #{roleId,jdbcType=INTEGER},
-      </if>
-      <if test="asex != null">
-        #{asex,jdbcType=INTEGER},
-      </if>
-      <if test="aage != null">
-        #{aage,jdbcType=INTEGER},
-      </if>
-      <if test="aname != null">
-        #{aname,jdbcType=VARCHAR},
-      </if>
-      <if test="atelephone != null">
-        #{atelephone,jdbcType=VARCHAR},
-      </if>
-      <if test="aemail != null">
-        #{aemail,jdbcType=VARCHAR},
-      </if>
-      <if test="ausername != null">
-        #{ausername,jdbcType=VARCHAR},
-      </if>
-      <if test="apassword != null">
-        #{apassword,jdbcType=VARCHAR},
-      </if>
-      <if test="acomment != null">
-        #{acomment,jdbcType=VARCHAR},
-      </if>
-      <if test="aavailable != null">
-        #{aavailable,jdbcType=INTEGER},
-      </if>
-      <if test="atime != null">
-        #{atime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Admin">
-    <!--@mbg.generated-->
-    update `admin`
-    <set>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=INTEGER},
-      </if>
-      <if test="asex != null">
-        asex = #{asex,jdbcType=INTEGER},
-      </if>
-      <if test="aage != null">
-        aage = #{aage,jdbcType=INTEGER},
-      </if>
-      <if test="aname != null">
-        aname = #{aname,jdbcType=VARCHAR},
-      </if>
-      <if test="atelephone != null">
-        atelephone = #{atelephone,jdbcType=VARCHAR},
-      </if>
-      <if test="aemail != null">
-        aemail = #{aemail,jdbcType=VARCHAR},
-      </if>
-      <if test="ausername != null">
-        ausername = #{ausername,jdbcType=VARCHAR},
-      </if>
-      <if test="apassword != null">
-        apassword = #{apassword,jdbcType=VARCHAR},
-      </if>
-      <if test="acomment != null">
-        acomment = #{acomment,jdbcType=VARCHAR},
-      </if>
-      <if test="aavailable != null">
-        aavailable = #{aavailable,jdbcType=INTEGER},
-      </if>
-      <if test="atime != null">
-        atime = #{atime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where aid = #{aid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Admin">
-    <!--@mbg.generated-->
-    update `admin`
-    set role_id = #{roleId,jdbcType=INTEGER},
-      asex = #{asex,jdbcType=INTEGER},
-      aage = #{aage,jdbcType=INTEGER},
-      aname = #{aname,jdbcType=VARCHAR},
-      atelephone = #{atelephone,jdbcType=VARCHAR},
-      aemail = #{aemail,jdbcType=VARCHAR},
-      ausername = #{ausername,jdbcType=VARCHAR},
-      apassword = #{apassword,jdbcType=VARCHAR},
-      acomment = #{acomment,jdbcType=VARCHAR},
-      aavailable = #{aavailable,jdbcType=INTEGER},
-      atime = #{atime,jdbcType=TIMESTAMP}
-    where aid = #{aid,jdbcType=INTEGER}
-  </update>
+<!--  <insert id="insert" keyColumn="aid" keyProperty="aid" parameterType="cui.gas.domain.Admin" useGeneratedKeys="true">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    insert into `admin` (role_id, asex, aage, -->
+<!--      aname, atelephone, aemail, -->
+<!--      ausername, apassword, acomment, -->
+<!--      aavailable, atime)-->
+<!--    values (#{roleId,jdbcType=INTEGER}, #{asex,jdbcType=INTEGER}, #{aage,jdbcType=INTEGER}, -->
+<!--      #{aname,jdbcType=VARCHAR}, #{atelephone,jdbcType=VARCHAR}, #{aemail,jdbcType=VARCHAR}, -->
+<!--      #{ausername,jdbcType=VARCHAR}, #{apassword,jdbcType=VARCHAR}, #{acomment,jdbcType=VARCHAR}, -->
+<!--      #{aavailable,jdbcType=INTEGER}, #{atime,jdbcType=TIMESTAMP})-->
+<!--  </insert>-->
+<!--  <insert id="insertSelective" keyColumn="aid" keyProperty="aid" parameterType="cui.gas.domain.Admin" useGeneratedKeys="true">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    insert into `admin`-->
+<!--    <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--      <if test="roleId != null">-->
+<!--        role_id,-->
+<!--      </if>-->
+<!--      <if test="asex != null">-->
+<!--        asex,-->
+<!--      </if>-->
+<!--      <if test="aage != null">-->
+<!--        aage,-->
+<!--      </if>-->
+<!--      <if test="aname != null">-->
+<!--        aname,-->
+<!--      </if>-->
+<!--      <if test="atelephone != null">-->
+<!--        atelephone,-->
+<!--      </if>-->
+<!--      <if test="aemail != null">-->
+<!--        aemail,-->
+<!--      </if>-->
+<!--      <if test="ausername != null">-->
+<!--        ausername,-->
+<!--      </if>-->
+<!--      <if test="apassword != null">-->
+<!--        apassword,-->
+<!--      </if>-->
+<!--      <if test="acomment != null">-->
+<!--        acomment,-->
+<!--      </if>-->
+<!--      <if test="aavailable != null">-->
+<!--        aavailable,-->
+<!--      </if>-->
+<!--      <if test="atime != null">-->
+<!--        atime,-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--    <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--      <if test="roleId != null">-->
+<!--        #{roleId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="asex != null">-->
+<!--        #{asex,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="aage != null">-->
+<!--        #{aage,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="aname != null">-->
+<!--        #{aname,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="atelephone != null">-->
+<!--        #{atelephone,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="aemail != null">-->
+<!--        #{aemail,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="ausername != null">-->
+<!--        #{ausername,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="apassword != null">-->
+<!--        #{apassword,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="acomment != null">-->
+<!--        #{acomment,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="aavailable != null">-->
+<!--        #{aavailable,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="atime != null">-->
+<!--        #{atime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--  </insert>-->
+<!--  <update id="updateByPrimaryKeySelective" parameterType="cui.gas.domain.Admin">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    update `admin`-->
+<!--    <set>-->
+<!--      <if test="roleId != null">-->
+<!--        role_id = #{roleId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="asex != null">-->
+<!--        asex = #{asex,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="aage != null">-->
+<!--        aage = #{aage,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="aname != null">-->
+<!--        aname = #{aname,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="atelephone != null">-->
+<!--        atelephone = #{atelephone,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="aemail != null">-->
+<!--        aemail = #{aemail,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="ausername != null">-->
+<!--        ausername = #{ausername,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="apassword != null">-->
+<!--        apassword = #{apassword,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="acomment != null">-->
+<!--        acomment = #{acomment,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="aavailable != null">-->
+<!--        aavailable = #{aavailable,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="atime != null">-->
+<!--        atime = #{atime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where aid = #{aid,jdbcType=INTEGER}-->
+<!--  </update>-->
+<!--  <update id="updateByPrimaryKey" parameterType="cui.gas.domain.Admin">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    update `admin`-->
+<!--    set role_id = #{roleId,jdbcType=INTEGER},-->
+<!--      asex = #{asex,jdbcType=INTEGER},-->
+<!--      aage = #{aage,jdbcType=INTEGER},-->
+<!--      aname = #{aname,jdbcType=VARCHAR},-->
+<!--      atelephone = #{atelephone,jdbcType=VARCHAR},-->
+<!--      aemail = #{aemail,jdbcType=VARCHAR},-->
+<!--      ausername = #{ausername,jdbcType=VARCHAR},-->
+<!--      apassword = #{apassword,jdbcType=VARCHAR},-->
+<!--      acomment = #{acomment,jdbcType=VARCHAR},-->
+<!--      aavailable = #{aavailable,jdbcType=INTEGER},-->
+<!--      atime = #{atime,jdbcType=TIMESTAMP}-->
+<!--    where aid = #{aid,jdbcType=INTEGER}-->
+<!--  </update>-->
   <select id="selectAll" resultMap="BaseResultMap">
         <!--@mbg.generated-->
-        select
-        <include refid="Base_Column_List" />
-        from `admin`
+    select
+    *
+    from `admin` a,role r
+    where a.role_id=r.rid
     </select>
 
   <select id="selectByUsernameAndPassword" parameterType="map" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-          from admin
-        where ausername = #{username,jdbcType=VARCHAR}
+    select
+    *
+    from `admin` a,role r
+    where a.role_id=r.rid and ausername = #{username,jdbcType=VARCHAR}
             and `apassword` = #{password,jdbcType=VARCHAR}
   </select>
 </mapper>

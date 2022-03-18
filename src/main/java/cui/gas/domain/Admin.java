@@ -13,7 +13,7 @@ import java.util.Date;
 public class Admin implements Serializable {
     private Integer aid;
 
-    private Integer roleId;
+    private Role roleId;
 
     private Integer asex;
 
@@ -46,11 +46,11 @@ public class Admin implements Serializable {
         this.aid = aid;
     }
 
-    public Integer getRoleId() {
+    public Role getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Role roleId) {
         this.roleId = roleId;
     }
 
