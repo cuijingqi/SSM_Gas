@@ -42,6 +42,11 @@ public class AdminController {
 //        return NONE;
         return new Result(0);
     }
+    @RequestMapping("{one}")
+    public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one) throws ServletException, IOException {
+        //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
+        return "../"+one;
+    }
     @RequestMapping("{one}/{two}")
     public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one,@PathVariable("two") String two) throws ServletException, IOException {
             //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);

@@ -17,6 +17,7 @@
 <!--    <mvc:resources mapping="/api/**" location="/api/"/>-->
     <!--启用tomcat中默认的servlet，即把静态资源交给默认的servlet处理-->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
+<!--    <mvc:resources mapping="/favicon.ico" location="images/"/>-->
     <!--避免springmvc拦截以html结尾的请求-->
 
     <!-- 这两个类用来启动基于Spring MVC的注解功能，将控制器与方法映射加入到容器中 -->
