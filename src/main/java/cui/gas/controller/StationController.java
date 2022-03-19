@@ -37,7 +37,7 @@ public class StationController {
                 //这个判断可以避免空参查询  也可以在mapper  if test 判断
                 saddress = map.get("saddress")==""?null:map.get("saddress");
             }
-            sname = request.getParameter("sname")==""?sname:request.getParameter("sname");
+            sname = request.getParameter("sname")==null?sname:request.getParameter("sname");
             PageInfo pageInfo = ss.selectByNameAndAddressWithPage(page,limit,sname,saddress);
             return new Result(pageInfo.getList().size() != 0 ? 0 : 1, pageInfo.getList(), "", pageInfo.getTotal());
 //        }else {
