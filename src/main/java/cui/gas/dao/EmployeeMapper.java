@@ -78,4 +78,5 @@ public interface EmployeeMapper {
 
     List<Employee> selectByNameAndTelephone(@Param("ename") String ename, @Param("etelephone") String etelephone);
 
+    Employee selectByUsernameAndPassword(@Param("eusername") String eusername, @Param("epassword") String epassword);
 }

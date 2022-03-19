@@ -193,7 +193,7 @@
     select
     *
     from `admin` a,role r
-    where a.role_id=r.rid and ausername = #{username,jdbcType=VARCHAR}
-            and `apassword` = #{password,jdbcType=VARCHAR}
+    where a.role_id=r.rid and ausername = #{ausername,jdbcType=VARCHAR}
+            and `apassword` = #{apassword,jdbcType=VARCHAR}
   </select>
 </mapper>

@@ -243,4 +243,9 @@
       </if>
     </where>
   </select>
+
+  <select id="selectByUsernameAndPassword" resultMap="BaseResultMap">
+    select * from(employee e LEFT JOIN station s on e.station_id=s.sid),role r where e.role_id=r.rid  and eusername = #{eusername,jdbcType=VARCHAR}
+    and `epassword` = #{epassword,jdbcType=VARCHAR}
+  </select>
 </mapper>

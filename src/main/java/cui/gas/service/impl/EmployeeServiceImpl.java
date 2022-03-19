@@ -127,6 +127,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Integer selectAllNum() {
         return employeeMapper.selectAll().size();
     }
+
+    @Override
+    public Employee login(Employee employee) {
+      return  employeeMapper.selectByUsernameAndPassword(employee.getEusername(),employee.getEpassword());
+    }
 }
 
 

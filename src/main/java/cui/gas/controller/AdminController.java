@@ -2,7 +2,9 @@ package cui.gas.controller;
 
 import cui.gas.controller.results.Result;
 import cui.gas.domain.Admin;
+import cui.gas.domain.Employee;
 import cui.gas.service.AdminService;
+import cui.gas.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +12,9 @@ import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author 崔靖奇 CUIJINGQICHN@163.com
@@ -21,17 +25,41 @@ import java.io.IOException;
 public class AdminController {
     @Resource
     private AdminService adminService;
+    @Resource
+    private EmployeeService employeeService;
     @PostMapping("login")
-    public Result login(HttpServletRequest request,HttpServletResponse response){
-        Admin admin=new Admin();
-        Admin login = adminService.login(admin);
-        if (true){
-            return new Result(0);
-        }else {
-            request.setAttribute("msg", "fail");
+    @ResponseBody
+    public Result login(HttpServletRequest request,HttpServletResponse response,@RequestBody Map data){
+        Integer roleId = Integer.parseInt( (String) data.get("roleId"));
+        String username = (String) data.get("username");
+        String password = (String) data.get("password");
+        HttpSession session = request.getSession();
+        session.setAttribute("roleId",roleId);
+        if (roleId==1){
+            Admin admin=new Admin();
+            admin.setAusername(username);
+            admin.setApassword(password);
+            Admin login = adminService.login(admin);
+            session.setAttribute("admin",login);
+            if (login!=null){
+                return new Result(0,login,"login successful!");
+            }else {
+                return new Result(1,"login failure!");
+            }
+        }else if (roleId==2){
+            Employee employee = new Employee();
+            employee.setEusername(username);
+            employee.setEpassword(password);
+            Employee login = employeeService.login(employee);
+            session.setAttribute("admin",login);
+            if (login!=null){
+                return new Result(0,login,"login successful!");
+            }else {
+                return new Result(1,"login failure!");
+            }
         }
+        return new Result(1,"login failure!");
 
-        return new Result(login!=null?141:140,login);
     }
     @PostMapping("quit")
     public Result quit(){

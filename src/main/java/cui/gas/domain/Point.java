@@ -21,7 +21,7 @@ public class Point implements Serializable {
 
     private Integer psum;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")//页面写入数据库时格式化
-    @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")//数据库导出页面时json格式化
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")//数据库导出页面时json格式化
     private Date ptime;
 
     private String pcomment;

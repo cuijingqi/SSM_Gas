@@ -60,5 +60,5 @@ public interface AdminMapper {
 
     List<Admin> selectAll();
 
-    Admin selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+    Admin selectByUsernameAndPassword(@Param("ausername") String ausername, @Param("apassword") String apassword);
 }
