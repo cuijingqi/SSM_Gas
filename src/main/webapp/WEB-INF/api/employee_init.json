@@ -1,0 +1,53 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "/admin/point/table/add"
+  },
+  "logoInfo": {
+    "title": "Gas",
+    "image": "/images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "管理面板",
+      "icon": "",
+      "href": "",
+      "target": "_self",
+      "child": [
+        {
+          "title": "首页",
+          "href": "",
+          "icon": "fa fa-home",
+          "target": "_self",
+          "child": [
+            {
+              "title": "添加积分",
+              "href": "/admin/point/table/add",
+              "icon": "fa fa-line-chart",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "员工管理",
+          "href": "/admin/employee/table",
+          "icon": "fa fa-group",
+          "target": "_self"
+        },
+        {
+          "title": "会员管理",
+          "href": "/admin/member/table",
+          "icon": "fa fa-user",
+          "target": "_self"
+        },
+        {
+          "title": "积分管理",
+          "href": "/admin/point/table",
+          "icon": "fa fa-ticket",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
+}

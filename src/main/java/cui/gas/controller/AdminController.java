@@ -61,19 +61,19 @@ public class AdminController {
         return new Result(1,"login failure!");
 
     }
-    @PostMapping("quit")
-    public Result quit(){
-//        HttpServletResponse response = ServletActionContext.getResponse();
-//        HttpServletRequest request = ServletActionContext.getRequest();
-//        response.setContentType("text/html;charset=utf-8");
-//        request.getSession().removeAttribute("admin");
-//        return NONE;
+    @GetMapping("quit")
+    @ResponseBody
+    public Result quit(HttpServletRequest request){
+        String aid = request.getParameter("aid");
+        String eid = request.getParameter("eid");
+        request.getSession().removeAttribute("admin");
+        request.getSession().removeAttribute("roleId");
         return new Result(0);
     }
     @RequestMapping("{one}")
     public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one) throws ServletException, IOException {
         //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
-        return "../"+one;
+        return one;
     }
     @RequestMapping("{one}/{two}")
     public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one,@PathVariable("two") String two) throws ServletException, IOException {
