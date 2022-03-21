@@ -27,8 +27,9 @@ public class AdminController {
     private AdminService adminService;
     @Resource
     private EmployeeService employeeService;
-    @PostMapping("login")
+
     @ResponseBody
+    @PostMapping("login")
     public Result login(HttpServletRequest request,HttpServletResponse response,@RequestBody Map data){
         Integer roleId = Integer.parseInt( (String) data.get("roleId"));
         String username = (String) data.get("username");
@@ -41,6 +42,7 @@ public class AdminController {
             admin.setApassword(password);
             Admin login = adminService.login(admin);
             session.setAttribute("admin",login);
+            System.out.println("one");
             if (login!=null){
                 return new Result(0,login,"login successful!");
             }else {
@@ -61,8 +63,9 @@ public class AdminController {
         return new Result(1,"login failure!");
 
     }
-    @GetMapping("quit")
+
     @ResponseBody
+    @GetMapping("quit")
     public Result quit(HttpServletRequest request){
         String aid = request.getParameter("aid");
         String eid = request.getParameter("eid");
@@ -70,15 +73,20 @@ public class AdminController {
         request.getSession().removeAttribute("roleId");
         return new Result(0);
     }
-    @RequestMapping("{one}")
-    public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one) throws ServletException, IOException {
-        //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
-        //todo filter 过滤判断是否有session登录
-        return one;
-    }
+//    @RequestMapping("{one}")
+//    public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one) throws ServletException, IOException {
+//        //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
+//        //todo filter 过滤判断是否有session登录
+//        System.out.println("two");
+//        return one;
+//    }
     @RequestMapping("{one}/{two}")
     public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one,@PathVariable("two") String two) throws ServletException, IOException {
             //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
+        System.out.println("afsd");
+        if (one=="cjq"){
+            return two;
+        }
         return one+"/"+two;
     }
     @RequestMapping("{one}/{two}/{three}")

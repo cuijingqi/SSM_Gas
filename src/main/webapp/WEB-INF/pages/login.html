@@ -104,11 +104,28 @@
     ©版权所有 崔靖奇<span class="padding-5">|</span><a target="_blank" href="https://github.com/cuijingqi">Github</a>
 </div>
 <script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
-<script src="../js/jquery-3.6.0.min.js"></script>
-<script src="../js/jquery.cookie.min.js"></script>
 <script>
-    layui.use(['form','jquery'], function () {
+    //写入cookie
+    function SetCookie(name, value) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() + 7 * 24 * 60 * 60 * 1000); //7天过期
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        return true;
+    };
+
+    //读取cookie
+    function getCookie(name) {
+        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return unescape(arr[2]); return null;
+    }
+    layui.config({
+        base: '../lib/jq-module/' //假设这是cookie.js所在的目录（本页面的相对路径）
+    }).extend({ //设定模块别名
+        cookie: 'cookie'   //如果cookie.js是在根目录，也可以不用设定别名,因为我cookie.js的是在根目录，所以这句话其实也不用写也行。
+    });
+    layui.use(['form','jquery','cookie'], function () {
         var $ = layui.jquery,
+            cookie=layui.cookie,
             form = layui.form,
             layer = layui.layer;
 
@@ -166,8 +183,8 @@
                             icon: 1,
                             time: 1000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
-                            $.cookie("admin",result.data);
-                            window.location="/admin/index.html";
+                            // $.cookie('admin', result.data);
+                            window.location="/admin/cjq/index.html";
                             //window.location = '/admin/index.html?aid='+result.data.aid+"&aname="+result.data.aname+"&eid="+result.data.eid+"&ename="+result.data.ename;
                         });
                     }else {
