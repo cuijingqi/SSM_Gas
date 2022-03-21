@@ -32,6 +32,7 @@ public class MemberController {
         Integer page = Integer.parseInt(request.getParameter("page"));
         Integer limit = Integer.parseInt(request.getParameter("limit"));
         String searchParams = request.getParameter("searchParams");
+        String sid = request.getParameter("sid");
 //        if (searchParams!=null) {
         ObjectMapper objectMapper = new ObjectMapper();
         String mname=null;
@@ -41,9 +42,10 @@ public class MemberController {
             mname = map.get("mname")==""?null:map.get("mname");
             mtelephone = map.get("mtelephone")==""?null:map.get("mtelephone");
         }
+        //避免Point null检索传输
         mname = request.getParameter("mname")==null?mname:request.getParameter("mname");
         mtelephone = request.getParameter("mtelephone")==null?mtelephone:request.getParameter("mtelephone");
-        PageInfo pageInfo = ms.selectByNameAndTelephoneWithPage(page,limit,mname,mtelephone);
+        PageInfo pageInfo = ms.selectByNameAndTelephoneAndStationWithPage(page,limit,mname,mtelephone,sid);
         return new Result(pageInfo.getList().size() != 0 ? 0 : 1, pageInfo.getList(), "", pageInfo.getTotal());
 //        }else {
 //            PageInfo pageInfo = ss.selectAllWithPage(page, limit);

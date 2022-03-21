@@ -248,4 +248,24 @@
     select * from(employee e LEFT JOIN station s on e.station_id=s.sid),role r where e.role_id=r.rid  and eusername = #{eusername,jdbcType=VARCHAR}
     and `epassword` = #{epassword,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByNameAndTelephoneAndStation" resultMap="BaseResultMap">
+    select * from (
+    employee e left join station s on s.sid=e.station_id
+    <where>
+      <if test="stationId != null">
+        and e.station_id=#{stationId,jdbcType=INTEGER}
+      </if>
+    </where>
+    ),role r
+    <where>
+      r.rid=e.role_id
+      <if test="ename != null">
+        and ename like concat('%',#{ename,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="etelephone != null">
+        and etelephone like concat('%',#{etelephone,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
 </mapper>

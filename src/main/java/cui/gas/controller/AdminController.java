@@ -73,6 +73,7 @@ public class AdminController {
     @RequestMapping("{one}")
     public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one) throws ServletException, IOException {
         //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
+        //todo filter 过滤判断是否有session登录
         return one;
     }
     @RequestMapping("{one}/{two}")

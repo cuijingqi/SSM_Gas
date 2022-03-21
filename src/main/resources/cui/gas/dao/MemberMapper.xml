@@ -236,4 +236,20 @@
       </if>
     </where>
   </select>
+
+  <select id="selectByNameAndTelephoneAndStation" resultMap="BaseResultMap">
+    select * from `member` m,station s,role r
+    <where>
+      m.station_id=s.sid and m.role_id=r.rid
+      <if test="mname != null">
+        and mname like concat('%',#{mname,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="mtelephone != null">
+        and mtelephone like concat('%',#{mtelephone,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="stationId != null">
+        and m.station_id=#{stationId,jdbcType=INTEGER}
+      </if>
+    </where>
+    </select>
 </mapper>

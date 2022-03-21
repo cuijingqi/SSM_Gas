@@ -32,6 +32,7 @@ public class EmployeeController {
         Integer page = Integer.parseInt(request.getParameter("page"));
         Integer limit = Integer.parseInt(request.getParameter("limit"));
         String searchParams = request.getParameter("searchParams");
+        String sid = request.getParameter("sid");
 //        if (ename!=null) {
             ObjectMapper objectMapper = new ObjectMapper();
             String ename=null;
@@ -41,7 +42,9 @@ public class EmployeeController {
                 ename = map.get("ename")==""?null:map.get("ename");
                 etelephone = map.get("etelephone")==""?null:map.get("etelephone");
             }
-            PageInfo pageInfo = es.selectByNameAndTelephoneWithPage(page,limit,ename,etelephone);
+        //避免检索station  null传输
+        ename = request.getParameter("ename")==null?ename:request.getParameter("ename");
+        PageInfo pageInfo = es.selectByNameAndTelephoneAndStationWithPage(page,limit,ename,etelephone,sid);
             return new Result(pageInfo.getList().size() != 0 ? 0 : 1, pageInfo.getList(), "", pageInfo.getTotal());
 //        }else {
 //            PageInfo pageInfo = es.selectAllWithPage(page, limit);

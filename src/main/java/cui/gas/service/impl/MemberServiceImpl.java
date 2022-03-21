@@ -98,6 +98,18 @@ public class MemberServiceImpl implements MemberService {
     public Integer selectAllNum() {
         return memberMapper.selectAll().size();
     }
+
+    @Override
+    public PageInfo selectByNameAndTelephoneAndStationWithPage(Integer page, Integer limit, String mname, String mtelephone, String sid) {
+        PageHelper.startPage(page,limit,true);
+        List<Member> members = memberMapper.selectByNameAndTelephoneAndStation(mname,mtelephone,sid==null?null:Integer.parseInt(sid));
+        for (int i = 0; i < members.size(); i++) {
+            List<Point> points=pointMapper.selectByMemberOrderByTime(members.get(i).getMid());
+            members.get(i).setPsum(points.size()!=0?points.get(0).getPsum():0);
+        }
+        PageInfo pageInfo = new PageInfo(members);
+        return pageInfo;
+    }
 }
 
 

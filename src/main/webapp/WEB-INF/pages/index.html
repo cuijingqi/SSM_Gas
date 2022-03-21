@@ -129,6 +129,8 @@
 </div>
 <script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script src="../js/lay-config.js?v=2.0.0" charset="utf-8"></script>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/jquery.cookie.min.js"></script>
 <script>
     <!--获取页面之间的传递的参数-->
     function getQueryString(name) {
@@ -142,7 +144,9 @@
             miniAdmin = layui.miniAdmin,
             miniTongji = layui.miniTongji;
         // "../api/init.json"
-        var init=getQueryString("aid")=="undefined"?"../api/employee_init.json":"../api/init.json"
+        let cookie = $.cookie("admin");
+        console.log("cookie");
+        var init=cookie.aid=="undefined"?"../api/employee_init.json":"../api/init.json"
         var options = {
             iniUrl: init,    // 初始化接口
             clearUrl: "../api/clear.json", // 缓存清理接口
@@ -186,7 +190,7 @@
                         icon: 1,
                         time: 1000 //2秒关闭（如果不配置，默认是3秒）
                     }, function(){
-                        window.location = 'login.html';
+                        window.location = '/admin/login.html';
                     });
                 },
                 //请求失败，包含具体的错误信息

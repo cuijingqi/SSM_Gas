@@ -47,8 +47,18 @@ public interface EmployeeService {
      * @return com.github.pagehelper.PageInfo
      */
 
-    //更全面的替代
+    //更全面的替代 selectByNameAndStationWithPage
     PageInfo selectByNameWithPage(Integer page, Integer limit, String ename);
+    /**
+     * @Description 查询站点所有
+     * @date 16:26 2022-03-10
+     * @param page
+     * @param limit
+     * @param sid
+     * @return com.github.pagehelper.PageInfo
+     */
+    //更全面的替代 selectByNameAndStationWithPage
+    PageInfo selectByStationWithPage(Integer page, Integer limit, String sid);
 
     /**
      * @Description 查询所有
@@ -72,17 +82,7 @@ public interface EmployeeService {
 
     PageInfo selectByNameAndStationWithPage(Integer page, Integer limit, String ename, String sid);
 
-    /**
-     * @Description 查询站点所有
-     * @date 16:26 2022-03-10
-     * @param page
-     * @param limit
-     * @param sid
-     * @return com.github.pagehelper.PageInfo
-     */
-    //更全面的替代
-    PageInfo selectByStationWithPage(Integer page, Integer limit, String sid);
-
+    //更全面的替代 selectByNameAndTelephoneAndSidWithPage
     PageInfo selectByNameAndTelephoneWithPage(Integer page, Integer limit, String ename, String etelephone);
 
 
@@ -91,6 +91,8 @@ public interface EmployeeService {
     Integer selectAllNum();
 
     Employee login(Employee employee);
+
+    PageInfo selectByNameAndTelephoneAndStationWithPage(Integer page, Integer limit, String ename, String etelephone, String sid);
 }
 
 

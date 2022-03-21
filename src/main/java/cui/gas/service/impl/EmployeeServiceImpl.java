@@ -132,6 +132,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee login(Employee employee) {
       return  employeeMapper.selectByUsernameAndPassword(employee.getEusername(),employee.getEpassword());
     }
+
+    @Override
+    public PageInfo selectByNameAndTelephoneAndStationWithPage(Integer page, Integer limit, String ename, String etelephone, String sid) {
+        PageHelper.startPage(page,limit,true);
+        List<Employee> employees = employeeMapper.selectByNameAndTelephoneAndStation(ename,etelephone,sid==null?null:Integer.parseInt(sid));
+        PageInfo pageInfo = new PageInfo(employees);
+        return pageInfo;
+    }
 }
 
 

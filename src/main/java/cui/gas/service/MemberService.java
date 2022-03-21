@@ -35,6 +35,8 @@ public interface MemberService {
     Member selectByMid(Integer mid);
 
     Integer selectAllNum();
+
+    PageInfo selectByNameAndTelephoneAndStationWithPage(Integer page, Integer limit, String mname, String mtelephone, String sid);
 }
 
 
