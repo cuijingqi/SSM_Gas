@@ -33,6 +33,8 @@ public interface PointService {
     Point selectByPid(Integer pid);
 
     Integer selectAllNum();
+
+    PageInfo selectByStationWithPage(Integer page, Integer limit, String sid);
 }
 
 

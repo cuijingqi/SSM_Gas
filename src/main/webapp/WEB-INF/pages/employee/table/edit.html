@@ -52,11 +52,23 @@
             <input type="number" name="etelephone" lay-verify="required" lay-reqtext="联系方式不能为空" placeholder="请输入联系方式" value="" class="layui-input">
         </div>
     </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" id="station">
         <label class="layui-form-label">任职部门</label>
         <div class="layui-input-inline">
             <input type="hidden" id="sid" name="stationId.sid" value="0">
             <input type="text" name=""  readonly placeholder="请选择" autocomplete="off" class="layui-input" id="selectstation" value="" ts-selected="">
+        </div>
+    </div>
+    <div class="layui-form-item" id="usernmae">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" name="eusername" placeholder="请输入用户名" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item" id="password">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input type="text" name="epassword" placeholder="请输入密码" value="" class="layui-input">
         </div>
     </div>
     <input type="hidden" name="eaddress">
@@ -95,6 +107,19 @@
 <script src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script src="../../../lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script>
+    //写入cookie
+    function SetCookie(name, value) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() + 7 * 24 * 60 * 60 * 1000); //7天过期
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        return true;
+    };
+
+    //读取cookie
+    function getCookie(name) {
+        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return unescape(arr[2]); return null;
+    }
     let regex = "(?<province>[^省]+省|.+自治区)(?<city>[^自治州]+自治州|[^市]+市|[^盟]+盟|[^地区]+地区|.+区划)(?<county>[^市]+市|[^县]+县|[^旗]+旗|.+区)?(?<town>[^区]+区|.+镇)?(?<village>.*)";
     let p1;
     let c2;
@@ -145,6 +170,8 @@
                 $("#sid").val((result.data.stationId.sid!=null)?result.data.stationId.sid:null);
                 $("#selectstation").attr("ts-selected",(result.data.stationId!=null)?result.data.stationId.sid:null);
                 $("#selectstation").attr("value",(result.data.stationId!=null)?result.data.stationId.sname:null);
+                $("input[name='eusername']").val(result.data.eusername);
+                $("input[name='epassword']").val(result.data.epassword);
                 $("input[name='eaddress']").val(result.data.eaddress);
                 p1=result.data.eaddress.match(regex)[1];
                 c2=result.data.eaddress.match(regex)[2];
@@ -160,6 +187,14 @@
             }
         });
     });
+    var adminstr = getCookie("admin")
+    var admin = JSON.parse(adminstr);
+    console.log(admin)
+    if (admin.aid==undefined){
+        $('#station').css("display","none");
+        $('#usernmae').css("display","none");
+        $('#password').css("display","none");
+    }
     layui.use(['layer', 'form', 'layarea', 'tableSelect'], function () {
         var form = layui.form,
             layer = layui.layer,

@@ -42,7 +42,7 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
-    select * from(employee e LEFT JOIN station s on e.station_id=s.sid),role r where e.role_id=r.rid  and e.eid=#{eid,jdbcType=INTEGER}
+    select * from(select * from employee e LEFT JOIN station s on e.station_id=s.sid) e,role r where e.role_id=r.rid  and e.eid=#{eid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
@@ -204,10 +204,10 @@
 
   <select id="selectAll" resultMap="BaseResultMap">
     <!--@mbg.generated-->
-    select * from (employee e left join station s on s.sid=e.station_id),role r WHERE r.rid=e.role_id
+    select * from (select * from employee e left join station s on s.sid=e.station_id) e,role r WHERE r.rid=e.role_id
   </select>
   <select id="selectByName" resultMap="BaseResultMap">
-    select * from (employee e left join station s on s.sid=e.station_id),role r
+    select * from (select * from employee e left join station s on s.sid=e.station_id),role r
     <where>
       r.rid=e.role_id
       <if test="ename != null">
@@ -229,10 +229,10 @@
   </where>
   </select>
   <select id="selectByStation" resultMap="BaseResultMap">
-    select * from (select * from  employee e LEFT JOIN station s on e.station_id=s.sid WHERE e.station_id=#{sid,jdbcType=INTEGER})e,role r where e.role_id=r.rid
+    select * from (select * from  employee e LEFT JOIN station s on e.station_id=s.sid WHERE e.station_id=#{sid,jdbcType=INTEGER}) e,role r where e.role_id=r.rid
   </select>
   <select id="selectByNameAndTelephone" resultMap="BaseResultMap">
-    select * from (employee e left join station s on s.sid=e.station_id),role r
+    select * from (select * from employee e left join station s on s.sid=e.station_id) e,role r
     <where>
       r.rid=e.role_id
       <if test="ename != null">
@@ -245,19 +245,19 @@
   </select>
 
   <select id="selectByUsernameAndPassword" resultMap="BaseResultMap">
-    select * from(employee e LEFT JOIN station s on e.station_id=s.sid),role r where e.role_id=r.rid  and eusername = #{eusername,jdbcType=VARCHAR}
+    select * from(select * from  employee e LEFT JOIN station s on e.station_id=s.sid) e,role r where e.role_id=r.rid  and eusername = #{eusername,jdbcType=VARCHAR}
     and `epassword` = #{epassword,jdbcType=VARCHAR}
   </select>
 
   <select id="selectByNameAndTelephoneAndStation" resultMap="BaseResultMap">
     select * from (
-    employee e left join station s on s.sid=e.station_id
-    <where>
-      <if test="stationId != null">
-        and e.station_id=#{stationId,jdbcType=INTEGER}
-      </if>
-    </where>
-    ),role r
+        select * from employee e left join station s on s.sid=e.station_id
+      <where>
+        <if test="stationId != null">
+          and e.station_id=#{stationId,jdbcType=INTEGER}
+        </if>
+      </where>
+    ) e,role r
     <where>
       r.rid=e.role_id
       <if test="ename != null">

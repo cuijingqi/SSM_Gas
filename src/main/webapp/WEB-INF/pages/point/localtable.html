@@ -57,6 +57,19 @@
 <script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script src="../../lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script>
+    //写入cookie
+    function SetCookie(name, value) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() + 7 * 24 * 60 * 60 * 1000); //7天过期
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        return true;
+    };
+
+    //读取cookie
+    function getCookie(name) {
+        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return unescape(arr[2]); return null;
+    }
     // $(function(){
     //     //请求参数
     //     var list = {};
@@ -82,6 +95,8 @@
     //         }
     //     });
     // });
+    var adminstr = getCookie("admin")
+    var admin = JSON.parse(adminstr);
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
             form = layui.form,
@@ -89,7 +104,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/point/allwithpage',
+            url: '/point/allwithpage?sid='+admin.stationId.sid,
             // parseData:function (result){
             //     return{
             //       "code":0,
@@ -129,7 +144,7 @@
             // });
 
             //执行搜索重载
-            table.reload('currentTableId', {
+            localtable.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
@@ -157,7 +172,7 @@
                 end: function () {
                     // $(window.document).find("iframe")[0].contentWindow.location.reload(true);
                     // window.location.reload();//关闭后刷新数据
-                    table.reload('currentTableId', {
+                    localtable.reload('currentTableId', {
                         page: {
                             curr: 1
                         }
@@ -171,7 +186,7 @@
                     layer.full(index);
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
-                var checkStatus = table.checkStatus('currentTableId')
+                var checkStatus = localtable.checkStatus('currentTableId')
                     , data = checkStatus.data;
                 var pid=data.map((item,index) =>{
 
@@ -197,7 +212,7 @@
                                 // console.log(obj)
                                 // obj.del();
                                 layer.close(index);
-                                table.reload('currentTableId', {
+                                localtable.reload('currentTableId', {
                                     page: {
                                         curr: 1
                                     }
@@ -240,7 +255,7 @@
                     end: function () {
                         // $(window.document).find("iframe")[0].contentWindow.location.reload(true);
                         // window.location.reload();//关闭后刷新数据
-                        table.reload('currentTableId', {
+                        localtable.reload('currentTableId', {
                             page: {
                                 curr: 1
                             }

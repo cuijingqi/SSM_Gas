@@ -139,4 +139,15 @@
   <select id="selectByMemberOrderByTime" resultMap="BaseResultMap">
     select * from point p,member m,`option` o where p.member_id=m.mid and p.option_id=o.oid and p.member_id= #{memberId,jdbcType=INTEGER} order by p.ptime desc
   </select>
+
+  <select id="selectByStation" resultMap="BaseResultMap">
+    SELECT * FROM `point` p,member m,`option` o,station s
+    <where>
+      p.member_id=m.mid and p.option_id=o.oid and m.station_id=s.sid
+      <if test="stationId != null">
+        and s.sid=#{stationId,jdbcType=INTEGER}
+      </if>
+    </where>
+    ORDER BY ptime desc
+  </select>
 </mapper>

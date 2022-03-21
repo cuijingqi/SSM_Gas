@@ -13,56 +13,63 @@
 <div class="layuimini-container">
     <div class="layuimini-main">
 
-        <fieldset class="table-search-fieldset">
-            <legend>搜索信息</legend>
-            <div style="margin: 10px 10px 10px 10px">
-                <form class="layui-form layui-form-pane" action="">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">员工姓名</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="ename" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">员工电话</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="etelephone" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
+<!--        <fieldset class="table-search-fieldset">-->
+<!--            <legend>搜索信息</legend>-->
+<!--            <div style="margin: 10px 10px 10px 10px">-->
+<!--                <form class="layui-form layui-form-pane" action="">-->
+<!--                    <div class="layui-form-item">-->
 <!--                        <div class="layui-inline">-->
-<!--                            <label class="layui-form-label">任职部门</label>-->
+<!--                            <label class="layui-form-label">油站名称</label>-->
 <!--                            <div class="layui-input-inline">-->
-<!--                                <input type="text" name="" autocomplete="off" class="layui-input">-->
+<!--                                <input type="text" name="sname" autocomplete="off" class="layui-input">-->
 <!--                            </div>-->
 <!--                        </div>-->
-                        <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </fieldset>
+<!--                        <div class="layui-inline">-->
+<!--                            <label class="layui-form-label">油站地址</label>-->
+<!--                            <div class="layui-input-inline">-->
+<!--                                <input type="text" name="saddress" autocomplete="off" class="layui-input">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="layui-inline">-->
+<!--                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </fieldset>-->
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
+<!--                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>-->
             </div>
         </script>
 
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
-        <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
-        </script>
+<!--        <script type="text/html" id="currentTableBar">-->
+<!--&lt;!&ndash;            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>&ndash;&gt;-->
+<!--            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>-->
+<!--        </script>-->
 
     </div>
 </div>
 <script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script src="../../lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script>
+    //写入cookie
+    function SetCookie(name, value) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() + 7 * 24 * 60 * 60 * 1000); //7天过期
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        return true;
+    };
+
+    //读取cookie
+    function getCookie(name) {
+        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return unescape(arr[2]); return null;
+    }
     // $(function(){
     //     //请求参数
     //     var list = {};
@@ -88,7 +95,8 @@
     //         }
     //     });
     // });
-    alert(getQueryString("eid"));
+    var adminstr = getCookie("admin")
+    var admin = JSON.parse(adminstr);
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
             form = layui.form,
@@ -96,7 +104,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/employee/allwithpage',
+            url: '/point/allwithpage',
             // parseData:function (result){
             //     return{
             //       "code":0,
@@ -113,17 +121,14 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'eid', width: 60, title: 'ID', sort: true},
-                {field: 'ename', width: 100, title: '姓名'},
-                {field: 'esex',templet: function(data){ return (data.esex!=1)?"女":"男"}, width: 75, title: '性别', sort: true},
-                {field: 'eage', width: 75, title: '年龄', sort: true},
-                {field: 'roleId',templet: function(data){ return (data.roleId.rid!=null)?data.roleId.rpostion:"暂无"}, width: 80, title: '职位'},
-                {field: 'stationId',templet: function(data){ return (data.stationId!=null)?data.stationId.sname:"暂无"}, width: 160, title: '任职部门'},
-                {field: 'etelephone', width: 160, title: '电话'},
-                {field: 'eaddress', title: '地址', minWidth: 160},
-                {field: 'etime', width: 160, title: '入职时间', sort: true, sort: true},
-                {field: 'eavailable',templet: function(data){ return (data.eavailable!=1)?"离职":"就职"}, width: 80, title: '就职', sort: true},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
+                {field: 'pid', width: 80, title: 'ID'},
+                {field: 'memberId',templet: function(data){ return (data.memberId!=null)?data.memberId.mname:"暂无"}, width: 80, title: '会员',sort: true},
+                {field: 'optionId',templet: function(data){ return (data.optionId!=null)?data.optionId.oname:"暂无"}, width: 80, title: '变动',sort: true},
+                {field: 'pfigure', width: 80, title: '数额'},
+                {field: 'psum', width: 80, title: '结余'},
+                {field: 'pcomment', title: '备注', minWidth: 100},
+                {field: 'ptime', width: 160, title: '创建时间', sort: true},
+                // {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -139,7 +144,7 @@
             // });
 
             //执行搜索重载
-            table.reload('currentTableId', {
+            localtable.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
@@ -157,17 +162,17 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
-                    title: '添加员工',
+                    title: '添加积分',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../employee/table/add.html',
+                    content: '../point/table/add.html',
                 end: function () {
                     // $(window.document).find("iframe")[0].contentWindow.location.reload(true);
                     // window.location.reload();//关闭后刷新数据
-                    table.reload('currentTableId', {
+                    localtable.reload('currentTableId', {
                         page: {
                             curr: 1
                         }
@@ -181,16 +186,16 @@
                     layer.full(index);
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
-                var checkStatus = table.checkStatus('currentTableId')
+                var checkStatus = localtable.checkStatus('currentTableId')
                     , data = checkStatus.data;
-                var eid=data.map((item,index) =>{
+                var pid=data.map((item,index) =>{
 
-                    return item.eid
+                    return item.pid
 
                 });
                 // layer.alert(JSON.stringify(data));
                 // layer.alert(JSON.stringify(checkStatus));
-                layer.confirm('真的删除选中员工吗？可以将员工设置为离职状态！'
+                layer.confirm('无误则不允许删除！请确认是否坚持删除。'
                     , function (index) {
                         $.ajax({
                             //请求方式
@@ -198,16 +203,16 @@
                             //请求的媒体类型
                             // contentType: "application/json;charset=UTF-8",
                             //请求地址
-                            url : "/employee/delsemployee",
+                            url : "/point/delspoint",
                             //数据，json字符串
-                            data : "eid="+eid,
+                            data : "pid="+pid,
                             //请求成功
                             success : function(result) {
                                 // console.log(result);
                                 // console.log(obj)
                                 // obj.del();
                                 layer.close(index);
-                                table.reload('currentTableId', {
+                                localtable.reload('currentTableId', {
                                     page: {
                                         curr: 1
                                     }
@@ -240,17 +245,17 @@
             if (obj.event === 'edit') {
                 //layer.open 通过ajax改造post方法不做 自行查询
                 var index = layer.open({
-                    title: '编辑员工',
+                    title: '编辑积分',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../employee/table/edit.html'+'?eid='+data.eid,
+                    content: '../point/table/edit.html'+'?pid='+data.pid,
                     end: function () {
                         // $(window.document).find("iframe")[0].contentWindow.location.reload(true);
                         // window.location.reload();//关闭后刷新数据
-                        table.reload('currentTableId', {
+                        localtable.reload('currentTableId', {
                             page: {
                                 curr: 1
                             }
@@ -265,7 +270,7 @@
                 });
                 return false;
             } else if (obj.event === 'delete') {
-                layer.confirm('真的删除该员工吗？可以将员工设置为离职状态！'
+                layer.confirm('无误则不允许删除！请确认是否坚持删除。'
                     , function (index) {
                         $.ajax({
                             //请求方式
@@ -273,9 +278,9 @@
                             //请求的媒体类型
                             // contentType: "application/json;charset=UTF-8",
                             //请求地址
-                            url : "/employee/delemployee",
+                            url : "/point/delpoint",
                             //数据，json字符串
-                            data : "eid="+data.eid,
+                            data : "pid="+data.pid,
                             //请求成功
                             success : function(result) {
                                 console.log(result);

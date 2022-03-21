@@ -52,11 +52,11 @@
             <input type="number" name="mtelephone" lay-verify="required" lay-reqtext="联系方式不能为空" placeholder="请输入联系方式" value="" class="layui-input">
         </div>
     </div>
-    <div class="layui-form-item">
+    <div class="layui-form-item" id="station">
         <label class="layui-form-label required">注册地</label>
         <div class="layui-input-inline">
             <input type="hidden" id="sid" name="stationId.sid" value="0">
-            <input type="text" name="" lay-verify="required" lay-reqtext="注册地不能为空"  readonly placeholder="请选择" autocomplete="off" class="layui-input" id="selectstation" value="" ts-selected="">
+            <input id="stationshow" type="text" name="" lay-verify="required" lay-reqtext="注册地不能为空"  readonly placeholder="请选择" autocomplete="off" class="layui-input" id="selectstation" value="" ts-selected="">
         </div>
     </div>
     <input type="hidden" name="maddress">
@@ -95,6 +95,28 @@
 <script src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script src="../../../lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script>
+    //写入cookie
+    function SetCookie(name, value) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() + 7 * 24 * 60 * 60 * 1000); //7天过期
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        return true;
+    };
+
+    //读取cookie
+    function getCookie(name) {
+        var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+        if (arr != null) return unescape(arr[2]); return null;
+    }
+    var adminstr = getCookie("admin")
+    var admin = JSON.parse(adminstr);
+    if (admin.aid==undefined){
+        $('#sid').val(admin.stationId.sid);
+        $('#stationshow').attr("lay-verify","");
+        $('#stationshow').attr("lay-reqtext","");
+        $('#stationshow').prop("readonly",false);
+        $('#station').css("display","none");
+    }
     layui.use(['layer', 'form', 'layarea', 'tableSelect'], function () {
         var form = layui.form,
             layer = layui.layer,

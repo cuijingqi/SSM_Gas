@@ -31,21 +31,49 @@
         },
         {
           "title": "员工管理",
-          "href": "/admin/employee/table",
+          "href": "/admin/employee/localtable",
           "icon": "fa fa-group",
           "target": "_self"
         },
         {
           "title": "会员管理",
-          "href": "/admin/member/table",
+          "href": "",
           "icon": "fa fa-user",
-          "target": "_self"
+          "target": "_self",
+          "child": [
+            {
+              "title": "本站会员",
+              "href": "/admin/member/localtable",
+              "icon": "fa fa-line-chart",
+              "target": "_self"
+            },
+            {
+              "title": "全部会员",
+              "href": "/admin/member/globaltable",
+              "icon": "fa fa-line-chart",
+              "target": "_self"
+            }
+          ]
         },
         {
           "title": "积分管理",
-          "href": "/admin/point/table",
+          "href": "",
           "icon": "fa fa-ticket",
-          "target": "_self"
+          "target": "_self",
+          "child": [
+            {
+              "title": "本站积分",
+              "href": "/admin/point/localtable",
+              "icon": "fa fa-line-chart",
+              "target": "_self"
+            },
+            {
+              "title": "全部积分",
+              "href": "/admin/point/globaltable",
+              "icon": "fa fa-line-chart",
+              "target": "_self"
+            }
+          ]
         }
       ]
     }

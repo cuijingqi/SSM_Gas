@@ -31,6 +31,7 @@ public class PointController {
     public Result getAllWithPage(HttpServletRequest request) throws JsonProcessingException {
         Integer page = Integer.parseInt(request.getParameter("page"));
         Integer limit = Integer.parseInt(request.getParameter("limit"));
+        String sid = request.getParameter("sid");
 //        String searchParams = request.getParameter("searchParams");
 //        if (searchParams!=null) {
 //            ObjectMapper objectMapper = new ObjectMapper();
@@ -44,7 +45,7 @@ public class PointController {
 //            }
 //            sname = request.getParameter("sname")==""?sname:request.getParameter("sname");
 //            PageInfo pageInfo = ss.selectByNameAndAddressWithPage(page,limit,sname,saddress);
-            PageInfo pageInfo = ps.selectAllWithPage(page,limit);
+            PageInfo pageInfo = ps.selectByStationWithPage(page,limit,sid);
             return new Result(pageInfo.getList().size() != 0 ? 0 : 1, pageInfo.getList(), "", pageInfo.getTotal());
 //        }else {
 //            PageInfo pageInfo = ss.selectAllWithPage(page, limit);

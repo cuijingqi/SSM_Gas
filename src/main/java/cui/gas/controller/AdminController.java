@@ -73,20 +73,19 @@ public class AdminController {
         request.getSession().removeAttribute("roleId");
         return new Result(0);
     }
-//    @RequestMapping("{one}")
-//    public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one) throws ServletException, IOException {
-//        //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
-//        //todo filter 过滤判断是否有session登录
-//        System.out.println("two");
-//        return one;
-//    }
+    @RequestMapping("{one}")
+    public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one) throws ServletException, IOException {
+        //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
+        //todo filter 过滤判断是否有session登录
+        return one;
+    }
     @RequestMapping("{one}/{two}")
     public String distribute(HttpServletRequest request,HttpServletResponse response,@PathVariable("one") String one,@PathVariable("two") String two) throws ServletException, IOException {
             //request.getRequestDispatcher("/page/"+one+"/"+two+".html").forward(request, response);
-        System.out.println("afsd");
-        if (one=="cjq"){
-            return two;
-        }
+//        System.out.println(one);
+//        if (one.equals("cjq")){
+//            return two;
+//        }
         return one+"/"+two;
     }
     @RequestMapping("{one}/{two}/{three}")

@@ -2,6 +2,7 @@ package cui.gas.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import cui.gas.dao.EmployeeMapper;
 import cui.gas.domain.Point;
 import cui.gas.domain.Station;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class PointServiceImpl implements PointService {
 
     @Resource
     private PointMapper pointMapper;
+    @Resource
+    private EmployeeMapper employeeMapper;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -76,6 +79,13 @@ public class PointServiceImpl implements PointService {
     @Override
     public Integer selectAllNum() {
         return pointMapper.selectAll().size();
+    }
+
+    @Override
+    public PageInfo selectByStationWithPage(Integer page, Integer limit, String sid) {
+        PageHelper.startPage(page,limit,true);
+        List<Point> points = pointMapper.selectByStation(sid==null?null:Integer.parseInt(sid));
+        return new PageInfo(points);
     }
 }
 

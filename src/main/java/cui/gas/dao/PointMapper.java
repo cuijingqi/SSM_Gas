@@ -67,4 +67,6 @@ public interface PointMapper {
     List<Point> selectAll();
 
     List<Point> selectByMemberOrderByTime(@Param("memberId") Integer memberId);
+
+    List<Point> selectByStation(@Param("stationId") Integer stationId);
 }
