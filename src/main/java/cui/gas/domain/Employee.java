@@ -5,13 +5,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author 崔靖奇 CUIJINGQICHN@163.com
  * @date 13:03 2022-03-08
  */
-public class Employee implements Serializable {
+public class Employee implements Serializable, Domain {
     private Integer eid;
 
     private Role roleId;

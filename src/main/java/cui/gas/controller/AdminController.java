@@ -42,7 +42,6 @@ public class AdminController {
             admin.setApassword(password);
             Admin login = adminService.login(admin);
             session.setAttribute("admin",login);
-            System.out.println("one");
             if (login!=null){
                 return new Result(0,login,"login successful!");
             }else {

@@ -21,38 +21,38 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
-  <!--  <filter>-->
-  <!--    <filter-name>Power</filter-name>-->
-  <!--    <filter-class>cui.gas.system.filter.PowerFilter</filter-class>-->
-  <!--    <init-param>-->
-  <!--      <param-name>excludedPages</param-name>-->
-  <!--      <param-value>login.html,/Admin/Login</param-value>-->
-  <!--    </init-param>-->
-  <!--    <init-param>-->
-  <!--      <param-name>zero</param-name>-->
-  <!--      <param-value>/*</param-value>-->
-  <!--    </init-param>-->
-  <!--    <init-param>-->
-  <!--      <param-name>one</param-name>-->
-  <!--      <param-value>/*</param-value>-->
-  <!--    </init-param>-->
-  <!--    <init-param>-->
-  <!--      <param-name>two</param-name>-->
-  <!--      <param-value>/station/table/edit.html,/station/getstation,/station/updatastation,/employee/,/member/,/point/</param-value>-->
-  <!--    </init-param>-->
-  <!--    <init-param>-->
-  <!--      <param-name>three</param-name>-->
-  <!--      <param-value></param-value>-->
-  <!--    </init-param>-->
-  <!--    <init-param>-->
-  <!--      <param-name>four</param-name>-->
-  <!--      <param-value></param-value>-->
-  <!--    </init-param>-->
-  <!--  </filter>-->
-  <!--  <filter-mapping>-->
-  <!--    <filter-name>Power</filter-name>-->
-  <!--    <url-pattern>/*</url-pattern>-->
-  <!--  </filter-mapping>-->
+    <filter>
+      <filter-name>Power</filter-name>
+      <filter-class>cui.gas.system.filter.PowerFilter</filter-class>
+      <init-param>
+        <param-name>excludedPages</param-name>
+        <param-value>/index.html,/admin/login,/admin/login.html</param-value>
+      </init-param>
+      <init-param>
+        <param-name>zero</param-name>
+        <param-value>/*</param-value>
+      </init-param>
+      <init-param>
+        <param-name>one</param-name>
+        <param-value>/*</param-value>
+      </init-param>
+      <init-param>
+        <param-name>two</param-name>
+        <param-value>/admin/point/table/add,/admin/index.html,/admin/employee/localtable,/employee/allwithpage,/employee/delsemployee,/employee/delemployee,/admin/employee/table/add.html,/station/allwithpage,/employee/addemployee,/admin/employee/table/edit.html,/employee/getemployee,/station/allwithpage,/employee/updataemployee,/admin/member/localtable,/admin/member/globaltable,/member/allwithpage,/member/delsmember,/member/delmember,/admin/member/table/add.html,/station/allwithpage,/member/addmember,/admin/member/table/edit.html,/member/getmember,/station/allwithpage,/member/updatamember,/admin/point/localtable,/admin/point/globaltable,/point/allwithpage,/point/delspoint,/point/delpoint,/admin/point/table/add.html,/member/allwithpage,/point/addpoint,/admin/point/table/edit.html</param-value>
+      </init-param>
+      <init-param>
+        <param-name>three</param-name>
+        <param-value>/</param-value>
+      </init-param>
+      <init-param>
+        <param-name>four</param-name>
+        <param-value>/</param-value>
+      </init-param>
+    </filter>
+    <filter-mapping>
+      <filter-name>Power</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

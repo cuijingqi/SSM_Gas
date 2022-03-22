@@ -10,7 +10,7 @@ import java.util.Date;
  * @author 崔靖奇 CUIJINGQICHN@163.com
  * @date 17:50 2022-03-11
  */
-public class Admin implements Serializable {
+public class Admin implements Serializable, Domain {
     private Integer aid;
 
     private Role roleId;
