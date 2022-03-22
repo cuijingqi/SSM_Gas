@@ -106,9 +106,9 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'sid', width: 80, title: 'ID', sort: true},
+                //{field: 'sid', width: 80, title: 'ID', sort: true},
                 {field: 'sname', width: 160, title: '站名'},
-                {field: 'employeeId',templet: function(data){ return (data.employeeId[0]!=null)?data.employeeId[0].ename:"暂无"}, width: 80, title: '站长'},
+                {field: 'employeeId',templet: function(data){ return (data.employeeId[0]!=null)?data.employeeId[0].ename:"暂无"}, width: 160, title: '站长'},
                 {field: 'stprice', width: 100, title: '当日油价', sort: true},
                 {field: 'saddress', title: '地址', minWidth: 100},
                 {field: 'sdescribe', title: '简述', minWidth: 100},

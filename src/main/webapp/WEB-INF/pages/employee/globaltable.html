@@ -133,8 +133,8 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'eid', width: 60, title: 'ID', sort: true},
-                {field: 'ename', width: 100, title: '姓名'},
+                // {field: 'eid', width: 60, title: 'ID', sort: true},
+                {field: 'ename', width: 160, title: '姓名'},
                 {field: 'esex',templet: function(data){ return (data.esex!=1)?"女":"男"}, width: 75, title: '性别', sort: true},
                 {field: 'eage', width: 75, title: '年龄', sort: true},
                 {field: 'roleId',templet: function(data){ return (data.roleId.rid!=null)?data.roleId.rpostion:"暂无"}, width: 80, title: '职位'},
@@ -240,7 +240,6 @@
                             error : function(e){
                                 console.log(e.status);
                                 console.log(e.responseText);
-                                obj.del();
                                 layer.close(index);
                             }
                         });

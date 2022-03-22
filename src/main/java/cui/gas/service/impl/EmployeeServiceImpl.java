@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public int deleteByPrimaryKey(Integer id) {
         Employee employee = employeeMapper.selectByPrimaryKey(id);
         if (employee.getRoleId().getRid()==2){
-            stationMapper.updateByPrimaryKeySelective(employee.getStationId().getSid(),null,null,null,null,null,null,null,null,null,null);
+            stationMapper.updateByPrimaryKeySelective(employee.getStationId().getSid(),null,0,null,null,null,null,null,null,null,null);
         }
         return employeeMapper.deleteByPrimaryKey(id);
     }

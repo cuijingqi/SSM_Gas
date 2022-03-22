@@ -167,7 +167,7 @@
                     $("#woman").prop("checked",true);
                 }
                 $("input[name='etelephone']").val(result.data.etelephone);
-                $("#sid").val((result.data.stationId.sid!=null)?result.data.stationId.sid:null);
+                $("#sid").val((result.data.stationId!=null)?result.data.stationId.sid:null);
                 $("#selectstation").attr("ts-selected",(result.data.stationId!=null)?result.data.stationId.sid:null);
                 $("#selectstation").attr("value",(result.data.stationId!=null)?result.data.stationId.sname:null);
                 $("input[name='eusername']").val(result.data.eusername);

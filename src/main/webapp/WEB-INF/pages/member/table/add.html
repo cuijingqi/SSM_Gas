@@ -56,7 +56,7 @@
         <label class="layui-form-label required">注册地</label>
         <div class="layui-input-inline">
             <input type="hidden" id="sid" name="stationId.sid" value="0">
-            <input id="stationshow" type="text" name="" lay-verify="required" lay-reqtext="注册地不能为空"  readonly placeholder="请选择" autocomplete="off" class="layui-input" id="selectstation" value="" ts-selected="">
+            <input type="text" name="" lay-verify="required" lay-reqtext="注册地不能为空"  readonly placeholder="请选择" autocomplete="off" class="layui-input" id="selectstation" value="" ts-selected="">
         </div>
     </div>
     <input type="hidden" name="maddress">
@@ -112,9 +112,9 @@
     var admin = JSON.parse(adminstr);
     if (admin.aid==undefined){
         $('#sid').val(admin.stationId.sid);
-        $('#stationshow').attr("lay-verify","");
-        $('#stationshow').attr("lay-reqtext","");
-        $('#stationshow').prop("readonly",false);
+        $('#selectstation').attr("lay-verify","");
+        $('#selectstation').attr("lay-reqtext","");
+        $('#selectstation').prop("readonly",false);
         $('#station').css("display","none");
     }
     layui.use(['layer', 'form', 'layarea', 'tableSelect'], function () {
@@ -183,7 +183,7 @@
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             data.field.mavailable=data.field.mavailable=='on'?1:0;
-             alert(JSON.stringify(data.field));
+             // alert(JSON.stringify(data.field));
             var index = layer.open({
                 content: '确认添加？',
                 title: '信息'
