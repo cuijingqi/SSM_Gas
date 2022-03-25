@@ -87,6 +87,24 @@ public class PointServiceImpl implements PointService {
         List<Point> points = pointMapper.selectByStation(sid==null?null:Integer.parseInt(sid));
         return new PageInfo(points);
     }
+
+    @Override
+    public Integer selectAllNumByStation(Integer sid) {
+        return pointMapper.selectByStation(sid).size();
+    }
+
+    @Override
+    public Integer selectAllNumByStationWithToday(Integer sid) {
+        int today = new Date().getDate();
+        int npcount=0;
+        List<Point> points = pointMapper.selectByStation(sid);
+        for (int i = 0; i < points.size(); i++) {
+            if (points.get(i).getPtime().getDate()==today){
+                npcount++;
+            }
+        }
+        return npcount;
+    }
 }
 
 

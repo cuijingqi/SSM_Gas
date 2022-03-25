@@ -71,4 +71,6 @@ public interface MemberMapper {
     List<Member> selectByNameAndTelephone(@Param("mname") String mname, @Param("mtelephone") String mtelephone);
 
     List<Member> selectByNameAndTelephoneAndStation(@Param("mname") String mname, @Param("mtelephone") String mtelephone, @Param("stationId") Integer stationId);
+
+    List<Member> selectByStation(@Param("sid") Integer sid);
 }

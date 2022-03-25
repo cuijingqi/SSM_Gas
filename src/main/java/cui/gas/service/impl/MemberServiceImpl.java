@@ -110,6 +110,11 @@ public class MemberServiceImpl implements MemberService {
         PageInfo pageInfo = new PageInfo(members);
         return pageInfo;
     }
+
+    @Override
+    public Integer selectNumByStation(Integer sid) {
+        return memberMapper.selectByStation(sid).size();
+    }
 }
 
 

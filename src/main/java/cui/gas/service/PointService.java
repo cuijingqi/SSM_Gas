@@ -35,6 +35,10 @@ public interface PointService {
     Integer selectAllNum();
 
     PageInfo selectByStationWithPage(Integer page, Integer limit, String sid);
+
+    Integer selectAllNumByStation(Integer sid);
+
+    Integer selectAllNumByStationWithToday(Integer sid);
 }
 
 

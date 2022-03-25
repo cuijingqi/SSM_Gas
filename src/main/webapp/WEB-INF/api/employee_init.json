@@ -1,7 +1,7 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "/admin/point/table/add"
+    "href": "/admin/home/dataAdd"
   },
   "logoInfo": {
     "title": "Gas",
@@ -22,8 +22,8 @@
           "target": "_self",
           "child": [
             {
-              "title": "添加积分",
-              "href": "/admin/point/table/add",
+              "title": "数据视图",
+              "href": "/admin/home/dataAdd",
               "icon": "fa fa-line-chart",
               "target": "_self"
             }

@@ -140,6 +140,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         PageInfo pageInfo = new PageInfo(employees);
         return pageInfo;
     }
+
+    @Override
+    public Integer selectNumByStation(Integer sid) {
+        return employeeMapper.selectByStation(String.valueOf(sid)).size();
+    }
 }
 
 

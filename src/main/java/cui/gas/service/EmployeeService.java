@@ -93,6 +93,8 @@ public interface EmployeeService {
     Employee login(Employee employee);
 
     PageInfo selectByNameAndTelephoneAndStationWithPage(Integer page, Integer limit, String ename, String etelephone, String sid);
+
+    Integer selectNumByStation(Integer sid);
 }
 
 

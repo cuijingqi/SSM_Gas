@@ -252,4 +252,11 @@
       </if>
     </where>
     </select>
+  <select id="selectByStation" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    *
+    from `member` m,station s,role r
+    where m.station_id=s.sid and m.role_id=r.rid and m.station_id=#{sid,jdbcType=INTEGER}
+  </select>
 </mapper>
