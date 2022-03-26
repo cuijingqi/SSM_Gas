@@ -9,6 +9,7 @@ import cui.gas.domain.Employee;
 import cui.gas.domain.Station;
 import cui.gas.domain.StationPointChart;
 import cui.gas.service.EmployeeService;
+import cui.gas.system.util.DateUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -146,7 +147,7 @@ public class StationServiceImpl implements StationService {
         List<String> snames = new ArrayList();
         int[] days=new int[7];
         for (int i = 0; i < 7; i++) {
-            days[6-i]=today-i;
+            days[6-i]= Integer.parseInt(DateUtil.getPastDate(i));
         }
         String name="";
         for (int i = 0; i < stationPointCharts.size(); i++) {

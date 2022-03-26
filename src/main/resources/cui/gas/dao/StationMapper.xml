@@ -201,6 +201,6 @@
   </select>
 
   <select id="selectChart" resultType="cui.gas.domain.StationPointChart">
-    SELECT sname,pfigure,ptime FROM (SELECT * FROM member m, station s where m.station_id=s.sid) t,point p where p.member_id=t.mid and p.option_id=1 ORDER BY sname,ptime desc
+    SELECT sname,pfigure,ptime FROM (SELECT * FROM member m, station s where m.station_id=s.sid) t,point p where p.member_id=t.mid and p.option_id=1 and (DATE_SUB(CURDATE(), INTERVAL 25 DAY) &lt;= date(ptime)) ORDER BY sname,ptime desc
   </select>
 </mapper>
