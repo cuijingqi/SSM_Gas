@@ -1,18 +1,17 @@
 package cui.gas.domain;
 
-import java.io.Serializable;
-
 /**
  * @author 崔靖奇 CUIJINGQICHN@163.com
- * @date 12:58 2022-03-08
+ * @date 11:09 2022-04-04
  */
-public class Function implements Serializable {
+public class Function {
+    private static final long serialVersionUID = 1L;
     private Integer fid;
 
     /**
      * 资源名称
      */
-    private String fname;
+    private String ftitle;
 
     /**
      * 资源类型：menu,button,
@@ -22,7 +21,7 @@ public class Function implements Serializable {
     /**
      * 访问url地址
      */
-    private String furl;
+    private String fhref;
 
     /**
      * 权限代码字符串
@@ -34,24 +33,12 @@ public class Function implements Serializable {
      */
     private Long fparentid;
 
-    /**
-     * 父结点id列表串
-     */
-    private String fparentids;
-
-    /**
-     * 排序号
-     */
-    private String fsortstring;
-
     private String fcomment;
 
     /**
      * 是否可用,1：可用，0不可用
      */
     private Integer favailable;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getFid() {
         return fid;
@@ -61,12 +48,12 @@ public class Function implements Serializable {
         this.fid = fid;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFtitle() {
+        return ftitle;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname == null ? null : fname.trim();
+    public void setFtitle(String ftitle) {
+        this.ftitle = ftitle == null ? null : ftitle.trim();
     }
 
     public String getFtype() {
@@ -77,12 +64,12 @@ public class Function implements Serializable {
         this.ftype = ftype == null ? null : ftype.trim();
     }
 
-    public String getFurl() {
-        return furl;
+    public String getFhref() {
+        return fhref;
     }
 
-    public void setFurl(String furl) {
-        this.furl = furl == null ? null : furl.trim();
+    public void setFhref(String fhref) {
+        this.fhref = fhref == null ? null : fhref.trim();
     }
 
     public String getFpercode() {
@@ -99,22 +86,6 @@ public class Function implements Serializable {
 
     public void setFparentid(Long fparentid) {
         this.fparentid = fparentid;
-    }
-
-    public String getFparentids() {
-        return fparentids;
-    }
-
-    public void setFparentids(String fparentids) {
-        this.fparentids = fparentids == null ? null : fparentids.trim();
-    }
-
-    public String getFsortstring() {
-        return fsortstring;
-    }
-
-    public void setFsortstring(String fsortstring) {
-        this.fsortstring = fsortstring == null ? null : fsortstring.trim();
     }
 
     public String getFcomment() {
@@ -140,13 +111,11 @@ public class Function implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", fid=").append(fid);
-        sb.append(", fname=").append(fname);
+        sb.append(", ftitle=").append(ftitle);
         sb.append(", ftype=").append(ftype);
-        sb.append(", furl=").append(furl);
+        sb.append(", fhref=").append(fhref);
         sb.append(", fpercode=").append(fpercode);
         sb.append(", fparentid=").append(fparentid);
-        sb.append(", fparentids=").append(fparentids);
-        sb.append(", fsortstring=").append(fsortstring);
         sb.append(", fcomment=").append(fcomment);
         sb.append(", favailable=").append(favailable);
         sb.append("]");
@@ -166,13 +135,11 @@ public class Function implements Serializable {
         }
         Function other = (Function) that;
         return (this.getFid() == null ? other.getFid() == null : this.getFid().equals(other.getFid()))
-                && (this.getFname() == null ? other.getFname() == null : this.getFname().equals(other.getFname()))
+                && (this.getFtitle() == null ? other.getFtitle() == null : this.getFtitle().equals(other.getFtitle()))
                 && (this.getFtype() == null ? other.getFtype() == null : this.getFtype().equals(other.getFtype()))
-                && (this.getFurl() == null ? other.getFurl() == null : this.getFurl().equals(other.getFurl()))
+                && (this.getFhref() == null ? other.getFhref() == null : this.getFhref().equals(other.getFhref()))
                 && (this.getFpercode() == null ? other.getFpercode() == null : this.getFpercode().equals(other.getFpercode()))
                 && (this.getFparentid() == null ? other.getFparentid() == null : this.getFparentid().equals(other.getFparentid()))
-                && (this.getFparentids() == null ? other.getFparentids() == null : this.getFparentids().equals(other.getFparentids()))
-                && (this.getFsortstring() == null ? other.getFsortstring() == null : this.getFsortstring().equals(other.getFsortstring()))
                 && (this.getFcomment() == null ? other.getFcomment() == null : this.getFcomment().equals(other.getFcomment()))
                 && (this.getFavailable() == null ? other.getFavailable() == null : this.getFavailable().equals(other.getFavailable()));
     }
@@ -182,13 +149,11 @@ public class Function implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getFid() == null) ? 0 : getFid().hashCode());
-        result = prime * result + ((getFname() == null) ? 0 : getFname().hashCode());
+        result = prime * result + ((getFtitle() == null) ? 0 : getFtitle().hashCode());
         result = prime * result + ((getFtype() == null) ? 0 : getFtype().hashCode());
-        result = prime * result + ((getFurl() == null) ? 0 : getFurl().hashCode());
+        result = prime * result + ((getFhref() == null) ? 0 : getFhref().hashCode());
         result = prime * result + ((getFpercode() == null) ? 0 : getFpercode().hashCode());
         result = prime * result + ((getFparentid() == null) ? 0 : getFparentid().hashCode());
-        result = prime * result + ((getFparentids() == null) ? 0 : getFparentids().hashCode());
-        result = prime * result + ((getFsortstring() == null) ? 0 : getFsortstring().hashCode());
         result = prime * result + ((getFcomment() == null) ? 0 : getFcomment().hashCode());
         result = prime * result + ((getFavailable() == null) ? 0 : getFavailable().hashCode());
         return result;
