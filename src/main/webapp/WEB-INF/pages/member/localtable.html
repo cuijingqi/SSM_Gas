@@ -204,7 +204,7 @@
                 });
                 // layer.alert(JSON.stringify(data));
                 // layer.alert(JSON.stringify(checkStatus));
-                layer.confirm('真的删除选中站点吗？站点下的所有员工将会被移出该站点！'
+                layer.confirm('真的删除该会员吗？可以将员工设置为注销状态！'
                     , function (index) {
                         $.ajax({
                             //请求方式
@@ -279,7 +279,7 @@
                 });
                 return false;
             } else if (obj.event === 'delete') {
-                layer.confirm('真的删除该站点吗？站点下的所有员工将会被移出该站点！'
+                layer.confirm('真的删除该会员吗？可以将员工设置为注销状态！'
                     , function (index) {
                         $.ajax({
                             //请求方式
