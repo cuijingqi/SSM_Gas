@@ -34,48 +34,50 @@ public class DataController {
     private PointService ps;
 
     @GetMapping("getcount")
-    public Result getCount(@Param("sid") Integer sid){
-        Integer scount=null;
-        Integer ecount=null;
-        Integer mcount=null;
-        Integer pcount=null;
-        Integer npcount=null;
-        if (sid!=null){
+    public Result getCount(@Param("sid") Integer sid) {
+        Integer scount = null;
+        Integer ecount = null;
+        Integer mcount = null;
+        Integer pcount = null;
+        Integer npcount = null;
+        if (sid != null) {
             ecount = es.selectNumByStation(sid);
             mcount = ms.selectNumByStation(sid);
             pcount = ps.selectAllNumByStation(sid);
             npcount = ps.selectAllNumByStationWithToday(sid);
-        }else {
+        } else {
             scount = ss.selectAllNum();
             ecount = es.selectAllNum();
             mcount = ms.selectAllNum();
             pcount = ps.selectAllNum();
         }
         JSONObject json = new JSONObject();
-        json.put("scount",scount);
-        json.put("ecount",ecount);
-        json.put("mcount",mcount);
-        json.put("pcount",pcount);
-        json.put("npcount",npcount);
-        return new Result(0,json);
+        json.put("scount", scount);
+        json.put("ecount", ecount);
+        json.put("mcount", mcount);
+        json.put("pcount", pcount);
+        json.put("npcount", npcount);
+        return new Result(0, json);
     }
+
     @GetMapping("getadvice")
-    public Result getAdvice(){
+    public Result getAdvice() {
         JSONArray array = new JSONArray();
         Map map = new HashMap();
         for (Station station : ss.selectAll()) {
             JSONObject json = new JSONObject();
-            json.put("sid",station.getSid());
-            json.put("sname",station.getSname());
-            json.put("saddress",station.getSaddress());
-            json.put("sadvice",station.getSadvice());
+            json.put("sid", station.getSid());
+            json.put("sname", station.getSname());
+            json.put("saddress", station.getSaddress());
+            json.put("sadvice", station.getSadvice());
             array.add(json);
         }
-        return new Result(0,array);
+        return new Result(0, array);
     }
+
     @GetMapping("stationpointchart")
-    public Result getStationPointChart(){
+    public Result getStationPointChart() {
         net.sf.json.JSONArray jsonArray = ss.selectChart();
-        return new Result(0,jsonArray);
+        return new Result(0, jsonArray);
     }
 }

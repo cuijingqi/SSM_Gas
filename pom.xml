@@ -17,6 +17,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+<!--    <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>-->
+<!--    <jdbc.url>jdbc:mysql://localhost:3307/gas?useSSL=false&amp;useAffectedRows=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8</jdbc.url>-->
+<!--    <jdbc.username>root</jdbc.username>-->
+<!--    <jdbc.password>admin</jdbc.password>-->
   </properties>
 
   <dependencies>
@@ -139,5 +143,14 @@
         </plugin>
       </plugins>
     </pluginManagement>
+<!--    <resources>-->
+<!--      <resource>-->
+<!--        <directory>${project.basedir}/src/main/resources</directory>-->
+<!--&lt;!&ndash;        <includes>&ndash;&gt;-->
+<!--&lt;!&ndash;          <include>**/jdbc.properties</include>&ndash;&gt;-->
+<!--&lt;!&ndash;        </includes>&ndash;&gt;-->
+<!--        <filtering>true</filtering>-->
+<!--      </resource>-->
+<!--    </resources>-->
   </build>
 </project>
